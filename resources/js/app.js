@@ -9,6 +9,12 @@ window.axios = require('axios')
 
 
 Vue.component('home-component',require('./components/HomeComponent.vue').default)
+Vue.component('header-component',require('./components/HeaderComponent.vue').default)
+Vue.component('footer-component',require('./components/FooterComponent.vue').default)
+Vue.component('news-home',require('./components/NewsHomeComponent.vue').default)
+Vue.component('add-article',require('./components/AddArticleComponent.vue').default)
+Vue.component('news-detail',require('./components/NewsDetailComponent.vue').default)
+Vue.component('users',require('./components/UserComponent.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

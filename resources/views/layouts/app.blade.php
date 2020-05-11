@@ -26,6 +26,6 @@
 <script type="application/javascript" src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
 <script type="application/javascript" src="{{asset('js/jquery-ui.min.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="{{mix('js/app.js')}}"></script>
+<script src="{{mix('js/app.js')}}?<?php echo filemtime('js/app.js') ?>"></script>
 </body>
 </html>

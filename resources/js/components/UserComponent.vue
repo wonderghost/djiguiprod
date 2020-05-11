@@ -58,7 +58,9 @@ import dropdown from 'vue-dropdowns';
             return {
                 isLoading : false,
                 fullPage : true,
-                userType : ['redacteur'],
+                userType : [{
+                    'type' : 'redacteur'
+                }],
                 object : {
                     name : 'type'
                 }

@@ -73,8 +73,6 @@
             getMenuNews : async function () {
                 try {
                     let response = await axios.get('/news/articles/get-category')
-                    console.log(response.data)
-
                     this.menu = response.data
                 } catch(error) {
                     alert(error)

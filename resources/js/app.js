@@ -15,6 +15,7 @@ Vue.component('news-home',require('./components/NewsHomeComponent.vue').default)
 Vue.component('add-article',require('./components/AddArticleComponent.vue').default)
 Vue.component('news-detail',require('./components/NewsDetailComponent.vue').default)
 Vue.component('users',require('./components/UserComponent.vue').default)
+Vue.component('category-news',require('./components/CategoryNewsComponent.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

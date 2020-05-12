@@ -20,7 +20,7 @@
                     <div style="margin:1%">
                         <div class="fb-like" :data-href="url" data-width="" data-layout="button_count" data-action="like" data-size="large" data-share="true"></div>
                     </div>
-                    <img :src="'/news-image/'+news.image" style="width:100%;height:800px" alt="">
+                    <img :src="'/news-image/'+news.image" style="width:100%;height:auto" alt="">
                     <p style="font-size : 20px " v-html="news.description"></p>
                     <div class="fb-comments" :data-href="url" data-numposts="5" data-width="1000"></div>
                     <!-- // -->

@@ -17,20 +17,20 @@
                 <!-- AJOUTER UN ARTICLE / UNE CATEGORIE D'ARTICLE / SOUS CATEGORIE -->
                 <h5>Ajouter un article</h5>
                 <div class="row">
-                    <form @submit.prevent="addArticle()" class="col s12 my-form">
+                    <form @submit.prevent="addArticle()" class="col s12 m12 my-form">
                         <div class="container row">
-                            <div class="input-field col m12">
+                            <div class="input-field col s12 m12">
                                 <input v-model="articleForm.name" placeholder="Nom de l'article" type="text" class="validate">
                                 <label for="first_name">Nom de l'article</label>
                             </div>
                             <div class="input-field col ">
                                 <input type="file"  @change="fileUpload">
                             </div>
-                            <div class="col m12">
+                            <div class="col s12 m12">
                                 <label for="">Contenu</label>
                                 <VueEditor v-model="articleForm.content" class="validate"></VueEditor>
                             </div>
-                            <div class="col m12">
+                            <div class="col s12 m12">
                                 <dropdown :options="subCategory" :selected="artObject" v-on:updateOption="runOnSelect"></dropdown>
                             </div>
                         </div>
@@ -44,11 +44,11 @@
                     <div class="row">
                         <form @submit.prevent="addSubCategory()" class="col s12 my-form">
                             <div class="row">
-                                <div class="input-field col m6">
+                                <div class="input-field col s12 m6">
                                     <input v-model="subCategoryForm.name" type="text" class="validate">
                                     <label for="">Nom sous categorie</label>
                                 </div>
-                                 <div class=" col m12">
+                                 <div class=" col s12 m12">
                                     <dropdown :options="category" :selected="object" v-on:updateOption="methodToRunOnSelect"></dropdown>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                     <div class="row">
                         <form @submit.prevent="addCategory()" class="col s12 my-form">
                             <div class="row">
-                                <div class="input-field col s6">
+                                <div class="input-field col s12 m6">
                                     <input placeholder="Nom de la Categorie" v-model="categoryForm.name" type="text" class="validate">
                                     <label for="first_name">Nom de la Categorie</label>
                                 </div>

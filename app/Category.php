@@ -14,4 +14,6 @@ class Category extends Model
     public function subCategory() {
         return $this->hasMany('App\SubCategory','id_category','slug')->get();
     }
+
+    
 }

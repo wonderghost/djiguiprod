@@ -165,4 +165,49 @@ class NewsController extends Controller
             die(json_encode($e->getMessage()));
         }
     }
+
+    public function getNewsCategoryDetails($slug , Category $c) {
+        $category = $c->find($slug);
+        $subCategory = $category->subCategory();
+
+        return view('news.news-category')->withData([
+            'sub_category' => $subCategory,
+            'category'  =>  $category
+            ]);
+    }
+
+    public function getSubCat(Request $request , Category $c , SubCategory $sc) {
+        try {
+            $category = $c->find($request->input('category'));
+            $subCategory = $category->subCategory();
+            
+            $data = [];
+            $i = 0;
+            foreach($subCategory as $key => $value) {
+                $articles = $value->articles();
+                foreach($articles as $_key => $_value) {
+                    $date = new Carbon($_value->created_at);
+                    $date->setLocale('fr_FR');
+                    $data[$i++] = [
+                        'slug'  =>  $_value->slug,
+                        'name'  =>  $_value->name,
+                        'created_at'    =>  $date->toFormattedDateString(),
+                        'image' =>  $_value->image,
+                        'description'   =>  $_value->description,
+                        'id_sub_category'   =>  $_value->id_sub_category,
+                        'author'    =>  $_value->author()->name
+                    ];
+                } 
+            }
+
+            return response()
+                ->json([
+                    'sub_category' => $subCategory,
+                    'data'  =>  $data
+                    ]);
+        } catch(AppException $e) {
+            header("Erreur!",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
 }

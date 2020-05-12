@@ -4,6 +4,7 @@
         :can-cancel="false" 
         :is-full-page="fullPage"
         loader="bars"></loading>
+        
         <div class="row">
             <div class="col m6" >
                 <!-- PUBLICITE -->
@@ -91,7 +92,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col m2">
+            <div class="col s12 m2">
                 <div class="fb-page" data-href="https://www.facebook.com/Djigui-Prod-362798861143645" data-tabs="" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Djigui-Prod-362798861143645" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Djigui-Prod-362798861143645">Djigui Prod</a></blockquote></div>
             </div>
         </div>

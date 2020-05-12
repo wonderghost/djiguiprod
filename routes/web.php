@@ -27,8 +27,13 @@ Route::prefix('news')->group(function () {
     Route::post('/articles/add','NewsController@addArticle')->middleware('auth');
     Route::get('/articles/get-category','NewsController@getCategoryList');
     Route::get('/articles/get-list','NewsController@getList'); 
+    
+
     Route::get('/{slug}','NewsController@getDetails');
+    Route::get('/category/{slug}','NewsController@getNewsCategoryDetails');
+    Route::post('/category/get-subcategory','NewsController@getSubCat');
     Route::post('/{slug}/get-infos','NewsController@getInfoDetails');
+
 });
 
 Auth::routes();

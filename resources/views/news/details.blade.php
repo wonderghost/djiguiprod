@@ -10,6 +10,7 @@
 <meta property="og:title"              content="{{$item->name}}" />
 <meta property="og:description"        content="{{$item->name}}" />
 <meta property="og:image"              content="{{asset('/news-image/'.$item->image)}}" />
+<meta property="fb:app_id" content="2005235842908607"/>
 @endsection
 
 @section('content')

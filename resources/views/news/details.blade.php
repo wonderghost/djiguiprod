@@ -4,6 +4,14 @@
 {{$item->name}}
 @endsection
 
+@section('metacontent')
+<meta property="og:url"                content="{{url()->current()}}" />
+<meta property="og:type"               content="article" />
+<meta property="og:title"              content="{{$item->name}}" />
+<meta property="og:description"        content="{{$item->name}}" />
+<meta property="og:image"              content="{{asset('/news-image/'.$item->image)}}" />
+@endsection
+
 @section('content')
 
 @if(Auth::check())

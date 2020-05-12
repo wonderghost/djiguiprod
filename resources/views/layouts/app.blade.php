@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/css/app.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap" rel="stylesheet">
+    @yield('metacontent')
 </head>
 <body>
 <div id="fb-root"></div>

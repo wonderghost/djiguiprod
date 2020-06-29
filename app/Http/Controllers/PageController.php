@@ -1,0 +1,76 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Exceptions\AppException;
+use App\Page;
+use Illuminate\Support\Str;
+
+class PageController extends Controller
+{
+    //
+
+    public function __construct() {
+        // $this->middleware('auth');
+    }
+
+    public function index() {
+        return view('pages.home-pages');
+    }
+
+    public function prestationIndex() {
+        return view('pages.prestations-index');
+    }
+
+    public function prestationDetails($slug) {
+        return view('pages.prestations-details')
+            ->withSlug($slug);
+    }
+
+    public function getPrestationDetails(Request $request , Page $p) {
+        try {
+            $details = $p->find($request->input('slug'));
+            
+            return response()
+                ->json($details);
+
+        } catch(AppException $e) {
+            header("Erreur",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
+
+    public function addPage(Request $request , Page $p) {
+        try {
+            $validation = $request->validate([
+                'title' =>  'required|string',
+                'content'   =>  'required|string',
+                'tag'   =>  'required|string'
+            ],[
+                'required'  =>  '`:attribute` est obligatoire !'
+            ]);
+
+            $p->title = $request->input('title');
+            $p->tag = $request->input('tag');
+            $p->content = $request->input('content');
+            $p->slug = Str::slug($request->input('title'));
+            $p->save();
+            return response() 
+                ->json('done');
+        } catch(AppException $e) {
+            header("Erreur",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
+
+    public function getListPage(Page $p) {
+        try {
+            return response()
+                ->json($p->all());
+        } catch(AppException $e) {
+            header("Erreur",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
+}

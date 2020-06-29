@@ -5,6 +5,7 @@
                  <!-- Dropdown Structure -->
                 <ul id="dropdown1" class="dropdown-content">
                     <li><a href="/news/articles/add">Articles</a></li>
+                    <li><a href="/admin/manage-pages">Gestion des pages</a></li>
                     <!-- <li><a href="#!">two</a></li> -->
                     <!-- <li class="divider"></li> -->
                     <!-- <li><a href="#!">three</a></li> -->
@@ -88,9 +89,9 @@
                 links : {
                     'Acceuil' : '/',
                     'Actualites' : '/news',
-                    'Prestations' : '/services',
-                    'Videos': '/videos',
-                    'Evenements': '/events',
+                    'Prestations' : '/prestations',
+                    // 'Videos': '/videos',
+                    // 'Evenements': '/events',
                     'A Propos' : '/about-us'
                 },
                 menu : []

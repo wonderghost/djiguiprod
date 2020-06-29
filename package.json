@@ -25,6 +25,7 @@
     "dependencies": {
         "@chenfengyuan/vue-carousel": "^1.0.3",
         "vue-dropdowns": "^1.1.1",
+        "vue-flash-message": "^0.7.2",
         "vue-flux": "^6.1.1",
         "vue-horizontal-list": "^1.0.7",
         "vue-infinite-slide-bar": "^1.1.1",

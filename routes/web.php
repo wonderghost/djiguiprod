@@ -13,10 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/','HomeController@index');
+Route::get('/get-prestation','PageController@getListPage');
 Route::get('/news','NewsController@index');
 
+Route::prefix('prestations')->group(function () {
+    Route::get('/','PageController@prestationIndex');
+    Route::post('/get-prestation-details','PageController@getPrestationDetails');
+    Route::get('/{slug}','PageController@prestationDetails');
+});
+
 Route::prefix('admin')->group(function () {
-    Route::get('/users','UserController@index');
+    Route::get('/users','UserController@index')->middleware('auth');
+    Route::get('/manage-pages','PageController@index')->middleware('auth'); //
+    Route::post('/page/add','PageController@addPage')->middleware('auth');
+    Route::get('/page','PageController@getListPage')->middleware('auth');
 });
 
 Route::prefix('news')->group(function () {

@@ -69,3 +69,25 @@ body {
     line-height: 1em !important;
     font-weight: bold;
 }
+
+.breadcrumb:before {
+    color: #000;
+  }
+  
+  .breadcrumb, .breadcrumb:last-child {
+    color: #000;
+  }
+  
+  .bread {
+    background-color : #fff !important;
+    box-shadow : none !important;
+  }
+.parallax-container {
+    height: 200px;
+    margin-bottom : 10px !important;
+  }
+
+  .who-we-are {
+      margin-bottom : 10px !important;
+    //   border: solid 1px black
+  }

@@ -23,25 +23,34 @@ Route::prefix('prestations')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::middleware(['admin'])->group(function () {
 
-    Route::prefix('admin')->group(function () {
-        Route::get('/manage-pages','PageController@index')->middleware('admin'); //
-        Route::get('/manage-users','UserController@index')->middleware('admin');
-        Route::get('/page','PageController@getListPage')->middleware('admin');
-    
-        Route::post('/page/add','PageController@addPage')->middleware('admin');
-        Route::post('/users/add','UserController@addUsers')->middleware('admin');
+        Route::prefix('admin')->group(function () {
+            Route::get('/manage-pages','PageController@index'); //
+            Route::get('/manage-users','UserController@index');
+            Route::get('/page','PageController@getListPage');
+        
+            Route::post('/page/add','PageController@addPage');
+            Route::post('/users/add','UserController@addUsers');
+        });
+
+        Route::prefix('news')->group(function () {
+            Route::post('/articles/add-category','NewsController@postCategory');
+            Route::post('/articles/add-sub-category','NewsController@postSubCategory');
+        });
     });
 
-    Route::prefix('news')->group(function () {
-        
-        Route::get('/articles/add','NewsController@articleGetForm')->middleware('redacteur');
-        Route::post('/articles/add-category','NewsController@postCategory')->middleware('admin');
-        Route::post('/articles/add-sub-category','NewsController@postSubCategory')->middleware('admin');
+    Route::middleware(['redacteur'])->group(function () {
 
-        Route::post('/articles/add','NewsController@addArticle');    
-        
+        Route::prefix('news')->group(function () {
+            
+            Route::get('/articles/add','NewsController@articleGetForm');
+            Route::post('/articles/add','NewsController@addArticle');    
+            
+        });
     });
+
+
 });
 
 Route::prefix('news')->group(function () {

@@ -99,3 +99,18 @@ body {
     padding : 0 !important;
     border : solid 1px black !important;
   }
+
+  ul.drop-list > li {
+      padding : .5em !important;
+  }
+
+//   .my-dropdown:hover .drop-list {
+//       display : block !important;
+//       top : 70% !important;
+//   }
+
+
+.my-dropdown {
+    position : relative !important;
+    display : inline-block !important;
+}

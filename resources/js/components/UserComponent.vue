@@ -92,6 +92,7 @@ import 'vue-loading-overlay/dist/vue-loading.css';
                         alert("Success !")
                         location.reload()
                     }
+                    
                 } catch(error) {
                     this.isLoading = false
                     if(error.response.data.errors) {

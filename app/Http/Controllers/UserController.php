@@ -22,12 +22,13 @@ class UserController extends Controller
         try {
 
             $validation = $request->validate([
-                'email' =>  'required|email',
+                'email' =>  'required|email|unique:users,email',
                 'name'  =>   'required|string',
                 'phone' =>  'required|string|max:9|min:9',
                 'typeUser'  =>  'required|string'
             ],[
-                'required'  =>  '`:attribute` requis!'
+                'required'  =>  '`:attribute` requis!',
+                'unique'    =>  '`:attribute` deja attribue !'
             ]);
 
             $user->email = $request->input('email');

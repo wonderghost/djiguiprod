@@ -36,6 +36,16 @@
                     <li v-for="l in menu.category" :key="l.slug" class="mr-6">
                         <a class="text-white" :href="'/news/category/'+l.slug">{{l.name}}</a>
                     </li>
+                    <li class="my-dropdown">
+                        <a class="text-white btn-drop text-left" @click="dropMenu()" href="#">{{user}} <i class="material-icons">arrow_drop_down</i></a>
+                        <!-- admin menu -->
+                        <ul v-show="dropState" class="drop-list absolute z-50 shadow-md bg-white p-5 rounded">
+                            <li><a class="hover:text-blue-600" href="/news/articles/add">Articles</a></li>
+                            <li><a class="hover:text-blue-600" href="/admin/manage-pages">Pages</a></li>
+                            <li><a class="hover:text-blue-600" href="/admin/manage-users">Utilisateur</a></li>
+                            <li><a class="hover:text-blue-600" href="/admin/bannieres">Bannieres</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </template>
@@ -62,10 +72,22 @@
                     // 'Evenements': '/events',
                     'A Propos' : '/about-us'
                 },
-                menu : []
+                menu : [],
+                dropState : false
             }
         },
         methods : {
+            dropMenu : function () {
+                try {
+                    if(this.dropState == false) {
+                        this.dropState = true
+                    } else {
+                        this.dropState = false
+                    }
+                } catch(error) {
+                    alert(error)
+                }
+            },
             getMenuNews : async function () {
                 try {
                     this.isLoading = true
@@ -82,6 +104,8 @@
             },
             logout : async function () {
                 try {
+                    this.isLoading = true
+                    
                     let response = await axios.post('/logout',{
                         _token : document.querySelector("meta[name='csrf-token']").content
                     })

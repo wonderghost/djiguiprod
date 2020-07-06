@@ -40,16 +40,12 @@ Route::middleware(['auth'])->group(function () {
         });
     });
 
-    Route::middleware(['redacteur'])->group(function () {
-
-        Route::prefix('news')->group(function () {
+    Route::prefix('news')->group(function () {
             
-            Route::get('/articles/add','NewsController@articleGetForm');
-            Route::post('/articles/add','NewsController@addArticle');    
-            
-        });
+        Route::get('/articles/add','NewsController@articleGetForm');
+        Route::post('/articles/add','NewsController@addArticle');    
+        
     });
-
 
 });
 

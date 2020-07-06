@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="container row">
     <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"

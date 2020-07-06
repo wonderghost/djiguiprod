@@ -5,9 +5,9 @@ Actualites-Ajouter un article
 @section('content')
 
 @if(Auth::check())
-<header-component type="djigui-news" user="{{Auth::user()->name}}"></header-component>
+<header-component type="djigui" user="{{Auth::user()->name}}"></header-component>
 @else 
-<header-component type="djigui-news" user="null"></header-component>
+<header-component type="djigui" user="null"></header-component>
 @endif
 <add-article></add-article>
 @endsection

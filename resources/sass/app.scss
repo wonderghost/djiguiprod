@@ -24,8 +24,8 @@ body {
     background-image : url('/img/slide-1.jpg') !important;
 }
 .img-news {
-    width : 150px !important;
-    height : 100px !important;
+    width : 100px !important;
+    height : 50px !important;
 }
 .breaking-news > span {
     border: solid 1px #42a5f5 !important;
@@ -90,4 +90,12 @@ body {
   .who-we-are {
       margin-bottom : 10px !important;
     //   border: solid 1px black
+  }
+
+  .ban-news-right {
+    height : 100px !important;
+    margin : 0.1% !important;
+    box-shadow : none !important;
+    padding : 0 !important;
+    border : solid 1px black !important;
   }

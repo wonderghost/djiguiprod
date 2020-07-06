@@ -9,4 +9,7 @@
 <header-component type="djigui" user="null"></header-component>
 @endif
 <home-component></home-component>
+<!-- footer -->
+<footer-component></footer-component>
+    <!-- // -->
 @endsection

@@ -4,131 +4,133 @@
         :can-cancel="false" 
         :is-full-page="fullPage"
         loader="bars"></loading>
-        
-        <div class="row">
-            <div class="col m6" >
-                <!-- PUBLICITE -->
+    
+    <div class="h-20" style="border : solid 1px #e2e8f0">
+        <i>PUBLICITE</i>
+    </div>
+    
+    <div class="" style="border-bottom : solid 1px #e2e8f0">
+        <!-- <div class="bg-blue-600 w-32 p-1 mt-1 text-white rounded-sm"><span>Infos a la une</span></div> -->
+        <vue-horizontal-list :items="breaking" :options="options" class="p-0">
+            <template v-slot:default="{item}">
+            <div class="p-0">
+                <a :href="'/news/'+item.slug" class="hover:text-blue-800 font-serif">
+                    <h6>{{item.name.substring(0,100)}}</h6>
+                </a>
             </div>
-            <div class="col m6">
-                <!-- PUBLICITE -->
+            </template>
+      </vue-horizontal-list>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3 divide-x divider-gray-400">
+        <div>
+            <div class="h-20 mb-2" style="border-bottom : solid 1px #e2e8f0">
+                <i>PUBLICITE</i>
             </div>
-            <div class="col s12 m12">
-                <div class="breaking-news">
-                    <span>A la une</span>
-                    <vue-horizontal-list :items="breaking" :options="{responsive: [{end: 576, size: 1}, {start: 576, end: 768, size: 2},{size: 4}]}">
-                    <template v-slot:default="{item}">
-                        <div class="item">
-                            <a :href="'/news/'+item.slug" class="black-text news-link">
-                                <h5>{{item.name.substring(0,100)}}</h5>
-                                <!-- <p v-html="(item.description)"></p> -->
+            <!-- BANNIERE -->
+            <vue-flux
+            :images="vfImages"
+            :transitions="fluxTransitions"
+            :captions="vfCaptions"
+            :options="fluxOptions">
+                <template v-slot:caption>
+                    <flux-caption v-slot="caption" class="bg-black bg-opacity-75">
+                        <p class="text-white p-2 text-xl font-serif">{{caption.caption}}</p>
+                    </flux-caption>
+                </template>
+            </vue-flux>
+            <!-- // -->
+            <div class="h-48 mt-3 mb-3" style="border : solid 1px #e2e8f0">
+                <i>PUBLICITE</i>
+            </div>
+        </div>
+        <!--  -->
+        <div class="p-2">
+            <div class="grid grid-cols-2 divide-x divide-gray-400 p-2">
+                <div>
+                    <h2 class="font-bold font-serif text-3xl" v-html="lastNews.name"></h2>
+                    <img :src="'/news-image/'+lastNews.image" class="h-48 pr-2 w-full" alt="">
+                    <p v-html="lastNews.description.substring(0,700)+'...'" class="mb-2 font-serif pr-2"></p>
+                    <a :href="'/news/'+lastNews.slug" class="bg-blue-600 text-white rounded p-1 hover:bg-blue-700">Lire plus</a>
+                </div>
+                <div class="grid grid-cols-1 divide-y divide-gray-400 p-1">
+                    <div class="grid grid-cols-2 gap-3 p-1" v-for="n in newsData.slice(0,5)" :key="n.slug">
+                        <div>
+                            <a :href="'/news/'+n.slug" class="hover:text-blue-800 font-serif">
+                                <p v-html="n.name.substring(0,100)"></p>
+                                <p v-html="n.description.substring(0,100)"></p>
                             </a>
                         </div>
-                    </template>
-                    </vue-horizontal-list>
+                        <div>
+                            <a :href="'/news/'+n.slug">
+                                <img :src="'/news-image/'+n.image" class="h-20 w-full rounded">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col s12 m6">
-                <!-- BANNIERE -->
-                    <vue-flux
-                        :options="fluxOptions"
-                        :images="vfImages"
-                        :transitions="fluxTransitions"
-                        :captions="vfCaptions"
-                        ref="slider">
+    </div>
 
-                        <template v-slot:caption>
-                            <flux-caption v-slot="captionProps">
-                                <a :href="captionProps.caption.url" target="_blank" class="flux-caption">
-                                    <h3>{{ captionProps.text }}</h3>
-                                </a>
-                            </flux-caption>
-                        </template>
-
-                    </vue-flux>
-                <!-- // -->
+    <!-- Cultures -->
+    <div class="container mx-auto " style="border-top:solid 1px #e2e8f0">
+        <div class="bg-blue-600 w-20 text-white font-serif p-1"><span>Cultures</span></div>
+        <div class="grid grid-cols-3">
+            <div class="col-span-2">
+                <a :href="'/news/'+lastCulturesNews.slug">
+                    <img :src="'/news-image/'+lastCulturesNews.image" class="w-full p-2" style="height : 25rem !important;" alt="">
+                    <h6 class="font-serif font-bold text-2xl text-center p-2">{{lastCulturesNews.name}}</h6>
+                </a>
             </div>
-            <div class="col m6 s12">
-                <div class="row" >
-                    <div v-for="i in breaking.slice(0,8)" :key="i.slug" class="col m6">
-                        <div class="card horizontal" style="height : 100px !important;margin:0.5% !important">
-                            <div class="card-image">
-                                <img :src="'/news-image/'+i.image" class="img-news">
-                            </div>
-                            <div class="card-stacked">
-                                <div class="card-content">
-                                    <p class="text-paragraphe"><a :href="'/news/'+i.slug" class="black-text news-link">{{i.name.substring(0,100)}}...</a></p>
-                                </div>
-                            </div>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </div>  
-        <!-- ARTICLES -->
-        <div class="row">
-            <div class="col s12 m10">
-                <div class="row">
-                    <div class="col s12">
-                        <div class="cat-title">
-                            <h5><a class="white-text">Cultures</a></h5>
-                        </div>
-                    </div>
-                    
-                    <div v-for="i in cultures.slice(0,12)" :key="i.slug" class="col s12 m3">
-                        <a class="black-text news-link" :href="'/news/'+i.slug">
-                            <div class="card white" style="box-shadow : none !important; margin : 2% !important;margin-bottom : 0 !important;">
-                                <div class="card-content" style="padding : 0px !important;">
-                                    <img :src="'/news-image/'+i.image" style="width : 40% ;height:70px; float : left !important;margin-right : 2% !important;" alt="">
-                                    <div style="padding : 1% !important">
-                                        <span class="" style="margin-left: 0.5 !important;font-weight:bold">
-                                            {{i.name.substring(0,50)}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="col-span-1 mt-2">
+                <div class="grid grid-rows-2 grid-flow-col gap-1">
+                    <div v-for="n in cultures.slice(0,4)" :key="n.slug">
+                        <a :href="'/news/'+n.slug" class="">
+                            <img :src="'/news-image/'+n.image" class="w-full h-20 rounded" alt="">
+                            <h6 class="font-serif hover:text-blue-600">{{n.name}}</h6>
+                            <i>
+                                <p class="font-serif text-sm" v-html="n.description.substring(0,150)"></p>
+                            </i>
+                            <!-- <span><i></i></span> -->
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col s12 m2">
-                <div class="fb-page" data-href="https://www.facebook.com/Djigui-Prod-362798861143645" data-tabs="" data-width="" data-height="" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Djigui-Prod-362798861143645" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Djigui-Prod-362798861143645">Djigui Prod</a></blockquote></div>
-            </div>
         </div>
-        <!-- // -->
-        <!-- SPORTS -->
-        <div class="row">
-            <div class="col s12 m10">
-                <div class="row">
-                    <div class="col s12 m12">
-                        <div class="cat-title">
-                            <h5><a class="white-text darken-2" href="#">Sports</a></h5>
-                        </div>
-                    </div>
-                    
-                    <div v-for="i in sports.slice(0,12)" :key="i.slug" class="col m3">
-                        <a class="black-text news-link" :href="'/news/'+i.slug">
-                            <div class="card white" style="box-shadow : none !important">
-                                <div class="card-content" style="padding : 0px !important;">
-                                    <img :src="'/news-image/'+i.image" style="height:200px;width : 100%;" alt="">
-                                    <div style="padding : 1% !important">
-                                        <span class="">
-                                            {{i.name}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+    </div>
+    <!-- // -->
+    <!-- Sports -->
+    <div class="container mx-auto" style="border-top:solid 1px #e2e9f0">
+       <div class="bg-blue-600 w-20 text-white font-serif p-1"><span>Sports</span></div>
+       <div class="grid grid-cols-3">
+            <div class="col-span-2">
+                <a :href="'/news/'+lastSportsNews.slug">
+                    <img :src="'/news-image/'+lastSportsNews.image" class="w-full p-2" style="height : 25rem !important;" alt="">
+                    <h6 class="font-serif font-bold text-2xl text-center p-2">{{lastSportsNews.name}}</h6>
+                </a>
+            </div>
+            <div class="col-span-1 mt-2">
+                <div class="grid grid-rows-2 grid-flow-col gap-1">
+                    <div v-for="n in sports.slice(0,4)" :key="n.slug">
+                        <a :href="'/news/'+n.slug" class="">
+                            <img :src="'/news-image/'+n.image" class="w-full h-20 rounded" alt="">
+                            <h6 class="font-serif hover:text-blue-600">{{n.name}}</h6>
+                            <i>
+                                <p class="font-serif text-sm" v-html="n.description.substring(0,150)"></p>
+                            </i>
+                            <!-- <span><i></i></span> -->
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="col m2">
-                <!-- publicite -->
-            </div>
         </div>
-        <!-- // -->
-        
+    </div>
+    <!-- // -->
+    <!-- PUBLICITE -->
+    <div class="h-20" style="border : solid 1px #e2e8f0">
+        <i>PUBLICITE</i>
+    </div>
+    <!-- // -->
     </div>    
 </template>
 
@@ -147,7 +149,7 @@ import { VueFlux, Transitions ,FluxCaption} from 'vue-flux';
     export default {
         components : {
             InfiniteSlideBar,
-            VueHorizontalList,
+            'vue-horizontal-list' : VueHorizontalList,
             'vue-flux' : VueFlux,
             Transitions,
             'flux-caption' : FluxCaption,
@@ -163,11 +165,19 @@ import { VueFlux, Transitions ,FluxCaption} from 'vue-flux';
                 fluxOptions: {
                     autoplay: true
                 },
-                fluxTransitions:[ 'fade', 'cube', 'book', 'wave' ],
+                fluxTransitions:[ 'fade', 'book', 'wave' ],
                 vfImages: [],
                 vfCaptions: [],
                 isLoading : false,
-                fullPage : true
+                fullPage : true,
+                options: {
+                    responsive: [
+                        {end: 576, size: 1}, 
+                        {start: 576, end: 768, size: 2},
+                        {start: 768, end: 992, size: 3},
+                        {size: 5}
+                    ],
+                }
             }
         },
         methods : {
@@ -175,13 +185,16 @@ import { VueFlux, Transitions ,FluxCaption} from 'vue-flux';
                 try {
                     this.isLoading = true
                     let response = await axios.get('/news/articles/get-list')
-                    this.breaking = response.data.breaking
-                    this.newsData = response.data.data
-                    for(var i = 0 ; i < this.breaking.length ; i++) {
-                        this.vfImages.push('/news-image/'+this.breaking[i].image)
-                        this.vfCaptions.push(this.breaking[i].name)
+                    if(response.data) {
+                        this.isLoading = false
+                        this.breaking = response.data.breaking
+                        this.newsData = response.data.data
+                        for(var i = 0 ; i < this.breaking.length ; i++) {
+                            this.vfImages.push('/news-image/'+this.breaking[i].image)
+                            this.vfCaptions.push(this.breaking[i].name)
+                        }
                     }
-                    this.isLoading = false
+                    
                 } catch(error) {
                     alert(error)
                 }
@@ -197,6 +210,15 @@ import { VueFlux, Transitions ,FluxCaption} from 'vue-flux';
                 return this.newsData.filter((n) => {
                     return n.cat.slug.match("sports")
                 })
+            },
+            lastCulturesNews() {
+                return this.cultures[0]
+            },
+            lastSportsNews() {
+                return this.sports[0]
+            },
+            lastNews() {
+                return this.newsData[0]
             }
         }
     }

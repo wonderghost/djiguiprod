@@ -16,16 +16,19 @@ class PageController extends Controller
     }
 
     public function index() {
-        return view('pages.home-pages');
+        return view('pages.home-pages')
+            ->withCat('null');
     }
 
     public function prestationIndex() {
-        return view('pages.prestations-index');
+        return view('pages.prestations-index')
+            ->withCat('home');
     }
 
     public function prestationDetails($slug) {
         return view('pages.prestations-details')
-            ->withSlug($slug);
+            ->withSlug($slug)
+            ->withCat('home');
     }
 
     public function getPrestationDetails(Request $request , Page $p) {

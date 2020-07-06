@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container row">
         <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
@@ -13,22 +13,32 @@
             <div id="test1" class="col m12 s12">
                 <div class="container">
                     <h4>Ajoutez un Utilisateur</h4>
-                    <form @submit.prevent="" class="row">
+                    <template v-if="errors">
+                        <div class="red darken-1 white-text" style="margin : 1% ; padding : 1%;" v-for="e in errors" :key="e">
+                            <span >{{e}}</span>
+                        </div>
+                    </template>
+                    <form @submit.prevent="addNewUser()" class="row">
                         <div class="input-field col s12 m6">
-                            <input type="text" class="validate">
+                            <input v-model="data.name" type="text" class="validate">
                             <label for="">Nom d'utilisateur</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input type="email" class="validate">
+                            <input v-model="data.email" type="email" class="validate">
                             <label for="">Adresse Email</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input type="text" class="validate">
+                            <input v-model="data.phone" type="text" class="validate">
                             <label for="">Telephone</label>
                         </div>
-                        <div class="input-field col s12 m6">
-                            <dropdown :options="userType" :selected="object" v-on:updateOption="methodToRunOnSelect"></dropdown>
+                        <div class="input-field col s12 m6" >
+                            <select v-model="data.typeUser">
+                                <option value="" disabled selected>-- Choisissez un type --</option>
+                                <option v-for="t in userType" :key="t.type" :value="t.type">{{ t.type }}</option>
+                            </select>
+                            <label>User Type</label>
                         </div>
+                        <button type="submit" class="btn">Validez</button>
                     </form>
                 </div>
             </div>
@@ -45,14 +55,13 @@
 import Loading from 'vue-loading-overlay';
 // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
-import dropdown from 'vue-dropdowns';
     export default {
         components : {
-            Loading,
-            dropdown
+            Loading
         },
         mounted() {
             $('.tabs').tabs();
+            $('select').formSelect();
         },
         data() {
             return {
@@ -61,14 +70,39 @@ import dropdown from 'vue-dropdowns';
                 userType : [{
                     'type' : 'redacteur'
                 }],
-                object : {
-                    name : 'type'
-                }
+                data : {
+                    _token : "",
+                    name : "",
+                    email : "",
+                    phone : "",
+                    typeUser : ""
+                },
+                errors : []
             }
         },
         methods : {
-            methodToRunOnSelect(payload) {
-                this.object = payload;
+            addNewUser : async function () {
+                try {
+                    this.isLoading = true
+                    this.data._token = document.querySelector("meta[name=csrf-token]").content
+                    let response  = await axios.post('/admin/users/add',this.data)
+
+                    if(response.data == 'done') {
+                        this.isLoading = false
+                        alert("Success !")
+                        location.reload()
+                    }
+                } catch(error) {
+                    this.isLoading = false
+                    if(error.response.data.errors) {
+                        let errorTab = error.response.data.errors
+                        for (var prop in errorTab) {
+                            this.errors.push(errorTab[prop][0])
+                        }
+                    } else {
+                        this.errors.push(error.response.data)
+                    }
+                }
             }
         },
         computed : {

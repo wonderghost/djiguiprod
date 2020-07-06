@@ -19,6 +19,8 @@ Vue.component('category-news',require('./components/CategoryNewsComponent.vue').
 Vue.component('contact-form',require('./components/ContactComponent.vue').default)
 Vue.component('manage-page',require('./components/PageManagementComponent.vue').default)
 Vue.component('prestation-page',require('./components/PrestationComponent.vue').default)
+Vue.component('login-tag',require('./components/LoginComponent.vue').default)
+Vue.component('footer-news',require('./components/FooterNewsComponent.vue').default)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

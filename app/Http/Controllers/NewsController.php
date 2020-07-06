@@ -17,7 +17,8 @@ class NewsController extends Controller
 
     public function getDetails($slug , Article $a) {
         $article = $a->find($slug);
-        return view('news.details')->withItem($article);
+        return view('news.details')->withItem($article)
+            ->withCat('news');
     }
 
     public function getInfoDetails(Request $request , Article $a) {
@@ -32,7 +33,9 @@ class NewsController extends Controller
                 'description'   =>  $article->description,
                 'image' =>  $article->image,
                 'created_at'    =>  $date->toFormattedDateString(),
-                'author'    =>  $article->author()->name
+                'author'    =>  $article->author()->name,
+                'cat'   =>  $article->subCategory()->first()->category(),
+                'slug'  =>  $article->slug
             ];
 
             return response()
@@ -46,7 +49,7 @@ class NewsController extends Controller
 
     public function getList(Category $c , SubCategory $sc ,Article $a) {
         try {
-            $art = $a->all();
+            $art = $a->select()->orderBy('created_at','desc')->limit(100)->get();
             $data = [];
 
             foreach($art as $key => $value) {
@@ -64,7 +67,7 @@ class NewsController extends Controller
 
             return response()
                 ->json([
-                    'breaking'  =>  $a->select()->orderBy('created_at','desc')->get(),
+                    'breaking'  =>  $a->select()->orderBy('created_at','desc')->limit(15)->get(),
                     'data'  =>  $data
                 ]);
         } catch(AppException $e) {
@@ -74,11 +77,13 @@ class NewsController extends Controller
     }
 
     public function index() {
-        return view('news.news-home');
+        return view('news.news-home')
+            ->withCat('news');
     }
 
     public function articleGetForm() {
-        return view('news.add-article');
+        return view('news.add-article')
+            ->withCat('null');
     }
 
     public function postCategory(Request $request) {
@@ -172,8 +177,9 @@ class NewsController extends Controller
 
         return view('news.news-category')->withData([
             'sub_category' => $subCategory,
-            'category'  =>  $category
-            ]);
+            'category'  =>  $category,
+            ])
+            ->withCat('news');
     }
 
     public function getSubCat(Request $request , Category $c , SubCategory $sc) {
@@ -184,7 +190,7 @@ class NewsController extends Controller
             $data = [];
             $i = 0;
             foreach($subCategory as $key => $value) {
-                $articles = $value->articles();
+                $articles = $value->articles()->orderBy('created_at','desc')->limit(100)->get();
                 foreach($articles as $_key => $_value) {
                     $date = new Carbon($_value->created_at);
                     $date->setLocale('fr_FR');

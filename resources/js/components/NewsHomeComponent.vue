@@ -54,7 +54,7 @@
                     <a :href="'/news/'+lastNews.slug" class="bg-blue-600 text-white rounded p-1 hover:bg-blue-700">Lire plus</a>
                 </div>
                 <div class="grid grid-cols-1 divide-y divide-gray-400 p-1">
-                    <div class="grid grid-cols-2 gap-3 p-1" v-for="n in newsData.slice(0,5)" :key="n.slug">
+                    <div class="grid grid-cols-2 gap-1 p-1" v-for="n in newsData.slice(0,3)" :key="n.slug">
                         <div>
                             <a :href="'/news/'+n.slug" class="hover:text-blue-800 font-serif">
                                 <p v-html="n.name.substring(0,100)"></p>

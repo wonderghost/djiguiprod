@@ -36,7 +36,7 @@
                     <li v-for="l in menu.category" :key="l.slug" class="mr-6">
                         <a class="text-white" :href="'/news/category/'+l.slug">{{l.name}}</a>
                     </li>
-                    <li class="my-dropdown">
+                    <li v-if="user != 'null'" class="my-dropdown">
                         <a class="text-white btn-drop text-left" @click="dropMenu()" href="#">{{user}} <i class="material-icons">arrow_drop_down</i></a>
                         <!-- admin menu -->
                         <ul v-show="dropState" class="drop-list absolute z-50 shadow-md bg-white p-5 rounded">
@@ -44,6 +44,7 @@
                             <li><a class="hover:text-blue-600" href="/admin/manage-pages">Pages</a></li>
                             <li><a class="hover:text-blue-600" href="/admin/manage-users">Utilisateur</a></li>
                             <li><a class="hover:text-blue-600" href="/admin/bannieres">Bannieres</a></li>
+                            <li><a class="hover:text-blue-600" style="cursor : pointer !important;" @click="logout()">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

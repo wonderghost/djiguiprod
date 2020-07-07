@@ -1,6 +1,7 @@
 @extends('layouts.app')
+
 @section('title')
-{{config('app.name')}}
+A Propos de nous
 @endsection
 @section('content')
 @if(Auth::check())
@@ -8,5 +9,5 @@
 @else 
 <header-component type="djigui" user="null"></header-component>
 @endif
-<home-component></home-component>
+<about-us></about-us>
 @endsection

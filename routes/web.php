@@ -21,6 +21,7 @@ Route::prefix('prestations')->group(function () {
     Route::post('/get-prestation-details','PageController@getPrestationDetails');
     Route::get('/{slug}','PageController@prestationDetails');
 });
+Route::get('/about-us','PageController@aboutUs');
 
 Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {

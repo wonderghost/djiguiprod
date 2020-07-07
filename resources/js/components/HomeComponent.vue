@@ -10,7 +10,7 @@
         <div class="container who-we-are">
             <h4>DjiguiProd</h4>
             <p v-for="i in aboutUsPage" :key="i.slug" v-html="i.content.substring(0,300)+'...'"></p>
-            <a href="#" class="btn light-blue darken-4 waves-effect waves-light">En savoir plus</a>
+            <a href="/about-us" class="btn light-blue darken-4 waves-effect waves-light">En savoir plus</a>
         </div>
          <!-- // -->
         <!-- NOS PRESTATIONS -->

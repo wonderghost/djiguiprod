@@ -15,6 +15,11 @@ class PageController extends Controller
         // $this->middleware('auth');
     }
 
+    public function aboutUs() {
+        return view('pages.about-us')
+            ->withCat('main');
+    }
+
     public function index() {
         return view('pages.home-pages')
             ->withCat('null');

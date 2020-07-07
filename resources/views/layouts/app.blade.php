@@ -39,6 +39,9 @@
     <footer-news la-date="{{Date('Y')}}"></footer-news>
     <!-- // -->
     @else
+    <!-- footer -->
+    <footer-component></footer-component>
+    <!-- // -->
     @endif
 </div>
 

@@ -100,7 +100,7 @@
     </div>
     <!-- // -->
     <!-- Sports -->
-    <div class="container mx-auto" style="border-top:solid 1px #e2e9f0">
+    <div v-if="lastSportsNews" class="container mx-auto" style="border-top:solid 1px #e2e9f0">
        <div class="bg-blue-600 w-20 text-white font-serif p-1"><span>Sports</span></div>
        <div class="grid grid-cols-3">
             <div class="col-span-2">

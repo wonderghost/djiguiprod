@@ -20,7 +20,7 @@
         </div>
         <div class="container mx-auto">
             <h6 class="font-serif text-5xl">{{news.name}}</h6>
-            <span class="text-xl"><i class="material-icons">account_circle</i><i>Admin</i></span>,
+            <span class="text-xl"><i class="material-icons">account_circle</i><i>{{news.author}}</i></span>,
             <!-- SOCIAL SHARING -->
             <span class="font-serif text-xl">Partagez : </span>
                 <twitter-share 

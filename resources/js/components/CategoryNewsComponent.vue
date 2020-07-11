@@ -22,16 +22,16 @@
         </div>
 
         <div v-if="!nothingState" class="container mx-auto">
-            <div class="mt-5">
+            <div v-if="subCatgoryList" class="mt-5">
                 <span class="font-serif text-4xl mr-10">{{categoryName}} : </span>
                 <span class="text-2xl mr-2 pr-2" style="border-right : solid 1px #e2e8f0" v-for="sc in subCatgoryList" :key="sc.slug">{{ sc.name }}</span>
             </div>
-            <div class="grid grid-cols-2 gap-3 divide-x divider-gray-400">
+            <div class="grid grid-cols-1 gap-3 divide-x divider-gray-400 lg:grid-cols-2">
                 <div>
                     <div class="h-20 mb-2" style="border-bottom : solid 1px #e2e8f0">
                         <i>PUBLICITE</i>
                     </div>
-                    <div>
+                    <div v-if="lastNews">
                         <a :href="'/news/'+lastNews.slug">
                             <img :src="'/news-image/'+lastNews.image" class="w-full p-2" style="height : 25rem !important;" alt="">
                             <h6 class="font-serif font-bold text-2xl text-center p-2">{{lastNews.name}}</h6>
@@ -43,14 +43,14 @@
                 </div>
                 <!--  -->
                 <div class="p-2">
-                    <div class="grid grid-cols-2 divide-x divide-gray-400 p-2">
-                        <div>
+                    <div class="grid grid-cols-1 divide-x divide-gray-400 p-2 lg:grid-cols-2">
+                        <div v-if="secondLastNews" class="mb-5 lg:mb-0">
                             <h2 class="font-bold font-serif text-3xl" v-html="secondLastNews.name"></h2>
-                            <img :src="'/news-image/'+secondLastNews.image" class="h-48 pr-2 w-full" alt="">
+                            <img :src="'/news-image/'+secondLastNews.image" class="h-48 pr-2 w-full mb-2 lg:mb-0" alt="">
                             <p v-html="secondLastNews.description.substring(0,300)+'...'" class="mb-2 font-serif pr-2"></p>
                             <a :href="'/news/'+secondLastNews.slug" class="bg-blue-600 text-white rounded p-1 hover:bg-blue-700">Lire plus</a>
                         </div>
-                        <div class="grid grid-cols-1 divide-y divide-gray-400">
+                        <div v-if="data" class="grid grid-cols-1 divide-y divide-gray-400">
                             <div class="grid grid-cols-2 gap-1 p-1" v-for="n in data.slice(2,5)" :key="n.slug">
                                 <div>
                                     <a :href="'/news/'+n.slug" class="hover:text-blue-800 font-serif">
@@ -60,7 +60,7 @@
                                 </div>
                                 <div>
                                     <a :href="'/news/'+n.slug">
-                                        <img :src="'/news-image/'+n.image" class="h-20 w-full rounded">
+                                        <img :src="'/news-image/'+n.image" class="h-32 w-full rounded lg:h20">
                                     </a>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
         <div v-if="!nothingState" class="container mx-auto">
             <div v-for="s in subCatgoryList" :key="s.slug" style="border-top : solid 1px #e2e8f0" class="mt-1 mb-4">
                 <div class="bg-blue-600 w-32 text-white font-serif p-1 rounded" style="border-top : solid 1px #e2e8f0"><span>{{s.name}}</span></div>
-                <div class="grid grid-cols-5 gap-3 mt-2">
+                <div class="grid grid-cols-2 gap-3 mt-2 lg:grid-cols-5">
                     <div v-for="n in getData(s.slug).slice(0,15)" :key="n.slug">
                         <a :href="'/news/'+n.slug" class="hover:text-blue-600">
                             <img :src="'/news-image/'+n.image" class="w-full h-32 rounded" alt="">

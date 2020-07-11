@@ -114,3 +114,16 @@ body {
     position : relative !important;
     display : inline-block !important;
 }
+
+.bm-burger-bars {
+    background-color : #fff !important;
+}
+
+.bm-burger-button {
+    cursor: pointer;
+    height: 30px;
+    top : 25px !important;
+    right : -70px !important;
+    position: absolute;
+    width: 36px;
+}

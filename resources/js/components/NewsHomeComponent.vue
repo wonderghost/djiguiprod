@@ -9,7 +9,7 @@
         <i>PUBLICITE</i>
     </div>
     
-    <div class="" style="border-bottom : solid 1px #e2e8f0">
+    <div class="w-auto" style="border-bottom : solid 1px #e2e8f0">
         <!-- <div class="bg-blue-600 w-32 p-1 mt-1 text-white rounded-sm"><span>Infos a la une</span></div> -->
         <vue-horizontal-list :items="breaking" :options="options" class="p-0">
             <template v-slot:default="{item}">
@@ -23,7 +23,7 @@
     </div>
 
     <div class="grid grid-cols-2 gap-3 divide-x divider-gray-400">
-        <div>
+        <div class="col-span-2 lg:col-span-1">
             <div class="h-20 mb-2" style="border-bottom : solid 1px #e2e8f0">
                 <i>PUBLICITE</i>
             </div>
@@ -45,15 +45,15 @@
             </div>
         </div>
         <!--  -->
-        <div class="p-2">
+        <div class="p-2 col-span-2 lg:col-span-1">
             <div class="grid grid-cols-2 divide-x divide-gray-400 p-2">
-                <div>
+                <div v-if="lastNews" class="col-span-2 mb-5 lg:col-span-1">
                     <h2 class="font-bold font-serif text-3xl" v-html="lastNews.name"></h2>
-                    <img :src="'/news-image/'+lastNews.image" class="h-48 pr-2 w-full" alt="">
+                    <img :src="'/news-image/'+lastNews.image" class="h-64 pr-2 mb-2 w-full lg:h48" alt="">
                     <p v-html="lastNews.description.substring(0,700)+'...'" class="mb-2 font-serif pr-2"></p>
                     <a :href="'/news/'+lastNews.slug" class="bg-blue-600 text-white rounded p-1 hover:bg-blue-700">Lire plus</a>
                 </div>
-                <div class="grid grid-cols-1 divide-y divide-gray-400 p-1">
+                <div v-if="newsData" class="grid grid-cols-1 divide-y divide-gray-400 p-1 col-span-2 lg:col-span-1">
                     <div class="grid grid-cols-2 gap-1 p-1" v-for="n in newsData.slice(0,3)" :key="n.slug">
                         <div>
                             <a :href="'/news/'+n.slug" class="hover:text-blue-800 font-serif">
@@ -63,7 +63,7 @@
                         </div>
                         <div>
                             <a :href="'/news/'+n.slug">
-                                <img :src="'/news-image/'+n.image" class="h-20 w-full rounded">
+                                <img :src="'/news-image/'+n.image" class="h-40 w-full rounded lg:h-20">
                             </a>
                         </div>
                     </div>
@@ -76,17 +76,17 @@
     <div class="container mx-auto " style="border-top:solid 1px #e2e8f0">
         <div class="bg-blue-600 w-20 text-white font-serif p-1"><span>Cultures</span></div>
         <div class="grid grid-cols-3">
-            <div class="col-span-2">
+            <div v-if="lastCulturesNews" class="col-span-3 lg:col-span-2">
                 <a :href="'/news/'+lastCulturesNews.slug">
                     <img :src="'/news-image/'+lastCulturesNews.image" class="w-full p-2" style="height : 25rem !important;" alt="">
                     <h6 class="font-serif font-bold text-2xl text-center p-2">{{lastCulturesNews.name}}</h6>
                 </a>
             </div>
-            <div class="col-span-1 mt-2">
-                <div class="grid grid-rows-2 grid-flow-col gap-1">
+            <div class="col-span-3 mt-2 lg:col-span-1">
+                <div v-if="cultures" class="grid grid-rows-2 grid-flow-col gap-1">
                     <div v-for="n in cultures.slice(0,4)" :key="n.slug">
                         <a :href="'/news/'+n.slug" class="">
-                            <img :src="'/news-image/'+n.image" class="w-full h-20 rounded" alt="">
+                            <img :src="'/news-image/'+n.image" class="w-full h-48 rounded lg:h-20" alt="">
                             <h6 class="font-serif hover:text-blue-600">{{n.name}}</h6>
                             <i>
                                 <p class="font-serif text-sm" v-html="n.description.substring(0,150)"></p>
@@ -103,13 +103,13 @@
     <div v-if="lastSportsNews" class="container mx-auto" style="border-top:solid 1px #e2e9f0">
        <div class="bg-blue-600 w-20 text-white font-serif p-1"><span>Sports</span></div>
        <div class="grid grid-cols-3">
-            <div class="col-span-2">
+            <div class="col-span-3 lg:col-span-2">
                 <a :href="'/news/'+lastSportsNews.slug">
                     <img :src="'/news-image/'+lastSportsNews.image" class="w-full p-2" style="height : 25rem !important;" alt="">
                     <h6 class="font-serif font-bold text-2xl text-center p-2">{{lastSportsNews.name}}</h6>
                 </a>
             </div>
-            <div class="col-span-1 mt-2">
+            <div class="col-span-3 mt-2 lg:col-span-1">
                 <div class="grid grid-rows-2 grid-flow-col gap-1">
                     <div v-for="n in sports.slice(0,4)" :key="n.slug">
                         <a :href="'/news/'+n.slug" class="">

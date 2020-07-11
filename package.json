@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "@chenfengyuan/vue-carousel": "^1.0.3",
+        "vue-burger-menu": "^2.0.5",
         "vue-dropdowns": "^1.1.1",
         "vue-flash-message": "^0.7.2",
         "vue-flux": "^6.1.1",

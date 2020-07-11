@@ -35,7 +35,7 @@
             <!-- // -->
 
             <div class="grid grid-cols-3 divide-x divider-gray-400 gap-1">
-                <div class="col-span-2 pr-5">
+                <div class="col-span-3 pr-5 lg:col-span-2">
                     <img :src="'/news-image/'+news.image" class="h-auto w-full" alt="">
                     <p class="font-serif text-xl mt-5 leading-loose" v-html="news.description"></p>
 

@@ -22,16 +22,41 @@
                             <a @click="logout()">Logout</a>
                         </li>
                     </ul>
+                    <a class="right sidenav-trigger" data-target="slide-out" style="margin-right : 2% !important;"><i class="material-icons">menu</i></a>
                     </div>
                 </nav>
             </div>
+            <ul id="slide-out" class="sidenav">
+                <li v-for="(m,name) in links" :key="name"><a class="waves-effect" :href="m">{{name}}</a></li>
+            </ul>
         </template>
         <template v-if="type == 'djigui-news'">
             <nav class="flex items-center justify-between flex-wrap bg-black p-0">
                 <div class="flex items-center flex-shrink-0 text-white mr-0">
                     <img src="/img/logo-djigui.png" width="200" alt="">
                 </div>
-                <ul class="flex mx-auto">
+                <div class="visible lg:invisible absolute right-0 mr-20 top-0">
+                    <!-- <a class="text-white"><i class="material-icons">menu</i></a> -->
+                    <Slide right reveal>
+                        <a id="home" href="/news/"> 
+                            <span>Home</span>  
+                        </a>
+                        <a :href="'/news/category/'+k.slug" v-for="k in menu.category" :key="k.slug">
+                            <span>{{k.name}}</span>
+                        </a>
+                        <a v-if="user != 'null'" href="#">
+                            <!-- <span>Admin</span> -->
+                            <ul class="drop-list rounded w-full">
+                                <li><a class="" href="/news/articles/add">Articles</a></li>
+                                <li><a class="" href="/admin/manage-pages">Pages</a></li>
+                                <li><a class="" href="/admin/manage-users">Utilisateur</a></li>
+                                <li><a class="" href="/admin/bannieres">Bannieres</a></li>
+                                <li><a class="" style="cursor : pointer !important;" @click="logout()">Logout</a></li>
+                            </ul>
+                        </a>
+                    </Slide>
+                </div>
+                <ul class="flex mx-auto invisible md:invisible lg:visible">
                     <li class="mr-6"><a class="text-white" href="/news/"><i class="material-icons">home</i></a></li>
                     <li v-for="l in menu.category" :key="l.slug" class="mr-6">
                         <a class="text-white" :href="'/news/category/'+l.slug">{{l.name}}</a>
@@ -53,7 +78,12 @@
     </div>
 </template>
 <script>
+import { Slide } from 'vue-burger-menu'
+
     export default {
+        components : {
+            Slide
+        },
         props : {
             type : String,
             user : String

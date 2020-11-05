@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130660555-2"></script>
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130660555-2"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
   gtag('config', 'UA-130660555-2');
-</script>
+</script> -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +33,7 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0&appId=2005235842908607&autoLogAppEvents=1"></script>
 
 <div id="app">
+    
     @yield('content')
     @if($cat == 'news')
     <!-- FOOTER COMPONENT -->

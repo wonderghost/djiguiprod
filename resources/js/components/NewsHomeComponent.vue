@@ -13,7 +13,7 @@
         <!-- <div class="bg-blue-600 w-32 p-1 mt-1 text-white rounded-sm"><span>Infos a la une</span></div> -->
         <vue-horizontal-list :items="breaking" :options="options" class="p-0">
             <template v-slot:default="{item}">
-            <div class="p-0">
+            <div class="p-0"> 
                 <a :href="'/news/'+item.slug" class="hover:text-blue-800 font-serif">
                     <h6>{{item.name.substring(0,100)}}</h6>
                 </a>

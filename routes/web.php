@@ -16,6 +16,12 @@ Route::get('/','HomeController@index');
 Route::get('/get-prestation','PageController@getListPage');
 Route::get('/news','NewsController@index');
 
+// Route  de la recuperation des artticles
+Route::get('/news/add-article','NewsController@articleGetForm');
+Route::get('/news/edit-article{slug}','NewsController@articleEditForm');
+Route::post('/news/update-article','NewsController@articleUpdate');
+Route::post('/news/wave-article','NewsController@articleWave');
+// fin
 Route::prefix('prestations')->group(function () {
     Route::get('/','PageController@prestationIndex');
     Route::post('/get-prestation-details','PageController@getPrestationDetails');

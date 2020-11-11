@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    category : []  
+    category : [],
+    _token : document.querySelector("meta[name='csrf-token']").content
   },
   mutations: {
     setCategory (state , data) {

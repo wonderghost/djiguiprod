@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-use App\AppException;
+use App\Exceptions\AppException;
 
 use App\Category;
 use App\SubCategory;
@@ -14,6 +14,15 @@ use Carbon\Carbon;
 
 class NewsController extends Controller
 {
+    // Controller de la reccuperation des articles
+    // public function takeArticle(){
+
+    //     $articles = Article::all();
+
+    //     return response()->json($articles, 200);
+
+    // }
+    // fin
 
     public function getDetails($slug , Article $a) {
         $article = $a->find($slug);
@@ -80,12 +89,84 @@ class NewsController extends Controller
         return view('news.news-home')
             ->withCat('news');
     }
-
+// fonction de recuperation des articles
     public function articleGetForm() {
-        return view('news.add-article')
+
+        $deleted = Article::all()
+                    ->where('deleted', true);
+        $articles = Article::all()
+                    ->where('deleted', false);
+
+        return view('news.add-article', [
+                'articles' => $articles,
+                'deleted' => $deleted,
+                 ])
             ->withCat('null');
     }
+// fonction de d'edition des articles
+    public function articleEditForm($slug) {
 
+        $article = Article::find($slug);
+
+        return response()->json($article);
+    }
+// fonction de mise a jour  des articles
+    public function articleUpdate(Request $request) {
+
+        try{
+            $article = Article::find(request()->slug);
+
+            $article->name = $request->input('title');
+            $article->description = $request->input('description');
+
+            if($request->hasFile('image')) {
+                $extension = $request->file('image')->getClientOriginalExtension();
+                
+                
+                if($request->file('image')->move(config('image.path'),$article->image)) {
+                    $article->update();
+                    return response()
+                        ->json('done');
+                } else {
+                    throw new AppException("Erreur de telechargement de l'image!");
+                }
+            } else {
+                throw new AppException("Veuillez selectionnez une image!");
+            }
+
+        // request()->file('image')->move(config('image.path'),request()->image;
+        
+                
+        // $article -> id_sub_category = request()->Categorie;
+        }
+        catch(AppException $e){
+            header("Erreur",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
+// fin
+
+// fonction de mise a jour  des articles   
+    public function articleWave(Request $request) {
+
+        // return response()
+        //         ->json($request);
+        try{
+            $article = Article::find(request()->slug);
+
+            $article->deleted = '1';
+            $article->update();
+            return response()
+                    ->json('Place dans la corbeil');
+        }
+        catch(AppException $e){
+            header("Erreur",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
+// fin
+
+    
     public function postCategory(Request $request) {
         try {
             $validation = $request->validate([

@@ -1,5 +1,5 @@
 <template>
-    <div class="container row">
+    <div class="container row" style="width: 90%">
     <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
@@ -8,11 +8,12 @@
         <div class="col s12">
             <ul class="tabs">
                 <li class="tab col s3"><a class="active" href="#test1">Nouvel Article</a></li>
-                <li class="tab col s3"><a class="" href="#test2">Nouvel Sous categorie</a></li>
-                <li class="tab col s3"><a class="" href="#test3">Nouvel Categorie</a></li>
+                <li class="tab col s3"><a class="" href="#test2">Sous categorie</a></li>
+                <li class="tab col s2"><a class="" href="#test3">Categorie</a></li>
                 <li class="tab col s3"><a class="" href="#test4">Tous les articles</a></li>
+                <li class="tab col s1"><a class="" href="#test5"><i class="material-icons">delete_sweep</i></a></li>
             </ul>
-            </div>
+        </div>
             <div id="test1" class="col m12 s12">
                 <!-- AJOUTER UN ARTICLE / UNE CATEGORIE D'ARTICLE / SOUS CATEGORIE -->
                 <h5>Ajouter un article</h5>
@@ -73,8 +74,108 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- article supprime -->
+             <div id="test5" class="col m12 s12">
+                <h5 class="aligne-center" >Tous les articles</h5>
+                <div>
+          <!--      Tableau daffichage des articles            -->
+                  <table class="highlight">
+                    <thead>
+                      <tr>
+                          <th>Libelle</th>
+                          <th>Description</th>
+                          <th>Image</th>
+                          <th>Options</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr  v-for = 'deletee in deleted' :key='deletee.slug'>
+                        <td>{{ deletee.name }}</td>
+                        <td>
+                           <p v-html="deletee.description.substring(0,150)"></p>
+                        </td>
+                        <td><img :src="'/news-image/'+deletee.image" 
+                            style="height: 100px; width:100px;">
+                        </td>
+                        <td>
+                         <a class="waves-effect waves-light btn modal-trigger" 
+                         @click="" ><i class="material-icons">loop</i></a>
+                         <a class="waves-effect #b71c1c red darken-4 btn" 
+                         @click="WaveOutArticle(deletee.slug)" ><i class="material-icons">delete_sweep</i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <!-- closed -->
+
+
             <div id="test4" class="col m12 s12">
-                <h5>Tous les articles</h5>
+                <h5 class="aligne-center" >Tous les articles</h5>
+                <div>
+          <!--      Tableau daffichage des articles            -->
+                  <table class="highlight">
+                    <thead>
+                      <tr>
+                          <th>Libelle</th>
+                          <th>Description</th>
+                          <th>Image</th>
+                          <th>Options</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr  v-for = 'article in articles' :key='article.slug'>
+                        <td>{{ article.name }}</td>
+                        <td>
+                           <p v-html="article.description.substring(0,150)"></p>
+                        </td>
+                        <td><img :src="'/news-image/'+article.image" 
+                            style="height: 100px; width:100px;">
+                        </td>
+                        <td>
+                         <a class="waves-effect waves-light btn modal-trigger" 
+                         @click="EditArticle(article.slug)" href="#modal1"><i class="material-icons">edit</i></a>
+                         <a class="waves-effect #b71c1c red darken-4 btn" 
+                         @click="WaveOutArticle(article.slug)" ><i class="material-icons">delete_sweep</i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            <!-- closed -->
+
+                  <!-- Modal Structure -->
+                  <div id="modal1" class="modal">
+                    <div class="modal-content">
+                      <h4>Editer cet Article</h4>
+                      <form @submit.prevent="UpdateArticle" class="col s12 m12 my-form">
+                        <div class="container row">
+                            <div class="input-field col s12 m12">
+                                <input v-model="titleEdit" placeholder="Nom de l'article" type="text" class="validate">
+                                <label for="first_name">Nom de l'article</label>
+                            </div>
+                            <div class="input-field col s12 m12">
+                                <input type="file"  @change="fileUpload2">
+                            </div>
+                            <div class="col s12 m12">
+                                <label for="">Contenu</label>
+                                <VueEditor v-model="DescEdit" class="validate"></VueEditor>
+                            </div>
+                            <div class="col s12 m12">
+                                <dropdown :options="category"  :selected="CategorieEdit" 
+                                v-on:updateOption="runOnSelect2" ></dropdown>
+                            </div>
+                        </div>
+                        <button type="submit" class="modal-close btn">Validez</button>
+                    </form>
+                    </div>
+                  </div>
+
+                </div>
             </div>
     </div>    
 </template>
@@ -85,14 +186,23 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { VueEditor } from 'vue2-editor'
 import dropdown from 'vue-dropdowns';
-
-
+        
+        $(document).ready(function(){
+            $('.modal').modal();
+          });
+     
+        
     export default {
+        // recuperer articles props
+        props: [ 'articles', 'deleted' ],
+
         components : {
             VueEditor,
             Loading,
             dropdown
         },
+
+
         mounted() {
             $('.tabs').tabs();
             $('select.sub').formSelect();
@@ -123,14 +233,37 @@ import dropdown from 'vue-dropdowns';
                 object: {
                     name: 'Categorie',
                 },
+
+                slug: '',
+                titleEdit: '',
+                ImageEdit: '',
+                DescEdit: '',
+                CategorieEdit: '',
+
                 artObject : {
                     name : "Tag"
-                }
+                },
+
+
             }
         },
+        // created() {
+
+        //     axios.get('http://localhost:8000/news/articles/add')
+        //         .then(response => console.log(response.data));
+
+        // },
         methods : {
             fileUpload : function (e) {
                 this.articleForm.image = e.target.files[0]
+            },
+            fileUpload2 : function (event) {
+                this.ImageEdit = event.originalTarget.files[0]
+            },
+            getArticle(slug){
+                axios.get('/news/edit-article/' + slug)
+                    .then(response=> console.log(response.data))
+                    .catch(error=> console.log(error));
             },
             addArticle : async function () {
                 try {
@@ -164,6 +297,11 @@ import dropdown from 'vue-dropdowns';
                 this.artObject = payload
                 this.articleForm.tag = this.artObject.slug
             },
+            runOnSelect2(payload) {
+                this.artObject = payload
+                this.CategorieEdit = this.artObject.slug
+            },
+            
             getCategoryList : async function () {
                 try {
                     let response = await axios.get('/news/articles/get-category')
@@ -200,10 +338,91 @@ import dropdown from 'vue-dropdowns';
                     this.isLoading = false
                     alert(error)
                 }
-            }
-        },
-        computed : {
+            },
 
+            // methode qui edite l'article dans la corbeille
+            EditArticle(slug){
+                axios.get('/news/edit-article'+slug)
+                    .then(response=> {
+                        this.slug = response.data.slug;
+                        this.titleEdit = response.data.name;
+                        this.DescEdit = response.data.description;
+                        this.ImageEdit = response.data.Image;
+                        this.CategorieEdit = response.data.id_sub_category;
+                    });
+            },
+
+            // methode qui place l'article dans la corbeille
+            WaveOutArticle : async function (slug) {
+
+                try {
+
+                    let response = await axios.post('/news/wave-article',{
+                        _token : this._token,
+                        slug : slug
+                    })
+
+                    if(response) {
+                        alert('Placé a la corbeille avec Succè');
+                        console.log(response.data)
+
+                    }
+                }  
+                catch(error){
+                    alert(error)
+                }
+
+               //  try{
+
+               // axios.post('/news/wave-article', 
+               //      {
+               //          slug : slug,
+               //          _token : this._token,
+               //      })
+               //      .then(response=> {
+               //          this.slug = response.data.slug;
+               //          // this.titleEdit = response.data.name;
+               //          // this.DescEdit = response.data.description;
+               //          // this.ImageEdit = response.data.Image;
+               //          // this.CategorieEdit = response.data.id_sub_category;
+               //      });
+               //  }catch(error)
+               //  {
+               //      alert('Erreur denvoi');
+               //  }
+                
+            },
+
+            // methode qui place l'article dans la corbeille
+            UpdateArticle :async function  (){
+                try{
+                    var theForm = new FormData()
+                    theForm.append('slug',this.slug)
+                    theForm.append('title',this.titleEdit)
+                    theForm.append('image',this.ImageEdit)
+                    theForm.append('description',this.DescEdit)
+
+                    let response = await axios.post('/news/update-article',theForm,
+                    {
+                        headers : {
+                        'content-type' : 'multipart/form-data'
+                    }
+                }) 
+                if (response) {
+                    console.log(response.data);
+                    alert("Success!")
+                }
+
+                }catch(error){
+                    alert(error)
+                }
+                
+        }
+    },
+        computed : {
+            _token() {
+                return this.$store.state._token
+            }
         }
     }
 </script>

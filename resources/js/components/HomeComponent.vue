@@ -88,7 +88,7 @@ import InfiniteSlideBar from 'vue-infinite-slide-bar'
         mounted() {
             $('.parallax').parallax();
             // 
-            this.getAllPage()
+            // this.getAllPage()
         },
         data() {
             return {

@@ -2,11 +2,11 @@
 <html lang="fr">
 <head>
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<<<<<<< HEAD
+
 {{-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130660555-2"></script> --}}
 {{-- <script>
 =======
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130660555-2"></script>
+<!<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130660555-2"></script>
 <script>
 >>>>>>> cd515e9bffe7a0ddff20d7bd750a902f25336fdd
   window.dataLayer = window.dataLayer || [];
@@ -17,10 +17,8 @@
 <<<<<<< HEAD
 </script>
  --}}
-=======
-</script> -->
+{{-- ======= --}}
 
->>>>>>> cd515e9bffe7a0ddff20d7bd750a902f25336fdd
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}">

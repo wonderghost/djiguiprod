@@ -77,6 +77,7 @@
         </template>
     </div>
 </template>
+
 <script>
 import { Slide } from 'vue-burger-menu'
 

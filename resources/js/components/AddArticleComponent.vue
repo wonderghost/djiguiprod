@@ -11,7 +11,7 @@
                 <li class="tab col s3"><a class="" href="#test2">Sous categorie</a></li>
                 <li class="tab col s2"><a class="" href="#test3">Categorie</a></li>
                 <li class="tab col s3"><a class="" href="#test4">Tous les articles</a></li>
-                <li class="tab col s1"><a class="" href="#test5"><i class="material-icons">delete_sweep</i></a></li>
+                <li class="tab col s1"><a class="" href="#test5"><i class="small material-icons">delete_sweep</i></a></li>
             </ul>
         </div>
             <div id="test1" class="col m12 s12">
@@ -78,9 +78,9 @@
 
             <!-- article supprime -->
              <div id="test5" class="col m12 s12">
-                <h5 class="aligne-center" >Tous les articles</h5>
+                <h5 class="aligne-center" >Tous les articles supprimés</h5>
                 <div>
-          <!--      Tableau daffichage des articles            -->
+          <!--      Tableau daffichage des articles supprimes            -->
                   <table class="highlight">
                     <thead>
                       <tr>
@@ -101,10 +101,14 @@
                             style="height: 100px; width:100px;">
                         </td>
                         <td>
-                         <a class="waves-effect waves-light btn modal-trigger" 
-                         @click="" ><i class="material-icons">loop</i></a>
-                         <a class="waves-effect #b71c1c red darken-4 btn" 
-                         @click="WaveOutArticle(deletee.slug)" ><i class="material-icons">delete_sweep</i></a>
+                            <div>
+                                 <a class="waves-effect waves-light btn modal-trigger" 
+                                 @click="RestoreArticle(deletee.slug)" ><i class="material-icons">loop</i>
+                                 </a>
+
+                                 <a class="waves-effect #b71c1c red darken-4 btn" 
+                                 @click="DeleteArticle(deletee.slug)" ><i class="material-icons">delete_forever</i></a>
+                            </div>
                         </td>
                       </tr>
                     </tbody>
@@ -365,32 +369,49 @@ import dropdown from 'vue-dropdowns';
                     if(response) {
                         alert('Placé a la corbeille avec Succè');
                         console.log(response.data)
-
+                    }}
+                    catch(error){
+                        alert(error)
                     }
-                }  
-                catch(error){
-                    alert(error)
-                }
+            },
 
-               //  try{
+            DeleteArticle :async function(slug){
 
-               // axios.post('/news/wave-article', 
-               //      {
-               //          slug : slug,
-               //          _token : this._token,
-               //      })
-               //      .then(response=> {
-               //          this.slug = response.data.slug;
-               //          // this.titleEdit = response.data.name;
-               //          // this.DescEdit = response.data.description;
-               //          // this.ImageEdit = response.data.Image;
-               //          // this.CategorieEdit = response.data.id_sub_category;
-               //      });
-               //  }catch(error)
-               //  {
-               //      alert('Erreur denvoi');
-               //  }
-                
+                    try{
+
+                        let response = await axios.post('/news/delete-article', 
+                        {
+                            _token : this._token,
+                            slug : slug
+                        })
+                        if(response){
+                            alert('Supprimer definivement');
+                            console.log(response.data)
+                        }
+                    }
+                    catch(error){
+                        alert(error)
+                    }
+
+            },
+
+            RestoreArticle :async function(slug){
+
+                    try{
+                        let response = await axios.post('/news/restore-article', 
+                        {
+                            _token : this._token,
+                            slug : slug
+                        })
+                        if (response) {
+                            alert('Restauré avec succes')
+                            console.log(response.data);
+                        }
+                    }
+                    catch(error){
+                        alert(error)
+                    }
+
             },
 
             // methode qui place l'article dans la corbeille

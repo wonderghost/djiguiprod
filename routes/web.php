@@ -21,6 +21,8 @@ Route::get('/news/add-article','NewsController@articleGetForm');
 Route::get('/news/edit-article{slug}','NewsController@articleEditForm');
 Route::post('/news/update-article','NewsController@articleUpdate');
 Route::post('/news/wave-article','NewsController@articleWave');
+Route::post('/news/delete-article','NewsController@articleDelete');
+Route::post('/news/restore-article','NewsController@articleRestore');
 // fin
 Route::prefix('prestations')->group(function () {
     Route::get('/','PageController@prestationIndex');

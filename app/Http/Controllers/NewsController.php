@@ -154,10 +154,49 @@ class NewsController extends Controller
         try{
             $article = Article::find(request()->slug);
 
-            $article->deleted = '1';
+            $article->deleted = true;
             $article->update();
             return response()
                     ->json('Place dans la corbeil');
+        }
+        catch(AppException $e){
+            header("Erreur",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
+// fin
+
+// fonction de suppression  des articles   
+    public function articleDelete(Request $request) {
+
+        // return response()
+        //         ->json($request);
+        try{
+            $article = Article::find(request()->slug);
+
+            $article->delete();
+            return response()
+                    ->json('Supprime Definitivement');
+        }
+        catch(AppException $e){
+            header("Erreur",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
+// fin
+
+// fonction de restauration  des articles   
+    public function articleRestore(Request $request) {
+
+        // return response()
+        //         ->json($request);
+        try{
+            $article = Article::find(request()->slug);
+
+            $article->deleted = false;
+            $article->update();
+            return response()
+                    ->json('Restauré avec succes');
         }
         catch(AppException $e){
             header("Erreur",true,422);

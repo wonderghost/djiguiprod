@@ -172,7 +172,7 @@ import { VueEditor } from 'vue2-editor'
 
             WaveOutPage : async function(slug){
                     
-                    // alert('voila le slug '+ slug);
+                if (confirm('Voulez-vous vraiment Supprimer cette page')) {
                     try{
                         let response = await axios.post('/admin/delete-page', 
                         {
@@ -186,7 +186,10 @@ import { VueEditor } from 'vue2-editor'
                     }
                     catch(error){
                         alert(error)
-                    }
+                    } 
+                }else{
+                    alert('Suppression annule')
+                }
 
             },
 

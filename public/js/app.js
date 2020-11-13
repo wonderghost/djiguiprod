@@ -3434,35 +3434,47 @@ $(document).ready(function () {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                _context6.prev = 0;
-                _context6.next = 3;
+                if (!confirm('Voulez-vous Vraiment supprimer cette article definivement')) {
+                  _context6.next = 13;
+                  break;
+                }
+
+                _context6.prev = 1;
+                _context6.next = 4;
                 return axios.post('/news/delete-article', {
                   _token: this._token,
                   slug: slug
                 });
 
-              case 3:
+              case 4:
                 response = _context6.sent;
 
                 if (response) {
-                  alert('Supprimer definivement');
+                  alert('Supprimer avec succes');
                   console.log(response.data);
                 }
 
-                _context6.next = 10;
+                _context6.next = 11;
                 break;
 
-              case 7:
-                _context6.prev = 7;
-                _context6.t0 = _context6["catch"](0);
+              case 8:
+                _context6.prev = 8;
+                _context6.t0 = _context6["catch"](1);
                 alert(_context6.t0);
 
-              case 10:
+              case 11:
+                _context6.next = 14;
+                break;
+
+              case 13:
+                console.log('suppression annule');
+
+              case 14:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, this, [[0, 7]]);
+        }, _callee6, this, [[1, 8]]);
       }));
 
       function DeleteArticle(_x2) {
@@ -5246,14 +5258,19 @@ $(document).ready(function () {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _context4.prev = 0;
-                _context4.next = 3;
+                if (!confirm('Voulez-vous vraiment Supprimer cette page')) {
+                  _context4.next = 13;
+                  break;
+                }
+
+                _context4.prev = 1;
+                _context4.next = 4;
                 return axios.post('/admin/delete-page', {
                   _token: this._token,
                   slug: slug
                 });
 
-              case 3:
+              case 4:
                 response = _context4.sent;
 
                 if (response) {
@@ -5261,20 +5278,27 @@ $(document).ready(function () {
                   console.log(response.data);
                 }
 
-                _context4.next = 10;
+                _context4.next = 11;
                 break;
 
-              case 7:
-                _context4.prev = 7;
-                _context4.t0 = _context4["catch"](0);
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](1);
                 alert(_context4.t0);
 
-              case 10:
+              case 11:
+                _context4.next = 14;
+                break;
+
+              case 13:
+                alert('Suppression annule');
+
+              case 14:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, this, [[0, 7]]);
+        }, _callee4, this, [[1, 8]]);
       }));
 
       function WaveOutPage(_x3) {

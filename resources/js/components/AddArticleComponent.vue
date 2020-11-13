@@ -375,6 +375,7 @@ import dropdown from 'vue-dropdowns';
 
             DeleteArticle :async function(slug){
 
+                if (confirm('Voulez-vous Vraiment supprimer cette article definivement')) {  
                     try{
 
                         let response = await axios.post('/news/delete-article', 
@@ -383,13 +384,16 @@ import dropdown from 'vue-dropdowns';
                             slug : slug
                         })
                         if(response){
-                            alert('Supprimer definivement');
+                            alert('Supprimer avec succes');
                             console.log(response.data)
                         }
                     }
                     catch(error){
                         alert(error)
                     }
+                }else{
+                    console.log('suppression annule')
+                }
 
             },
 

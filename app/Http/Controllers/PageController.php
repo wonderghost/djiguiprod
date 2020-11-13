@@ -81,4 +81,42 @@ class PageController extends Controller
             die(json_encode($e->getMessage()));
         }
     }
+
+// fonction de traitement des pages 
+    public function EditPage($slug) {
+
+         $page = Page::find($slug);
+
+        return response()->json($page);
+    }
+
+    public function deletePage (Request $request){
+
+        $page = Page::find(request()->slug);
+
+        $page->delete();
+
+        return response()
+                ->json('deleted with success');
+
+    }
+
+    public function pageUpdate(Request $request) {
+
+         try{
+            $page = Page::find(request()->slug);
+
+            $page->title = $request->input('title');
+            $page->content = $request->input('content');
+            $page->tag = $request->input('tag');
+            $page->update();
+            return response()
+                    ->json('Updated with success');
+        }
+        catch(AppException $e){
+            header("Erreur",true,422);
+            die(json_encode($e->getMessage()));
+        }
+    }
+// fin
 }

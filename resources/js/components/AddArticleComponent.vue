@@ -116,8 +116,6 @@
                 </div>
             </div>
             <!-- closed -->
-
-
             <div id="test4" class="col m12 s12">
                 <h5 class="aligne-center" >Tous les articles</h5>
                 <div>
@@ -169,10 +167,10 @@
                                 <label for="">Contenu</label>
                                 <VueEditor v-model="DescEdit" class="validate"></VueEditor>
                             </div>
-                            <div class="col s12 m12">
+                            <!-- <div class="col s12 m12">
                                 <dropdown :options="category"  :selected="CategorieEdit" 
                                 v-on:updateOption="runOnSelect2" ></dropdown>
-                            </div>
+                            </div> -->
                         </div>
                         <button type="submit" class="modal-close btn">Validez</button>
                     </form>
@@ -344,7 +342,7 @@ import dropdown from 'vue-dropdowns';
                 }
             },
 
-            // methode qui edite l'article dans la corbeille
+            // methode qui edite l'article 
             EditArticle(slug){
                 axios.get('/news/edit-article'+slug)
                     .then(response=> {

@@ -13,7 +13,6 @@ Vue.component('header-component',require('./components/HeaderComponent.vue').def
 Vue.component('footer-component',require('./components/FooterComponent.vue').default)
 Vue.component('news-home',require('./components/NewsHomeComponent.vue').default)
 Vue.component('add-article',require('./components/AddArticleComponent.vue').default)
-Vue.component('edit-article',require('./components/EditArticleComponent.vue').default)
 Vue.component('news-detail',require('./components/NewsDetailComponent.vue').default)
 Vue.component('users',require('./components/UserComponent.vue').default)
 Vue.component('category-news',require('./components/CategoryNewsComponent.vue').default)

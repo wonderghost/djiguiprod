@@ -16,14 +16,24 @@ Route::get('/','HomeController@index');
 Route::get('/get-prestation','PageController@getListPage');
 Route::get('/news','NewsController@index');
 
-// Route  de la recuperation des artticles
 Route::get('/news/add-article','NewsController@articleGetForm');
+// Route  de la recuperation des artticles
 Route::get('/news/edit-article{slug}','NewsController@articleEditForm');
 Route::post('/news/update-article','NewsController@articleUpdate');
 Route::post('/news/wave-article','NewsController@articleWave');
 Route::post('/news/delete-article','NewsController@articleDelete');
 Route::post('/news/restore-article','NewsController@articleRestore');
 // fin
+
+// recuperation, modification et suppression des pages
+Route::post('/admin/delete-page','PageController@deletePage');
+Route::post('/admin/update-page','PageController@pageUpdate');
+Route::get('/admin/edit-page{slug}','PageController@EditPage');
+// fin
+
+
+
+
 Route::prefix('prestations')->group(function () {
     Route::get('/','PageController@prestationIndex');
     Route::post('/get-prestation-details','PageController@getPrestationDetails');
@@ -35,10 +45,15 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['admin'])->group(function () {
 
         Route::prefix('admin')->group(function () {
+
+            // Les pur le traitement des banieres
+
+            Route::get('bannieres','NewsController@articleGetForm');
+
+            // fin
             Route::get('/manage-pages','PageController@index'); //
             Route::get('/manage-users','UserController@index');
-            Route::get('/page','PageController@getListPage');
-        
+            Route::get('/page','PageController@getListPage');        
             Route::post('/page/add','PageController@addPage');
             Route::post('/users/add','UserController@addUsers');
         });

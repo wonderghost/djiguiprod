@@ -7,6 +7,7 @@
 window.Vue = require('vue');
 window.axios = require('axios')
 
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 Vue.component('home-component',require('./components/HomeComponent.vue').default)
 Vue.component('header-component',require('./components/HeaderComponent.vue').default)
@@ -22,6 +23,7 @@ Vue.component('prestation-page',require('./components/PrestationComponent.vue').
 Vue.component('login-tag',require('./components/LoginComponent.vue').default)
 Vue.component('footer-news',require('./components/FooterNewsComponent.vue').default)
 Vue.component('about-us',require('./components/AboutUsComponent.vue').default)
+Vue.component('caroussel',require('./components/CarousselComponent.vue').default)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

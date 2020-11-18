@@ -9,5 +9,5 @@ Actualites-Ajouter un article
 @else 
 <header-component type="djigui" user="null"></header-component>
 @endif
-<add-article></add-article>
+<caroussel></caroussel>
 @endsection 

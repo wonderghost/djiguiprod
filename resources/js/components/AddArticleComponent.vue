@@ -92,7 +92,8 @@
                     </thead>
 
                     <tbody>
-                      <tr  v-for = 'deletee in deleted' :key='deletee.slug'>
+                      <tr  v-for = 'deletee in articleAll.data' 
+                        v-if = 'deletee.deleted == true' >
                         <td>{{ deletee.name }}</td>
                         <td>
                            <p v-html="deletee.description.substring(0,150)"></p>
@@ -113,6 +114,8 @@
                       </tr>
                     </tbody>
                   </table>
+                <pagination :data="articleAll" @pagination-change-page="getResults"></pagination>
+
                 </div>
             </div>
             <!-- closed -->
@@ -131,7 +134,8 @@
                     </thead>
 
                     <tbody>
-                      <tr  v-for = 'article in articles' :key='article.slug'>
+                      <tr v-for = 'article in articleAll.data' 
+                          v-if = 'article.deleted == false'>
                         <td>{{ article.name }}</td>
                         <td>
                            <p v-html="article.description.substring(0,150)"></p>
@@ -148,6 +152,8 @@
                       </tr>
                     </tbody>
                   </table>
+                <pagination :data="articleAll" @pagination-change-page="getResults"></pagination>
+
             <!-- closed -->
 
                   <!-- Modal Structure -->
@@ -195,21 +201,12 @@ import dropdown from 'vue-dropdowns';
      
         
     export default {
-        // recuperer articles props
-        props: [ 'articles', 'deleted' ],
-
         components : {
             VueEditor,
             Loading,
             dropdown
         },
 
-
-        mounted() {
-            $('.tabs').tabs();
-            $('select.sub').formSelect();
-            this.getCategoryList()
-        },
         data() {
             return {
                 isLoading : false,
@@ -236,6 +233,8 @@ import dropdown from 'vue-dropdowns';
                     name: 'Categorie',
                 },
 
+                articleAll : {},
+
                 slug: '',
                 titleEdit: '',
                 ImageEdit: '',
@@ -255,7 +254,21 @@ import dropdown from 'vue-dropdowns';
         //         .then(response => console.log(response.data));
 
         // },
+         mounted() {
+            $('.tabs').tabs();
+            $('select.sub').formSelect();
+            this.getCategoryList()
+            this.getResults();
+        },
         methods : {
+
+            getResults(page = 1) {
+            axios.get('/news/all-article?page=' + page)
+                .then(response => {
+                    console.log(response.data);
+                    this.articleAll = response.data;
+                });
+            },
             fileUpload : function (e) {
                 this.articleForm.image = e.target.files[0]
             },
@@ -284,6 +297,7 @@ import dropdown from 'vue-dropdowns';
                     if(response.data == 'done') {
                         this.isLoading = false
                         alert("Success!")
+                        this.getResults();
                         location.reload()
                     }
                 } catch(error) {
@@ -366,6 +380,7 @@ import dropdown from 'vue-dropdowns';
 
                     if(response) {
                         alert('Placé a la corbeille avec Succè');
+                        this.getResults();
                         console.log(response.data)
                     }}
                     catch(error){
@@ -385,6 +400,7 @@ import dropdown from 'vue-dropdowns';
                         })
                         if(response){
                             alert('Supprimer avec succes');
+                            this.getResults();
                             console.log(response.data)
                         }
                     }
@@ -407,6 +423,7 @@ import dropdown from 'vue-dropdowns';
                         })
                         if (response) {
                             alert('Restauré avec succes')
+                            this.getResults();
                             console.log(response.data);
                         }
                     }
@@ -433,6 +450,7 @@ import dropdown from 'vue-dropdowns';
                 }) 
                 if (response) {
                     console.log(response.data);
+                    this.getResults();
                     alert("Success!")
                 }
 

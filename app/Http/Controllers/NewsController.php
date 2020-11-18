@@ -23,6 +23,11 @@ class NewsController extends Controller
 
     // }
     // fin
+    public function allArticles()
+    {
+        $article =Article::paginate(3);
+        return response()->json($article);   
+    }
 
     public function getDetails($slug , Article $a) {
         $article = $a->find($slug);

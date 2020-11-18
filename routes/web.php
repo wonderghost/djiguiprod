@@ -23,6 +23,8 @@ Route::post('/news/update-article','NewsController@articleUpdate');
 Route::post('/news/wave-article','NewsController@articleWave');
 Route::post('/news/delete-article','NewsController@articleDelete');
 Route::post('/news/restore-article','NewsController@articleRestore');
+
+Route::get('/news/all-article','NewsController@allArticles');
 // fin
 
 // recuperation, modification et suppression des pages
@@ -31,7 +33,16 @@ Route::post('/admin/update-page','PageController@pageUpdate');
 Route::get('/admin/edit-page{slug}','PageController@EditPage');
 // fin
 
+ // Les pur le traitement des banieres
 
+    Route::get('/admin/bannieres','CarousselController@index');
+    Route::post('/admin/save-caroussel','CarousselController@store');
+    Route::get('/admin/allBanner','CarousselController@create');
+    
+    Route::post('/admin/active-banner','CarousselController@activeBanner');
+    Route::post('/admin/block-banner','CarousselController@blockBanner');
+
+// fin
 
 
 Route::prefix('prestations')->group(function () {
@@ -46,11 +57,6 @@ Route::middleware(['auth'])->group(function () {
 
         Route::prefix('admin')->group(function () {
 
-            // Les pur le traitement des banieres
-
-            Route::get('bannieres','NewsController@articleGetForm');
-
-            // fin
             Route::get('/manage-pages','PageController@index'); //
             Route::get('/manage-users','UserController@index');
             Route::get('/page','PageController@getListPage');        

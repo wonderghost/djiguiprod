@@ -24,6 +24,7 @@
     },
     "dependencies": {
         "@chenfengyuan/vue-carousel": "^1.0.3",
+        "laravel-vue-pagination": "^2.3.1",
         "vue-burger-menu": "^2.0.5",
         "vue-dropdowns": "^1.1.1",
         "vue-flash-message": "^0.7.2",

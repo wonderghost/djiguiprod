@@ -63,7 +63,7 @@ class NewsController extends Controller
 
     public function getList(Category $c , SubCategory $sc ,Article $a) {
         try {
-            $art = $a->select()->orderBy('created_at','desc')->limit(100)->get();
+            $art = $a->select()->where('deleted', false)->get();
             $data = [];
 
             foreach($art as $key => $value) {
@@ -81,7 +81,7 @@ class NewsController extends Controller
 
             return response()
                 ->json([
-                    'breaking'  =>  $a->select()->orderBy('created_at','desc')->limit(15)->get(),
+                    'breaking'  =>  $a->select()->where('deleted', false)->get(),
                     'data'  =>  $data
                 ]);
         } catch(AppException $e) {

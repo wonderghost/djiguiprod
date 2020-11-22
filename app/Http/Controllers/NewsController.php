@@ -25,7 +25,7 @@ class NewsController extends Controller
     // fin
     public function allArticles()
     {
-        $article =Article::paginate(3);
+        $article =Article::paginate(10);
         return response()->json($article);   
     }
 
@@ -63,7 +63,7 @@ class NewsController extends Controller
 
     public function getList(Category $c , SubCategory $sc ,Article $a) {
         try {
-            $art = $a->select()->where('deleted', false)->get();
+            $art = $a->select()->where('deleted', false)->orderBy('created_at', 'desc')->get();
             $data = [];
 
             foreach($art as $key => $value) {
@@ -81,7 +81,8 @@ class NewsController extends Controller
 
             return response()
                 ->json([
-                    'breaking'  =>  $a->select()->where('deleted', false)->get(),
+                    'breaking'  =>  $a->select()->where('deleted', false)
+                                    ->orderBy('created_at', 'desc')->get(),
                     'data'  =>  $data
                 ]);
         } catch(AppException $e) {

@@ -84,6 +84,7 @@
                   <table class="highlight">
                     <thead>
                       <tr>
+                          <th>Numero</th>
                           <th>Libelle</th>
                           <th>Description</th>
                           <th>Image</th>
@@ -92,8 +93,9 @@
                     </thead>
 
                     <tbody>
-                      <tr  v-for = 'deletee in articleAll.data' 
+                      <tr  v-for = '(deletee, index) in articleAll.data' 
                         v-if = 'deletee.deleted == true' >
+                        <td>{{ index ++ }}</td>
                         <td>{{ deletee.name }}</td>
                         <td>
                            <p v-html="deletee.description.substring(0,150)"></p>
@@ -126,6 +128,7 @@
                   <table class="highlight">
                     <thead>
                       <tr>
+                          <th>Numero</th>
                           <th>Libelle</th>
                           <th>Description</th>
                           <th>Image</th>
@@ -134,8 +137,9 @@
                     </thead>
 
                     <tbody>
-                      <tr v-for = 'article in articleAll.data' 
+                      <tr v-for = '(article, index) in articleAll.data' 
                           v-if = 'article.deleted == false'>
+                        <td>{{ index ++ }}</td>
                         <td>{{ article.name }}</td>
                         <td>
                            <p v-html="article.description.substring(0,150)"></p>

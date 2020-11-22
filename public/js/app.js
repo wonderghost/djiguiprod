@@ -3112,6 +3112,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
 // Import component
  // Import stylesheet
 
@@ -27944,9 +27948,11 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.articleAll.data, function(deletee) {
+                _vm._l(_vm.articleAll.data, function(deletee, index) {
                   return deletee.deleted == true
                     ? _c("tr", [
+                        _c("td", [_vm._v(_vm._s(index++))]),
+                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(deletee.name))]),
                         _vm._v(" "),
                         _c("td", [
@@ -28034,9 +28040,11 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.articleAll.data, function(article) {
+                _vm._l(_vm.articleAll.data, function(article, index) {
                   return article.deleted == false
                     ? _c("tr", [
+                        _c("td", [_vm._v(_vm._s(index++))]),
+                        _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(article.name))]),
                         _vm._v(" "),
                         _c("td", [
@@ -28245,6 +28253,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", [_vm._v("Numero")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Libelle")]),
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
@@ -28261,6 +28271,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", [_vm._v("Numero")]),
+        _vm._v(" "),
         _c("th", [_vm._v("Libelle")]),
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),

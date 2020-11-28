@@ -81,9 +81,10 @@
                 <h5 class="aligne-center" >Tous les articles supprimés</h5>
                 <div>
           <!--      Tableau daffichage des articles supprimes            -->
-                  <table class="highlight">
-                    <thead>
-                      <tr>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+                  <table class="highlight"  id="myTable">
+                    <thead >
+                      <tr class="header">
                           <th>Numero</th>
                           <th>Libelle</th>
                           <th>Description</th>
@@ -125,9 +126,11 @@
                 <h5 class="aligne-center" >Tous les articles</h5>
                 <div>
           <!--      Tableau daffichage des articles            -->
-                  <table class="highlight">
+          <input type="text" placeholder="Search for names..">
+
+                <table class="highlight">
                     <thead>
-                      <tr>
+                      <tr class="header">
                           <th>Numero</th>
                           <th>Libelle</th>
                           <th>Description</th>
@@ -198,7 +201,7 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import { VueEditor } from 'vue2-editor'
 import dropdown from 'vue-dropdowns';
-        
+
         $(document).ready(function(){
             $('.modal').modal();
           });
@@ -215,6 +218,7 @@ import dropdown from 'vue-dropdowns';
             return {
                 isLoading : false,
                 fullPage : true,
+                q : '',
                 categoryForm : {
                     _token : document.querySelector("meta[name='csrf-token']").content,
                     name : ""

@@ -1,4 +1,4 @@
-<template>
+<template> 
     <div>
         <loading :active.sync="isLoading" 
         :can-cancel="false" 
@@ -87,8 +87,7 @@ import InfiniteSlideBar from 'vue-infinite-slide-bar'
         },
         mounted() {
             $('.parallax').parallax();
-            // 
-            // this.getAllPage()
+            this.getAllPage();
         },
         data() {
             return {

@@ -3116,6 +3116,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 // Import component
  // Import stylesheet
 
@@ -3135,6 +3138,7 @@ $(document).ready(function () {
     return {
       isLoading: false,
       fullPage: true,
+      q: '',
       categoryForm: {
         _token: document.querySelector("meta[name='csrf-token']").content,
         name: ""
@@ -4613,8 +4617,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     InfiniteSlideBar: vue_infinite_slide_bar__WEBPACK_IMPORTED_MODULE_4___default.a
   },
   mounted: function mounted() {
-    $('.parallax').parallax(); // 
-    // this.getAllPage()
+    $('.parallax').parallax();
+    this.getAllPage();
   },
   data: function data() {
     return {
@@ -27943,80 +27947,93 @@ var render = function() {
         _c(
           "div",
           [
-            _c("table", { staticClass: "highlight" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.articleAll.data, function(deletee, index) {
-                  return deletee.deleted == true
-                    ? _c("tr", [
-                        _c("td", [_vm._v(_vm._s(index++))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(deletee.name))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("p", {
-                            domProps: {
-                              innerHTML: _vm._s(
-                                deletee.description.substring(0, 150)
+            _c("input", {
+              attrs: {
+                type: "text",
+                id: "myInput",
+                onkeyup: "myFunction()",
+                placeholder: "Search for names.."
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "table",
+              { staticClass: "highlight", attrs: { id: "myTable" } },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.articleAll.data, function(deletee, index) {
+                    return deletee.deleted == true
+                      ? _c("tr", [
+                          _c("td", [_vm._v(_vm._s(index++))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(deletee.name))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("p", {
+                              domProps: {
+                                innerHTML: _vm._s(
+                                  deletee.description.substring(0, 150)
+                                )
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("img", {
+                              staticStyle: { height: "100px", width: "100px" },
+                              attrs: { src: "/news-image/" + deletee.image }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("div", [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "waves-effect waves-light btn modal-trigger",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.RestoreArticle(deletee.slug)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "material-icons" }, [
+                                    _vm._v("loop")
+                                  ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "waves-effect #b71c1c red darken-4 btn",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.DeleteArticle(deletee.slug)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "material-icons" }, [
+                                    _vm._v("delete_forever")
+                                  ])
+                                ]
                               )
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("img", {
-                            staticStyle: { height: "100px", width: "100px" },
-                            attrs: { src: "/news-image/" + deletee.image }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", [
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "waves-effect waves-light btn modal-trigger",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.RestoreArticle(deletee.slug)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "material-icons" }, [
-                                  _vm._v("loop")
-                                ])
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass:
-                                  "waves-effect #b71c1c red darken-4 btn",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.DeleteArticle(deletee.slug)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "material-icons" }, [
-                                  _vm._v("delete_forever")
-                                ])
-                              ]
-                            )
+                            ])
                           ])
                         ])
-                      ])
-                    : _vm._e()
-                }),
-                0
-              )
-            ]),
+                      : _vm._e()
+                  }),
+                  0
+                )
+              ]
+            ),
             _vm._v(" "),
             _c("pagination", {
               attrs: { data: _vm.articleAll },
@@ -28035,6 +28052,10 @@ var render = function() {
         _c(
           "div",
           [
+            _c("input", {
+              attrs: { type: "text", placeholder: "Search for names.." }
+            }),
+            _vm._v(" "),
             _c("table", { staticClass: "highlight" }, [
               _vm._m(2),
               _vm._v(" "),
@@ -28252,7 +28273,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("tr", [
+      _c("tr", { staticClass: "header" }, [
         _c("th", [_vm._v("Numero")]),
         _vm._v(" "),
         _c("th", [_vm._v("Libelle")]),
@@ -28270,7 +28291,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("tr", [
+      _c("tr", { staticClass: "header" }, [
         _c("th", [_vm._v("Numero")]),
         _vm._v(" "),
         _c("th", [_vm._v("Libelle")]),

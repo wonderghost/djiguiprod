@@ -103,7 +103,7 @@ class PageController extends Controller
 
     public function pageUpdate(Request $request) {
 
-         try{
+        try{
             $page = Page::find(request()->slug);
 
             $page->title = $request->input('title');
@@ -120,3 +120,4 @@ class PageController extends Controller
     }
 // fin
 }
+ 

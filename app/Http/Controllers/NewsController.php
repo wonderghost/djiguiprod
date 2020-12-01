@@ -25,7 +25,7 @@ class NewsController extends Controller
     // fin
     public function allArticles()
     {
-        $article =Article::paginate(10);
+        $article =Article::select()->orderBy('created_at', 'desc')->paginate(10);
         return response()->json($article);   
     }
 

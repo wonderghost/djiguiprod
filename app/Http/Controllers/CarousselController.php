@@ -31,6 +31,13 @@ class CarousselController extends Controller
         return response()->json($caroussel);   
     }
 
+    public function getBanner()
+    {
+        $caroussel = Caroussel::all()
+                    ->where('state', false);
+        return response()->json($caroussel);   
+    }
+
     /**
      * Store a newly created resource in storage.
      *

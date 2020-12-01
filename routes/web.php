@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/','HomeController@index');
 Route::get('/get-prestation','PageController@getListPage');
+Route::get('/get-banner','CarousselController@getBanner');
 Route::get('/news','NewsController@index');
 
 Route::get('/news/add-article','NewsController@articleGetForm');

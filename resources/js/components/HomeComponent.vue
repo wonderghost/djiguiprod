@@ -4,13 +4,24 @@
         :can-cancel="false" 
         :is-full-page="fullPage"
         loader="bars"></loading>
-
-         <VueCarousel :data="slides"></VueCarousel>
+<!-- 
+         <VueCarousel v-for="slide in slides" :key="slide.slug" :title="slide.name" 
+         :image="'/news-image/'+slide.image">
+        </VueCarousel> -->
+        <vueper-slides fade :touchable="false">
+          <vueper-slide
+            v-for="(slide, i) in slides"
+            :key="i"
+            :image="'/news-image/'+slide.image"
+            :title="slide.slug"
+            :content="slide.name" />
+        </vueper-slides>
          <!-- ABOUT US -->
         <div class="container who-we-are">
             <h4>DjiguiProd</h4>
             <p v-for="i in aboutUsPage" :key="i.slug" v-html="i.content.substring(0,300)+'...'"></p>
             <a href="/about-us" class="btn light-blue darken-4 waves-effect waves-light">En savoir plus</a>
+            <div v-for="k in slides" :key="k.slug" > {{ k.image }} </div>
         </div>
          <!-- // -->
         <!-- NOS PRESTATIONS -->
@@ -76,34 +87,33 @@
 import Loading from 'vue-loading-overlay';
 // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
-import VueCarousel from '@chenfengyuan/vue-carousel';
 import InfiniteSlideBar from 'vue-infinite-slide-bar'
+
+import { VueperSlides, VueperSlide } from 'vueperslides'
+import 'vueperslides/dist/vueperslides.css'
 
     export default {
         components : {
+            VueperSlides,
+            VueperSlide,
             Loading,
-            VueCarousel,
             InfiniteSlideBar
         },
         mounted() {
             $('.parallax').parallax();
             this.getAllPage();
+            this.getAllbanner();
         },
         data() {
             return {
                 isLoading : false,
                 fullPage : true,
                 slides : [
-                    {   
-                        id : 1,
-                        message : "hello world",
-                        content : "<img src='/img/slide-1.jpg'/>"
-                    },
-                    {
-                        id : 2,
-                        message : "",
-                        content : "<img src='/img/slide-2.jpg'/>"
-                    }
+                    // {
+                    //     id : 2,
+                    //     message : "kiiki",
+                    //     content : "<img src='/img/slide-2.jpg'/>"
+                    // }
                 ],
                 services : [],
                 partners : ['partner1.jpg','partner2.png','partner3.png','partner4.jpg'],
@@ -120,6 +130,16 @@ import InfiniteSlideBar from 'vue-infinite-slide-bar'
                     alert(error)
                 }
             },
+            getAllbanner : async function () {
+                try {
+                    this.isLoading = true
+                    let response = await axios.get('/get-banner')
+                    this.slides = response.data
+                    this.isLoading = false
+                } catch(error) {
+                    alert(error)
+                }
+            }
             
         },
         computed : {

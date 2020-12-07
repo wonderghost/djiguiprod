@@ -12,7 +12,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-130660555-2');
 <<<<<<< HEAD
 </script>
@@ -26,7 +25,9 @@
     <link rel="shortcut icon" type="image/png" href="/img/logo-djigui.png">
     @if($cat == 'news')
         <!-- Compiled and minified CSS -->
-        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+        {{-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> --}}
+        <link rel="stylesheet" href="/css/materialize.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     @else
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     @endif
@@ -56,7 +57,19 @@
 
 <script type="application/javascript" src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
 <script type="application/javascript" src="{{asset('js/jquery-ui.min.js')}}"></script>
+<script type="application/javascript" src="{{asset('js/materialize.min.js')}}"></script>
+<script type="application/javascript" src="{{asset('js/materialize.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="{{asset('js/app.js')}}?<?php echo filemtime('js/app.js') ?>"></script>
+<script type="text/javascript">
+
+      $('.carousel.carousel-slider').carousel({
+        fullWidth: true
+      });
+
+      $(".button-collapse").sideNav();
+      $(".dropdown-button").dropdown();
+        
+</script>
 </body>
 </html>

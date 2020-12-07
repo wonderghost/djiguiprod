@@ -1,5 +1,5 @@
 <template>
-    <div class="news-block-center">
+<div class="news-block-center" >
          <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
@@ -15,123 +15,159 @@
             <template v-slot:default="{item}">
             <div class="p-0"> 
                 <a :href="'/news/'+item.slug" class="hover:text-blue-800 font-serif">
-                    <h6>{{item.name.substring(0,100)}}</h6>
+                    <h6>{{item.name.substring(0,50)+'......'}}</h6>
                 </a>
             </div>
             </template>
       </vue-horizontal-list>
     </div>
 
-    <div class="grid grid-cols-2 gap-3 divide-x divider-gray-400">
-        <div class="col-span-2 lg:col-span-1">
-            <div class="h-20 mb-2" style="border-bottom : solid 1px #e2e8f0">
-                <i>PUBLICITE</i>
-            </div>
-            <!-- BANNIERE -->
-            <vue-flux
-            :images="vfImages"
-            :transitions="fluxTransitions"
-            :captions="vfCaptions"
-            :options="fluxOptions">
-                <template v-slot:caption>
-                    <flux-caption v-slot="caption" class="bg-black bg-opacity-75">
-                        <p class="text-white p-2 text-xl font-serif">{{caption.caption}}</p>
-                    </flux-caption>
-                </template>
-            </vue-flux>
-            <!-- // -->
-            <div class="h-48 mt-3 mb-3" style="border : solid 1px #e2e8f0">
-                <i>PUBLICITE</i>
-            </div>
-        </div>
-        <!--  -->
-        <div class="p-2 col-span-2 lg:col-span-1">
-            <div class="grid grid-cols-2 divide-x divide-gray-400 p-2">
-                <div v-if="lastNews" class="col-span-2 mb-5 lg:col-span-1">
-                    <h2 class="font-bold font-serif text-3xl" v-html="lastNews.name"></h2>
-                    <img :src="'/news-image/'+lastNews.image" class="h-64 pr-2 mb-2 w-full lg:h48" alt="">
-                    <p v-html="lastNews.description.substring(0,700)+'...'" class="mb-2 font-serif pr-2"></p>
-                    <a :href="'/news/'+lastNews.slug" class="bg-blue-600 text-white rounded p-1 hover:bg-blue-700">Lire plus</a>
-                </div>
-                <div v-if="newsData" class="grid grid-cols-1 divide-y divide-gray-400 p-1 col-span-2 lg:col-span-1">
-                    <div class="grid grid-cols-2 gap-1 p-1" v-for="n in newsData.slice(0,3)" :key="n.slug">
-                        <div>
-                            <a :href="'/news/'+n.slug" class="hover:text-blue-800 font-serif">
-                                <p v-html="n.name.substring(0,100)"></p>
-                                <p v-html="n.description.substring(0,100)"></p>
-                            </a>
-                        </div>
-                        <div>
-                            <a :href="'/news/'+n.slug">
-                                <img :src="'/news-image/'+n.image" class="h-40 w-full rounded lg:h-20">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- ici commence les cadres principal -->
+    <div class="container row" style="width: 100%;">
 
-    <!-- Cultures -->
-    <div class="container mx-auto " style="border-top:solid 1px #e2e8f0">
-        <div class="bg-blue-600 w-20 text-white font-serif p-1"><span>Cultures</span></div>
-        <div class="grid grid-cols-3">
-            <div v-if="lastCulturesNews" class="col-span-3 lg:col-span-2">
+        <div class="col s12 m8">
+          <div class="card">
+            <div v-if="lastNews" class="card-image">
+             <a :href="'/news/'+lastNews.slug">
+              <img :src="'/news-image/'+lastNews.image" style="height: 450px;">
+              <span class="card-title" style="font-size: 40px;
+              background: linear-gradient(transparent,black);">
+                <h6 style="float:right; margin-top: -240px;" class="hide-on-med-and-down" >Real Time</h6>
+                <h6 style="margin-bottom: -5px;" v-html="lastNews.sub_cat.name"></h6>
+                <h4 v-html="lastNews.name" ></h4>
+                <h6 class="hide-on-med-and-down">{{ lastNews.author.name }} | Mercredi 25 Novembre 2020 </h6>
+              </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m4">
+            <div v-if="newsData" class="card">
+                <div v-for="n in newsData.slice(1,4)" :key="n.slug" class="card-image">
+                <a :href="'/news/'+n.slug">
+                  <img :src="'/news-image/'+n.image" style="height: 150px;">
+                  <span class="card-title" style="padding-bottom: -20px; 
+                  background: linear-gradient(transparent,black);
+                  width: 500px;">
+                    <h6 style="float:right; margin-top: -60px;" class="hide-on-med-and-down">{{n.author.name}} - Real Time</h6>
+                    <h6 style="margin-bottom: -10px;" >{{n.sub_cat.name}}</h6>
+                    <h5 style="margin-bottom: -10px;">{{n.name.substring(0,25)}}</h5>
+                  </span>
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- fin de la carte principale -->
+<!-- quelques publicites -->
+    <div class="container row">
+        <div style="height: 100px;">
+          <div class="col s12 m6">
+            <p>publicite</p>
+          </div>
+          <div class="col s12 m6">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          </div>
+        </div>
+    </div>
+<!-- fin -->
+<!-- conteneur de news -->
+    <div class="container row" style="width: 95%;">
+        <h5>Derniere News</h5>
+            <div v-if="newsData">
+              <div v-for="n in newsData.slice(2,10)" :key="n.slug"  class="col s12 m3">
+                <div class="card small">
+                    <a :href="'/news/'+n.slug">
+                      <div class="card-image">
+                        <img :src="'/news-image/'+n.image">
+                        <span class="card-title">{{ n.name }}</span>
+                      </div>
+                    </a>
+                  <div class="card-content">
+                    <p v-html="n.description.substring(0,75)+'....'"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+    </div>
+<!-- fin de news -->
+<!-- ici commence la liste par category -->
+<div  class="container row" style="width: 90%;">
+        
+      <div class="col s12 m4">
+        <h5>Cultures</h5>
+        <div class="card">
+            <div v-if="lastCulturesNews" >  
+              <div class="card-image">
                 <a :href="'/news/'+lastCulturesNews.slug">
-                    <img :src="'/news-image/'+lastCulturesNews.image" class="w-full p-2" style="height : 25rem !important;" alt="">
-                    <h6 class="font-serif font-bold text-2xl text-center p-2">{{lastCulturesNews.name}}</h6>
+                    <img :src="'/news-image/'+lastCulturesNews.image" height="200px;">
+                    <span class="card-title" style="background: linear-gradient(transparent,black);">
+                        <p v-html="lastCulturesNews.name.substring(0,40)+'....'"></p>
+                    </span>
                 </a>
-            </div>
-            <div class="col-span-3 mt-2 lg:col-span-1">
-                <div v-if="cultures" class="grid grid-rows-2 grid-flow-col gap-1">
-                    <div v-for="n in cultures.slice(0,4)" :key="n.slug">
-                        <a :href="'/news/'+n.slug" class="">
-                            <img :src="'/news-image/'+n.image" class="w-full h-48 rounded lg:h-20" alt="">
-                            <h6 class="font-serif hover:text-blue-600">{{n.name}}</h6>
-                            <i>
-                                <p class="font-serif text-sm" v-html="n.description.substring(0,150)"></p>
-                            </i>
-                            <!-- <span><i></i></span> -->
-                        </a>
-                    </div>
                 </div>
-            </div>
+              <div class="card-content">
+                <p v-html="lastCulturesNews.description.substring(0,75)+'....'"></p>
+              </div>
+            </div>    
+          <div v-for="n in newsData.slice(0,7)" v-if="n.cat.slug == 'cultures' " class="card-action">
+            <a :href="'/news/'+n.slug">{{ n.name }}</a>
+          </div>
         </div>
-    </div>
-    <!-- // -->
-    <!-- Sports -->
-    <div v-if="lastSportsNews" class="container mx-auto" style="border-top:solid 1px #e2e9f0">
-       <div class="bg-blue-600 w-20 text-white font-serif p-1"><span>Sports</span></div>
-       <div class="grid grid-cols-3">
-            <div class="col-span-3 lg:col-span-2">
+      </div>
+    <div class="col s12 m4">
+        <h5>Sports</h5>
+        <div class="card">
+            <div v-if="lastSportsNews">  
+              <div class="card-image">
                 <a :href="'/news/'+lastSportsNews.slug">
-                    <img :src="'/news-image/'+lastSportsNews.image" class="w-full p-2" style="height : 25rem !important;" alt="">
-                    <h6 class="font-serif font-bold text-2xl text-center p-2">{{lastSportsNews.name}}</h6>
+                    <img :src="'/news-image/'+lastSportsNews.image" height="200px;">
+                    <span class="card-title" style="background: linear-gradient(transparent,black);">
+                        <p v-html="lastSportsNews.name.substring(0,40)+'....'"></p>
+                    </span>
                 </a>
-            </div>
-            <div class="col-span-3 mt-2 lg:col-span-1">
-                <div class="grid grid-rows-2 grid-flow-col gap-1">
-                    <div v-for="n in sports.slice(0,4)" :key="n.slug">
-                        <a :href="'/news/'+n.slug" class="">
-                            <img :src="'/news-image/'+n.image" class="w-full h-20 rounded" alt="">
-                            <h6 class="font-serif hover:text-blue-600">{{n.name}}</h6>
-                            <i>
-                                <p class="font-serif text-sm" v-html="n.description.substring(0,150)"></p>
-                            </i>
-                            <!-- <span><i></i></span> -->
-                        </a>
-                    </div>
-                </div>
-            </div>
+              </div>
+              <div class="card-content">
+                <p v-html="lastSportsNews.description.substring(0,75)+'....'"></p>
+              </div>
+            </div>    
+          <div v-for="n in newsData.slice(0,7)" v-if="n.cat.slug == 'sports' " class="card-action">
+            <a :href="'/news/'+n.slug">{{ n.name }}</a>
+          </div>
         </div>
     </div>
-    <!-- // -->
+    <div class="col s12 m4">
+        <h5>Evenementiels</h5>
+        <div class="card">
+            <div v-if="lastEventNews">
+            <a href="">
+                <div class="card-image">
+                <img :src="'/news-image/'+lastEventNews.image" height="200px;">
+                <span class="card-title" style="background: linear-gradient(transparent,black);">
+                    <p v-html="lastEventNews.name.substring(0,50)+'....'"></p>
+                </span>
+              </div>
+            </a>  
+              <div class="card-content">
+                <p v-html="lastEventNews.description.substring(0,75)+'....'"></p>
+              </div>
+            </div>    
+          <div v-for="n in newsData.slice(0,7)" v-if="n.cat.slug == 'evenements' " class="card-action">
+            <a :href="'/news/'+n.slug">{{ n.name }}</a>
+          </div>
+        </div>
+    </div>
+</div>
+
     <!-- PUBLICITE -->
     <div class="h-20" style="border : solid 1px #e2e8f0">
         <i>PUBLICITE</i>
     </div>
     <!-- // -->
-    </div>    
+</div>    
 </template>
 
 <script>
@@ -161,6 +197,8 @@ import { VueFlux, Transitions ,FluxCaption} from 'vue-flux';
         data() {
             return {
                 breaking: [],
+                Evenementiels: [],
+                categirie: [],
                 newsData : [],
                 fluxOptions: {
                     autoplay: true
@@ -198,6 +236,20 @@ import { VueFlux, Transitions ,FluxCaption} from 'vue-flux';
                 } catch(error) {
                     alert(error)
                 }
+            },
+            getCategorie : async function () {
+                try {
+                    this.isLoading = true
+                    let response = await axios.get('/news/articles/get-category')
+                    if(response.data) {
+                        this.isLoading = false
+                        this.categirie = response.data
+                        this.$store.commit('setCategory',response.data)
+                    }
+                    
+                } catch(error) {
+                    alert(error)
+                }
             }
         },
         computed : {
@@ -211,8 +263,16 @@ import { VueFlux, Transitions ,FluxCaption} from 'vue-flux';
                     return n.cat.slug.match("sports")
                 })
             },
+            evenementiels() {
+                return this.newsData.filter((n) => {
+                    return n.cat.slug.match("evenements")
+                })
+            },
             lastCulturesNews() {
                 return this.cultures[0]
+            },
+            lastEventNews() {
+                return this.evenementiels[0]
             },
             lastSportsNews() {
                 return this.sports[0]

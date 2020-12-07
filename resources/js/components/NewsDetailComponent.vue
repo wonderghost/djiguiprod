@@ -5,7 +5,7 @@
         :is-full-page="fullPage"
         loader="bars"></loading>
 
-        <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+        <!-- nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
             <ol class="list-reset flex text-grey-dark">
                 <li><a href="/news" class="text-blue font-bold"><i class="material-icons">home</i></a></li>
                 <li><span class="mx-2">/</span></li>
@@ -13,60 +13,71 @@
                 <li><span class="mx-2">/</span></li>
                 <li>{{news.name}}</li>
             </ol>
-        </nav>
+        </nav> -->
 
         <div class="h-20" style="border : solid 1px #e2e8f0">
             <i>PUBLICITE</i>
         </div>
-        <div class="container mx-auto">
-            <h6 class="font-serif text-5xl">{{news.name}}</h6>
-            <span class="text-xl"><i class="material-icons">account_circle</i><i>{{news.author}}</i></span>,
-            <!-- SOCIAL SHARING -->
-            <span class="font-serif text-xl">Partagez : </span>
+
+        <!-- ici se termine le menu  -->
+    <div class="container">
+        <h4 class="center-align">{{news.name}}</h4>
+    </div>
+    <div class="container row" style="width: 95%;">
+        <div class="col s12 m9">
+          <div class="card">
+            <div class="card-image">
+              <img :src="'/news-image/'+news.image" style="height: 518px;">
+              <span class="card-title">
+                <h6>by {{news.author}} | Mercredi 25 Novembre 2020 </h6>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="col m3">
+          <h5>Plus populaires</h5>
+          <div>
+            <div v-for="n in othersArticle.slice(0,2)" :key="n.slug" class="card horizontal">
+              <div class="card-image">
+                <img :src="'/news-image/'+n.image" style="height: 200px;">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                <p v-html="n.name.substring(0,50)+'....'"></p>
+                </div>
+                <div class="card-action">
+                  <a :href="'/news/'+n.slug">Voir plus</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div> 
+    <div class="container">
+      <div>
+            <span class="font-serif text-xl">
+                <h6> Auteur : {{news.author}}</h6> Partagez : 
+            </span>
+                
+        <!-- SOCIAL SHARING -->
                 <twitter-share 
                     :page_url="url"
                     has_icon>
                 </twitter-share>
                 <facebook-share
                     :page_url="url"
-                    has_icon></facebook-share>
-                <!-- <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="box_count" data-size="small"></div> -->
-            
-            <!-- // -->
-
-            <div class="grid grid-cols-3 divide-x divider-gray-400 gap-1">
-                <div class="col-span-3 pr-5 lg:col-span-2">
-                    <img :src="'/news-image/'+news.image" class="h-auto w-full" alt="">
-                    <p class="font-serif text-xl mt-5 leading-loose" v-html="news.description"></p>
-
-                    <div class="fb-comments w-full" :data-href="url" data-numposts="5" data-width="100%"></div>
-
-                    <!-- MORE POSTS -->
-                    <div class="mt-10" style="border-top: solid 1px #e2e8f0">
-                        <div class="bg-blue-600 w-32 text-white font-serif p-1"><span>Plus d'Articles</span></div>
-
-                        <div class="mt-10">
-                            <div v-for="a in othersArticle" :key="a.slug" class="grid grid-cols-3 gap-1 p-2" style="border-bottom :solid 1px #e2e8f0">
-                                <div class="col-span-2 hover:text-blue-600">
-                                    <a :href="'/news/'+a.slug">
-                                        <p class="font-serif text-xl" v-html="a.name"></p>
-                                        <p class="font-serif" v-html="a.description.substring(0,200)"></p>
-                                    </a>
-                                </div>
-                                <div class="col-span-1">
-                                    <a :href="'/news/'+a.slug">
-                                        <img :src="'/news-image/'+a.image" class="w-full h-32" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-span-1"></div>
-            </div>
-        </div>
-
+                    has_icon>    
+                </facebook-share>
+        <hr>
+        <p v-html="news.name"></p>      
+      </div>
+      <hr>
+      <div>
+        <h6>Contenu</h6>
+        <p v-html="news.description"></p>      
+      </div>
+    </div> 
+        <!-- fin de fin -->
     </div>    
 </template>
 

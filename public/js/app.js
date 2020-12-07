@@ -3373,9 +3373,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     LaDate: String
@@ -3419,6 +3416,17 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4099,6 +4107,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Import component
  // Import stylesheet
 
@@ -4352,6 +4371,42 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // Import component
  // Import stylesheet
 
@@ -4375,6 +4430,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       breaking: [],
+      Evenementiels: [],
+      categirie: [],
       newsData: [],
       fluxOptions: {
         autoplay: true
@@ -4450,6 +4507,49 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       return getNewsList;
+    }(),
+    getCategorie: function () {
+      var _getCategorie = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                this.isLoading = true;
+                _context2.next = 4;
+                return axios.get('/news/articles/get-category');
+
+              case 4:
+                response = _context2.sent;
+
+                if (response.data) {
+                  this.isLoading = false;
+                  this.categirie = response.data;
+                  this.$store.commit('setCategory', response.data);
+                }
+
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                alert(_context2.t0);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[0, 8]]);
+      }));
+
+      function getCategorie() {
+        return _getCategorie.apply(this, arguments);
+      }
+
+      return getCategorie;
     }()
   },
   computed: {
@@ -4463,8 +4563,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         return n.cat.slug.match("sports");
       });
     },
+    evenementiels: function evenementiels() {
+      return this.newsData.filter(function (n) {
+        return n.cat.slug.match("evenements");
+      });
+    },
     lastCulturesNews: function lastCulturesNews() {
       return this.cultures[0];
+    },
+    lastEventNews: function lastEventNews() {
+      return this.evenementiels[0];
     },
     lastSportsNews: function lastSportsNews() {
       return this.sports[0];
@@ -27779,20 +27887,6 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c(
-        "nav",
-        { staticClass: "bg-grey-light p-3 rounded font-sans w-full m-4" },
-        [
-          _c("ol", { staticClass: "list-reset flex text-grey-dark" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c("li", [_vm._v(_vm._s(_vm.categoryName))])
-          ])
-        ]
-      ),
-      _vm._v(" "),
       _vm.nothingState
         ? _c("div", { staticClass: "h-20 bg-blue-800 text-white" }, [
             _c("p", { staticClass: "text-center text-xl" }, [
@@ -27801,7 +27895,7 @@ var render = function() {
           ])
         : _vm._e(),
       _vm._v(" "),
-      _vm._m(2),
+      _vm._m(0),
       _vm._v(" "),
       !_vm.nothingState
         ? _c("div", { staticClass: "container mx-auto" }, [
@@ -27838,7 +27932,7 @@ var render = function() {
               },
               [
                 _c("div", [
-                  _vm._m(3),
+                  _vm._m(1),
                   _vm._v(" "),
                   _vm.lastNews
                     ? _c("div", [
@@ -27868,7 +27962,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm._m(4)
+                  _vm._m(2)
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "p-2" }, [
@@ -28060,24 +28154,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        { staticClass: "text-blue font-bold", attrs: { href: "/news" } },
-        [_c("i", { staticClass: "material-icons" }, [_vm._v("home")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("span", { staticClass: "mx-2" }, [_vm._v("/")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "div",
       { staticClass: "h-20", staticStyle: { border: "solid 1px #e2e8f0" } },
@@ -28228,7 +28304,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("footer", { staticClass: "page-footer grey darken-4" }, [
+      _c("footer", { staticClass: "page-footer grey darken-3" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col l6 s12" }, [
@@ -28325,113 +28401,91 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "bg-white text-black border mt-10 p-8" }, [
-      _c("div", { staticClass: "container mx-auto" }, [
-        _c("div", { staticClass: "text-2xl mb-8 font-sans" }, [
-          _vm._v("DjiguiProd News")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "grid grid-cols-4" }, [
-          _c("div", [
-            _c("div", { staticClass: "text-xl font-sans" }, [
-              _vm._v("Actualites")
+    _c("footer", { staticClass: "page-footer grey darken-3" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col l6 s12" }, [
+            _c("div", { staticClass: "text-2xl mb-8 font-sans" }, [
+              _vm._v("DjiguiProd News")
             ]),
             _vm._v(" "),
-            _c(
-              "ul",
-              { staticClass: "list-none" },
-              _vm._l(_vm.newsCategory.category, function(n) {
-                return _c("li", { key: n.slug }, [
+            _c("div", [
+              _c("div", { staticClass: "text-xl font-sans" }, [
+                _vm._v("Newsletters")
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-grey-darker leading-normal" }, [
+                _vm._v(
+                  "Souscrivez pour ne rien manquer de l'actualite culturelle !"
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mt-4 flex" }, [
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                      }
+                    }
+                  },
+                  [
+                    _c("input", {
+                      staticClass:
+                        "p-2 border border-grey-light round text-grey-dark text-sm h-auto",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Votre adresse email",
+                        required: ""
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "waves-effect waves-light btn light-blue darken-2"
+                      },
+                      [_vm._v("Souscrire")]
+                    )
+                  ]
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "footer-copyright" }, [
+        _c("div", { staticClass: "container" }, [
+          _c(
+            "p",
+            { staticClass: "text-center" },
+            [
+              _c("span", [_vm._v("© " + _vm._s(_vm.LaDate) + " Djiguiprod")]),
+              _vm._v(" "),
+              _vm._l(_vm.footerLinks, function(l, name) {
+                return _c("span", { key: l, staticClass: "pl-5" }, [
                   _c(
                     "a",
                     {
                       staticClass: "hover:text-blue-600",
-                      attrs: { href: "/news/category/" + n.slug }
+                      attrs: { href: "/news/links" + name }
                     },
-                    [_vm._v(_vm._s(n.name))]
+                    [_vm._v(_vm._s(l))]
                   )
                 ])
-              }),
-              0
-            )
-          ]),
+              })
+            ],
+            2
+          ),
           _vm._v(" "),
-          _c("div", [
-            _c("div", { staticClass: "text-xl font-sans" }, [
-              _vm._v("Newsletters")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-grey-darker leading-normal" }, [
-              _vm._v(
-                "Souscrivez pour ne rien manquer de l'actualite culturelle !"
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "mt-4 flex" }, [
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                    }
-                  }
-                },
-                [
-                  _c("input", {
-                    staticClass:
-                      "p-2 border border-grey-light round text-grey-dark text-sm h-auto",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Votre adresse email",
-                      required: ""
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass:
-                        "bg-blue-600 p-2 h-auto text-sm font-serif text-white"
-                    },
-                    [_vm._v("Souscrire")]
-                  )
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div")
+          _vm._m(1)
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "grid grid-cols-1 border pl-10 pr-10 text-sm" }, [
-      _c(
-        "p",
-        { staticClass: "text-center" },
-        [
-          _c("span", [_vm._v("© " + _vm._s(_vm.LaDate) + " Djiguiprod")]),
-          _vm._v(" "),
-          _vm._l(_vm.footerLinks, function(l, name) {
-            return _c("span", { key: l, staticClass: "pl-5" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "hover:text-blue-600",
-                  attrs: { href: "/news/links" + name }
-                },
-                [_vm._v(_vm._s(l))]
-              )
-            ])
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _vm._m(1)
     ])
   ])
 }
@@ -28440,45 +28494,47 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "text-xl font-sans" }, [
-        _vm._v("Reseaux Sociaux")
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "fb-page",
-          attrs: {
-            "data-href": "https://www.facebook.com/Djiguiproduction",
-            "data-tabs": "timeline",
-            "data-width": "",
-            "data-height": "70",
-            "data-small-header": "false",
-            "data-adapt-container-width": "true",
-            "data-hide-cover": "false",
-            "data-show-facepile": "true"
-          }
-        },
-        [
-          _c(
-            "blockquote",
-            {
-              staticClass: "fb-xfbml-parse-ignore",
-              attrs: { cite: "https://www.facebook.com/Djiguiproduction" }
-            },
-            [
-              _c(
-                "a",
-                {
-                  attrs: { href: "https://www.facebook.com/Djiguiproduction" }
-                },
-                [_vm._v("Djigui Prod")]
-              )
-            ]
-          )
-        ]
-      )
+    return _c("div", { staticClass: "col l4 offset-l2 s12" }, [
+      _c("div", [
+        _c("div", { staticClass: "text-xl font-sans" }, [
+          _vm._v("Reseaux Sociaux")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "fb-page",
+            attrs: {
+              "data-href": "https://www.facebook.com/Djiguiproduction",
+              "data-tabs": "timeline",
+              "data-width": "",
+              "data-height": "70",
+              "data-small-header": "false",
+              "data-adapt-container-width": "true",
+              "data-hide-cover": "false",
+              "data-show-facepile": "true"
+            }
+          },
+          [
+            _c(
+              "blockquote",
+              {
+                staticClass: "fb-xfbml-parse-ignore",
+                attrs: { cite: "https://www.facebook.com/Djiguiproduction" }
+              },
+              [
+                _c(
+                  "a",
+                  {
+                    attrs: { href: "https://www.facebook.com/Djiguiproduction" }
+                  },
+                  [_vm._v("Djigui Prod")]
+                )
+              ]
+            )
+          ]
+        )
+      ])
     ])
   },
   function() {
@@ -28614,118 +28670,75 @@ var render = function() {
       _vm._v(" "),
       _vm.type == "djigui-news"
         ? [
+            _vm._m(3),
+            _vm._v(" "),
             _c(
-              "nav",
-              {
-                staticClass:
-                  "flex items-center justify-between flex-wrap bg-black p-0"
-              },
+              "ul",
+              { staticClass: "dropdown-content", attrs: { id: "dropdown10" } },
               [
-                _vm._m(3),
+                _vm._m(4),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "visible lg:invisible absolute right-0 mr-20 top-0"
-                  },
-                  [
-                    _c(
-                      "Slide",
-                      { attrs: { right: "", reveal: "" } },
-                      [
-                        _c("a", { attrs: { id: "home", href: "/news/" } }, [
-                          _c("span", [_vm._v("Home")])
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.menu.category, function(k) {
-                          return _c(
-                            "a",
-                            {
-                              key: k.slug,
-                              attrs: { href: "/news/category/" + k.slug }
-                            },
-                            [_c("span", [_vm._v(_vm._s(k.name))])]
-                          )
-                        }),
-                        _vm._v(" "),
-                        _vm.user != "null"
-                          ? _c("a", { attrs: { href: "#" } }, [
-                              _c(
-                                "ul",
-                                { staticClass: "drop-list rounded w-full" },
-                                [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      { attrs: { href: "/news/articles/add" } },
-                                      [_vm._v("Articles")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: { href: "/admin/manage-pages" }
-                                      },
-                                      [_vm._v("Pages")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        attrs: { href: "/admin/manage-users" }
-                                      },
-                                      [_vm._v("Utilisateur")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      { attrs: { href: "/admin/bannieres" } },
-                                      [_vm._v("Bannieres")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticStyle: {
-                                          cursor: "pointer !important"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.logout()
-                                          }
-                                        }
-                                      },
-                                      [_vm._v("Logout")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ])
-                          : _vm._e()
-                      ],
-                      2
-                    )
-                  ],
-                  1
-                ),
+                _vm._m(5),
+                _vm._v(" "),
+                _vm._m(6),
+                _vm._v(" "),
+                _vm._m(7),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      staticStyle: { cursor: "pointer !important" },
+                      on: {
+                        click: function($event) {
+                          return _vm.logout()
+                        }
+                      }
+                    },
+                    [_vm._v("Logout")]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "ul",
+              { staticClass: "dropdown-content", attrs: { id: "dropdown02" } },
+              [
+                _vm._m(8),
+                _vm._v(" "),
+                _vm._m(9),
+                _vm._v(" "),
+                _vm._m(10),
+                _vm._v(" "),
+                _vm._m(11),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      staticStyle: { cursor: "pointer !important" },
+                      on: {
+                        click: function($event) {
+                          return _vm.logout()
+                        }
+                      }
+                    },
+                    [_vm._v("Logout")]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("nav", { staticClass: "nav grey darken-3" }, [
+              _c("div", { staticClass: "nav-wrapper" }, [
+                _vm._m(12),
                 _vm._v(" "),
                 _c(
                   "ul",
-                  {
-                    staticClass:
-                      "flex mx-auto invisible md:invisible lg:visible"
-                  },
+                  { staticClass: "center hide-on-med-and-down" },
                   [
-                    _vm._m(4),
+                    _vm._m(13),
                     _vm._v(" "),
                     _vm._l(_vm.menu.category, function(l) {
                       return _c("li", { key: l.slug, staticClass: "mr-6" }, [
@@ -28741,65 +28754,57 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _vm.user != "null"
-                      ? _c("li", { staticClass: "my-dropdown" }, [
+                      ? _c("li", [
                           _c(
                             "a",
                             {
-                              staticClass: "text-white btn-drop text-left",
-                              attrs: { href: "#" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.dropMenu()
-                                }
-                              }
+                              staticClass: "dropdown-trigger",
+                              attrs: { href: "#!", "data-target": "dropdown10" }
                             },
                             [
-                              _vm._v(_vm._s(_vm.user) + " "),
-                              _c("i", { staticClass: "material-icons" }, [
+                              _vm._v(_vm._s(_vm.user)),
+                              _c("i", { staticClass: "material-icons right" }, [
                                 _vm._v("arrow_drop_down")
                               ])
                             ]
-                          ),
-                          _vm._v(" "),
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  { staticClass: "side-nav", attrs: { id: "mobile-demo" } },
+                  [
+                    _vm._m(14),
+                    _vm._v(" "),
+                    _vm._l(_vm.menu.category, function(l) {
+                      return _c("li", { key: l.slug, staticClass: "mr-6" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-white",
+                            attrs: { href: "/news/category/" + l.slug }
+                          },
+                          [_vm._v(_vm._s(l.name))]
+                        )
+                      ])
+                    }),
+                    _vm._v(" "),
+                    _vm.user != "null"
+                      ? _c("li", [
                           _c(
-                            "ul",
+                            "a",
                             {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: _vm.dropState,
-                                  expression: "dropState"
-                                }
-                              ],
-                              staticClass:
-                                "drop-list absolute z-50 shadow-md bg-white p-5 rounded"
+                              staticClass: "dropdown-trigger",
+                              attrs: { href: "#!", "data-target": "dropdown02" }
                             },
                             [
-                              _vm._m(5),
-                              _vm._v(" "),
-                              _vm._m(6),
-                              _vm._v(" "),
-                              _vm._m(7),
-                              _vm._v(" "),
-                              _vm._m(8),
-                              _vm._v(" "),
-                              _c("li", [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "hover:text-blue-600",
-                                    staticStyle: {
-                                      cursor: "pointer !important"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.logout()
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Logout")]
-                                )
+                              _vm._v(_vm._s(_vm.user)),
+                              _c("i", { staticClass: "material-icons right" }, [
+                                _vm._v("arrow_drop_down")
                               ])
                             ]
                           )
@@ -28808,8 +28813,8 @@ var render = function() {
                   ],
                   2
                 )
-              ]
-            )
+              ])
+            ])
           ]
         : _vm._e()
     ],
@@ -28882,23 +28887,76 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "flex items-center flex-shrink-0 text-white mr-0" },
-      [
+    return _c("div", { staticStyle: { "background-color": "grey" } }, [
+      _c("a", { staticClass: "brand-logo", attrs: { href: "/" } }, [
         _c("img", {
-          attrs: { src: "/img/logo-djigui.png", width: "200", alt: "" }
+          attrs: { src: "/img/logo-djigui.png", width: "200px", height: "50px" }
         })
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "hide-on-med-and-down",
+          staticStyle: { float: "right", "margin-top": "10px" }
+        },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "waves-effect waves-light btn light-blue darken-2",
+              staticStyle: { "font-size": "11px" },
+              attrs: { href: "/" }
+            },
+            [_vm._v("A propos")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "waves-effect waves-light btn light-blue darken-2",
+              staticStyle: { "font-size": "11px" },
+              attrs: { href: "/" }
+            },
+            [_vm._v("Contact")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "waves-effect waves-light btn light-blue darken-2",
+              staticStyle: { "font-size": "11px" },
+              attrs: { href: "/" }
+            },
+            [_vm._v("Publicite")]
+          )
+        ]
+      )
+    ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "mr-6" }, [
-      _c("a", { staticClass: "text-white", attrs: { href: "/news/" } }, [
-        _c("i", { staticClass: "material-icons" }, [_vm._v("home")])
+    return _c("li", [
+      _c("a", { attrs: { href: "/news/articles/add" } }, [_vm._v("Articles")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/admin/manage-pages" } }, [_vm._v("Pages")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/admin/manage-users" } }, [
+        _vm._v("Utilisateur")
       ])
     ])
   },
@@ -28907,14 +28965,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "hover:text-blue-600",
-          attrs: { href: "/news/articles/add" }
-        },
-        [_vm._v("Articles")]
-      )
+      _c("a", { attrs: { href: "/admin/bannieres" } }, [_vm._v("Bannieres")])
     ])
   },
   function() {
@@ -28922,14 +28973,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "hover:text-blue-600",
-          attrs: { href: "/admin/manage-pages" }
-        },
-        [_vm._v("Pages")]
-      )
+      _c("a", { attrs: { href: "/news/articles/add" } }, [_vm._v("Articles")])
     ])
   },
   function() {
@@ -28937,14 +28981,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "hover:text-blue-600",
-          attrs: { href: "/admin/manage-users" }
-        },
-        [_vm._v("Utilisateur")]
-      )
+      _c("a", { attrs: { href: "/admin/manage-pages" } }, [_vm._v("Pages")])
     ])
   },
   function() {
@@ -28952,14 +28989,46 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "hover:text-blue-600",
-          attrs: { href: "/admin/bannieres" }
-        },
-        [_vm._v("Bannieres")]
-      )
+      _c("a", { attrs: { href: "/admin/manage-users" } }, [
+        _vm._v("Utilisateur")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/admin/bannieres" } }, [_vm._v("Bannieres")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "button-collapse",
+        attrs: { href: "#", "data-activates": "mobile-demo" }
+      },
+      [_c("i", { staticClass: "material-icons" }, [_vm._v("menu")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/news" } }, [_vm._v("Dernieres")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "/news" } }, [_vm._v("Dernieres")])
     ])
   }
 ]
@@ -29414,158 +29483,110 @@ var render = function() {
         }
       }),
       _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("h4", { staticClass: "center-align" }, [
+          _vm._v(_vm._s(_vm.news.name))
+        ])
+      ]),
+      _vm._v(" "),
       _c(
-        "nav",
-        { staticClass: "bg-grey-light p-3 rounded font-sans w-full m-4" },
+        "div",
+        { staticClass: "container row", staticStyle: { width: "95%" } },
         [
-          _c("ol", { staticClass: "list-reset flex text-grey-dark" }, [
-            _vm._m(0),
+          _c("div", { staticClass: "col s12 m9" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-image" }, [
+                _c("img", {
+                  staticStyle: { height: "518px" },
+                  attrs: { src: "/news-image/" + _vm.news.image }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "card-title" }, [
+                  _c("h6", [
+                    _vm._v(
+                      "by " +
+                        _vm._s(_vm.news.author) +
+                        " | Mercredi 25 Novembre 2020 "
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col m3" }, [
+            _c("h5", [_vm._v("Plus populaires")]),
             _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c("li", [
-              _c(
-                "a",
-                {
-                  staticClass: "text-blue font-bold",
-                  attrs: { href: "/news/category/" + _vm.news.cat.slug }
-                },
-                [_vm._v(_vm._s(_vm.news.cat.name))]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(2),
-            _vm._v(" "),
-            _c("li", [_vm._v(_vm._s(_vm.news.name))])
+            _c(
+              "div",
+              _vm._l(_vm.othersArticle.slice(0, 2), function(n) {
+                return _c(
+                  "div",
+                  { key: n.slug, staticClass: "card horizontal" },
+                  [
+                    _c("div", { staticClass: "card-image" }, [
+                      _c("img", {
+                        staticStyle: { height: "200px" },
+                        attrs: { src: "/news-image/" + n.image }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "card-stacked" }, [
+                      _c("div", { staticClass: "card-content" }, [
+                        _c("p", {
+                          domProps: {
+                            innerHTML: _vm._s(n.name.substring(0, 50) + "....")
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-action" }, [
+                        _c("a", { attrs: { href: "/news/" + n.slug } }, [
+                          _vm._v("Voir plus")
+                        ])
+                      ])
+                    ])
+                  ]
+                )
+              }),
+              0
+            )
           ])
         ]
       ),
       _vm._v(" "),
-      _vm._m(3),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "container mx-auto" },
-        [
-          _c("h6", { staticClass: "font-serif text-5xl" }, [
-            _vm._v(_vm._s(_vm.news.name))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "text-xl" }, [
-            _c("i", { staticClass: "material-icons" }, [
-              _vm._v("account_circle")
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          [
+            _c("span", { staticClass: "font-serif text-xl" }, [
+              _c("h6", [_vm._v(" Auteur : " + _vm._s(_vm.news.author))]),
+              _vm._v(" Partagez : \n        ")
             ]),
-            _c("i", [_vm._v(_vm._s(_vm.news.author))])
-          ]),
-          _vm._v(",\n        "),
+            _vm._v(" "),
+            _c("twitter-share", { attrs: { page_url: _vm.url, has_icon: "" } }),
+            _vm._v(" "),
+            _c("facebook-share", {
+              attrs: { page_url: _vm.url, has_icon: "" }
+            }),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("p", { domProps: { innerHTML: _vm._s(_vm.news.name) } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", [
+          _c("h6", [_vm._v("Contenu")]),
           _vm._v(" "),
-          _c("span", { staticClass: "font-serif text-xl" }, [
-            _vm._v("Partagez : ")
-          ]),
-          _vm._v(" "),
-          _c("twitter-share", { attrs: { page_url: _vm.url, has_icon: "" } }),
-          _vm._v(" "),
-          _c("facebook-share", { attrs: { page_url: _vm.url, has_icon: "" } }),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "grid grid-cols-3 divide-x divider-gray-400 gap-1" },
-            [
-              _c("div", { staticClass: "col-span-3 pr-5 lg:col-span-2" }, [
-                _c("img", {
-                  staticClass: "h-auto w-full",
-                  attrs: { src: "/news-image/" + _vm.news.image, alt: "" }
-                }),
-                _vm._v(" "),
-                _c("p", {
-                  staticClass: "font-serif text-xl mt-5 leading-loose",
-                  domProps: { innerHTML: _vm._s(_vm.news.description) }
-                }),
-                _vm._v(" "),
-                _c("div", {
-                  staticClass: "fb-comments w-full",
-                  attrs: {
-                    "data-href": _vm.url,
-                    "data-numposts": "5",
-                    "data-width": "100%"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "mt-10",
-                    staticStyle: { "border-top": "solid 1px #e2e8f0" }
-                  },
-                  [
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "mt-10" },
-                      _vm._l(_vm.othersArticle, function(a) {
-                        return _c(
-                          "div",
-                          {
-                            key: a.slug,
-                            staticClass: "grid grid-cols-3 gap-1 p-2",
-                            staticStyle: {
-                              "border-bottom": "solid 1px #e2e8f0"
-                            }
-                          },
-                          [
-                            _c(
-                              "div",
-                              { staticClass: "col-span-2 hover:text-blue-600" },
-                              [
-                                _c(
-                                  "a",
-                                  { attrs: { href: "/news/" + a.slug } },
-                                  [
-                                    _c("p", {
-                                      staticClass: "font-serif text-xl",
-                                      domProps: { innerHTML: _vm._s(a.name) }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("p", {
-                                      staticClass: "font-serif",
-                                      domProps: {
-                                        innerHTML: _vm._s(
-                                          a.description.substring(0, 200)
-                                        )
-                                      }
-                                    })
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-span-1" }, [
-                              _c("a", { attrs: { href: "/news/" + a.slug } }, [
-                                _c("img", {
-                                  staticClass: "w-full h-32",
-                                  attrs: {
-                                    src: "/news-image/" + a.image,
-                                    alt: ""
-                                  }
-                                })
-                              ])
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-span-1" })
-            ]
-          )
-        ],
-        1
-      )
+          _c("p", { domProps: { innerHTML: _vm._s(_vm.news.description) } })
+        ])
+      ])
     ],
     1
   )
@@ -29575,44 +29596,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        { staticClass: "text-blue font-bold", attrs: { href: "/news" } },
-        [_c("i", { staticClass: "material-icons" }, [_vm._v("home")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("span", { staticClass: "mx-2" }, [_vm._v("/")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [_c("span", { staticClass: "mx-2" }, [_vm._v("/")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
       "div",
       { staticClass: "h-20", staticStyle: { border: "solid 1px #e2e8f0" } },
       [_c("i", [_vm._v("PUBLICITE")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "bg-blue-600 w-32 text-white font-serif p-1" },
-      [_c("span", [_vm._v("Plus d'Articles")])]
     )
   }
 ]
@@ -29682,7 +29669,9 @@ var render = function() {
                         },
                         [
                           _c("h6", [
-                            _vm._v(_vm._s(item.name.substring(0, 100)))
+                            _vm._v(
+                              _vm._s(item.name.substring(0, 50) + "......")
+                            )
                           ])
                         ]
                       )
@@ -29698,320 +29687,402 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "grid grid-cols-2 gap-3 divide-x divider-gray-400" },
+        { staticClass: "container row", staticStyle: { width: "100%" } },
         [
-          _c(
-            "div",
-            { staticClass: "col-span-2 lg:col-span-1" },
-            [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("vue-flux", {
-                attrs: {
-                  images: _vm.vfImages,
-                  transitions: _vm.fluxTransitions,
-                  captions: _vm.vfCaptions,
-                  options: _vm.fluxOptions
-                },
-                scopedSlots: _vm._u([
-                  {
-                    key: "caption",
-                    fn: function() {
-                      return [
-                        _c("flux-caption", {
-                          staticClass: "bg-black bg-opacity-75",
-                          scopedSlots: _vm._u([
-                            {
-                              key: "default",
-                              fn: function(caption) {
-                                return [
-                                  _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "text-white p-2 text-xl font-serif"
-                                    },
-                                    [_vm._v(_vm._s(caption.caption))]
-                                  )
-                                ]
-                              }
-                            }
-                          ])
-                        })
-                      ]
-                    },
-                    proxy: true
-                  }
-                ])
-              }),
-              _vm._v(" "),
-              _vm._m(2)
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "p-2 col-span-2 lg:col-span-1" }, [
-            _c(
-              "div",
-              { staticClass: "grid grid-cols-2 divide-x divide-gray-400 p-2" },
-              [
-                _vm.lastNews
-                  ? _c(
-                      "div",
-                      { staticClass: "col-span-2 mb-5 lg:col-span-1" },
-                      [
-                        _c("h2", {
-                          staticClass: "font-bold font-serif text-3xl",
-                          domProps: { innerHTML: _vm._s(_vm.lastNews.name) }
-                        }),
-                        _vm._v(" "),
-                        _c("img", {
-                          staticClass: "h-64 pr-2 mb-2 w-full lg:h48",
-                          attrs: {
-                            src: "/news-image/" + _vm.lastNews.image,
-                            alt: ""
+          _c("div", { staticClass: "col s12 m8" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm.lastNews
+                ? _c("div", { staticClass: "card-image" }, [
+                    _c("a", { attrs: { href: "/news/" + _vm.lastNews.slug } }, [
+                      _c("img", {
+                        staticStyle: { height: "450px" },
+                        attrs: { src: "/news-image/" + _vm.lastNews.image }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "card-title",
+                          staticStyle: {
+                            "font-size": "40px",
+                            background: "linear-gradient(transparent,black)"
                           }
-                        }),
-                        _vm._v(" "),
+                        },
+                        [
+                          _c(
+                            "h6",
+                            {
+                              staticClass: "hide-on-med-and-down",
+                              staticStyle: {
+                                float: "right",
+                                "margin-top": "-240px"
+                              }
+                            },
+                            [_vm._v("Real Time")]
+                          ),
+                          _vm._v(" "),
+                          _c("h6", {
+                            staticStyle: { "margin-bottom": "-5px" },
+                            domProps: {
+                              innerHTML: _vm._s(_vm.lastNews.sub_cat.name)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("h4", {
+                            domProps: { innerHTML: _vm._s(_vm.lastNews.name) }
+                          }),
+                          _vm._v(" "),
+                          _c("h6", { staticClass: "hide-on-med-and-down" }, [
+                            _vm._v(
+                              _vm._s(_vm.lastNews.author.name) +
+                                " | Mercredi 25 Novembre 2020 "
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col s12 m4" }, [
+            _vm.newsData
+              ? _c(
+                  "div",
+                  { staticClass: "card" },
+                  _vm._l(_vm.newsData.slice(1, 4), function(n) {
+                    return _c(
+                      "div",
+                      { key: n.slug, staticClass: "card-image" },
+                      [
+                        _c("a", { attrs: { href: "/news/" + n.slug } }, [
+                          _c("img", {
+                            staticStyle: { height: "150px" },
+                            attrs: { src: "/news-image/" + n.image }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "card-title",
+                              staticStyle: {
+                                "padding-bottom": "-20px",
+                                background:
+                                  "linear-gradient(transparent,black)",
+                                width: "500px"
+                              }
+                            },
+                            [
+                              _c(
+                                "h6",
+                                {
+                                  staticClass: "hide-on-med-and-down",
+                                  staticStyle: {
+                                    float: "right",
+                                    "margin-top": "-60px"
+                                  }
+                                },
+                                [_vm._v(_vm._s(n.author.name) + " - Real Time")]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "h6",
+                                { staticStyle: { "margin-bottom": "-10px" } },
+                                [_vm._v(_vm._s(n.sub_cat.name))]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "h5",
+                                { staticStyle: { "margin-bottom": "-10px" } },
+                                [_vm._v(_vm._s(n.name.substring(0, 25)))]
+                              )
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e()
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "container row", staticStyle: { width: "95%" } },
+        [
+          _c("h5", [_vm._v("Derniere News")]),
+          _vm._v(" "),
+          _vm.newsData
+            ? _c(
+                "div",
+                _vm._l(_vm.newsData.slice(2, 10), function(n) {
+                  return _c("div", { key: n.slug, staticClass: "col s12 m3" }, [
+                    _c("div", { staticClass: "card small" }, [
+                      _c("a", { attrs: { href: "/news/" + n.slug } }, [
+                        _c("div", { staticClass: "card-image" }, [
+                          _c("img", {
+                            attrs: { src: "/news-image/" + n.image }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "card-title" }, [
+                            _vm._v(_vm._s(n.name))
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-content" }, [
                         _c("p", {
-                          staticClass: "mb-2 font-serif pr-2",
                           domProps: {
                             innerHTML: _vm._s(
-                              _vm.lastNews.description.substring(0, 700) + "..."
+                              n.description.substring(0, 75) + "...."
                             )
                           }
-                        }),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass:
-                              "bg-blue-600 text-white rounded p-1 hover:bg-blue-700",
-                            attrs: { href: "/news/" + _vm.lastNews.slug }
-                          },
-                          [_vm._v("Lire plus")]
-                        )
-                      ]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.newsData
-                  ? _c(
-                      "div",
-                      {
-                        staticClass:
-                          "grid grid-cols-1 divide-y divide-gray-400 p-1 col-span-2 lg:col-span-1"
-                      },
-                      _vm._l(_vm.newsData.slice(0, 3), function(n) {
-                        return _c(
-                          "div",
-                          {
-                            key: n.slug,
-                            staticClass: "grid grid-cols-2 gap-1 p-1"
-                          },
-                          [
-                            _c("div", [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "hover:text-blue-800 font-serif",
-                                  attrs: { href: "/news/" + n.slug }
-                                },
-                                [
-                                  _c("p", {
-                                    domProps: {
-                                      innerHTML: _vm._s(
-                                        n.name.substring(0, 100)
-                                      )
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("p", {
-                                    domProps: {
-                                      innerHTML: _vm._s(
-                                        n.description.substring(0, 100)
-                                      )
-                                    }
-                                  })
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", [
-                              _c("a", { attrs: { href: "/news/" + n.slug } }, [
-                                _c("img", {
-                                  staticClass: "h-40 w-full rounded lg:h-20",
-                                  attrs: { src: "/news-image/" + n.image }
-                                })
-                              ])
-                            ])
-                          ]
-                        )
-                      }),
-                      0
-                    )
-                  : _vm._e()
-              ]
-            )
-          ])
+                        })
+                      ])
+                    ])
+                  ])
+                }),
+                0
+              )
+            : _vm._e()
         ]
       ),
       _vm._v(" "),
       _c(
         "div",
-        {
-          staticClass: "container mx-auto ",
-          staticStyle: { "border-top": "solid 1px #e2e8f0" }
-        },
+        { staticClass: "container row", staticStyle: { width: "90%" } },
         [
-          _vm._m(3),
-          _vm._v(" "),
-          _c("div", { staticClass: "grid grid-cols-3" }, [
-            _vm.lastCulturesNews
-              ? _c("div", { staticClass: "col-span-3 lg:col-span-2" }, [
-                  _c(
-                    "a",
-                    { attrs: { href: "/news/" + _vm.lastCulturesNews.slug } },
-                    [
-                      _c("img", {
-                        staticClass: "w-full p-2",
-                        staticStyle: { height: "25rem !important" },
-                        attrs: {
-                          src: "/news-image/" + _vm.lastCulturesNews.image,
-                          alt: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "h6",
-                        {
-                          staticClass:
-                            "font-serif font-bold text-2xl text-center p-2"
-                        },
-                        [_vm._v(_vm._s(_vm.lastCulturesNews.name))]
-                      )
-                    ]
-                  )
-                ])
-              : _vm._e(),
+          _c("div", { staticClass: "col s12 m4" }, [
+            _c("h5", [_vm._v("Cultures")]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-span-3 mt-2 lg:col-span-1" }, [
-              _vm.cultures
-                ? _c(
-                    "div",
-                    { staticClass: "grid grid-rows-2 grid-flow-col gap-1" },
-                    _vm._l(_vm.cultures.slice(0, 4), function(n) {
-                      return _c("div", { key: n.slug }, [
+            _c(
+              "div",
+              { staticClass: "card" },
+              [
+                _vm.lastCulturesNews
+                  ? _c("div", [
+                      _c("div", { staticClass: "card-image" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href: "/news/" + _vm.lastCulturesNews.slug
+                            }
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  "/news-image/" + _vm.lastCulturesNews.image,
+                                height: "200px;"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "card-title",
+                                staticStyle: {
+                                  background:
+                                    "linear-gradient(transparent,black)"
+                                }
+                              },
+                              [
+                                _c("p", {
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      _vm.lastCulturesNews.name.substring(
+                                        0,
+                                        40
+                                      ) + "...."
+                                    )
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-content" }, [
+                        _c("p", {
+                          domProps: {
+                            innerHTML: _vm._s(
+                              _vm.lastCulturesNews.description.substring(
+                                0,
+                                75
+                              ) + "...."
+                            )
+                          }
+                        })
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.newsData.slice(0, 7), function(n) {
+                  return n.cat.slug == "cultures"
+                    ? _c("div", { staticClass: "card-action" }, [
                         _c("a", { attrs: { href: "/news/" + n.slug } }, [
+                          _vm._v(_vm._s(n.name))
+                        ])
+                      ])
+                    : _vm._e()
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col s12 m4" }, [
+            _c("h5", [_vm._v("Sports")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card" },
+              [
+                _vm.lastSportsNews
+                  ? _c("div", [
+                      _c("div", { staticClass: "card-image" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: { href: "/news/" + _vm.lastSportsNews.slug }
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src: "/news-image/" + _vm.lastSportsNews.image,
+                                height: "200px;"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              {
+                                staticClass: "card-title",
+                                staticStyle: {
+                                  background:
+                                    "linear-gradient(transparent,black)"
+                                }
+                              },
+                              [
+                                _c("p", {
+                                  domProps: {
+                                    innerHTML: _vm._s(
+                                      _vm.lastSportsNews.name.substring(0, 40) +
+                                        "...."
+                                    )
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-content" }, [
+                        _c("p", {
+                          domProps: {
+                            innerHTML: _vm._s(
+                              _vm.lastSportsNews.description.substring(0, 75) +
+                                "...."
+                            )
+                          }
+                        })
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.newsData.slice(0, 7), function(n) {
+                  return n.cat.slug == "sports"
+                    ? _c("div", { staticClass: "card-action" }, [
+                        _c("a", { attrs: { href: "/news/" + n.slug } }, [
+                          _vm._v(_vm._s(n.name))
+                        ])
+                      ])
+                    : _vm._e()
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col s12 m4" }, [
+            _c("h5", [_vm._v("Evenementiels")]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "card" },
+              [
+                _vm.lastEventNews
+                  ? _c("div", [
+                      _c("a", { attrs: { href: "" } }, [
+                        _c("div", { staticClass: "card-image" }, [
                           _c("img", {
-                            staticClass: "w-full h-48 rounded lg:h-20",
-                            attrs: { src: "/news-image/" + n.image, alt: "" }
+                            attrs: {
+                              src: "/news-image/" + _vm.lastEventNews.image,
+                              height: "200px;"
+                            }
                           }),
                           _vm._v(" "),
                           _c(
-                            "h6",
-                            { staticClass: "font-serif hover:text-blue-600" },
-                            [_vm._v(_vm._s(n.name))]
-                          ),
-                          _vm._v(" "),
-                          _c("i", [
-                            _c("p", {
-                              staticClass: "font-serif text-sm",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  n.description.substring(0, 150)
-                                )
+                            "span",
+                            {
+                              staticClass: "card-title",
+                              staticStyle: {
+                                background: "linear-gradient(transparent,black)"
                               }
-                            })
-                          ])
+                            },
+                            [
+                              _c("p", {
+                                domProps: {
+                                  innerHTML: _vm._s(
+                                    _vm.lastEventNews.name.substring(0, 50) +
+                                      "...."
+                                  )
+                                }
+                              })
+                            ]
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-content" }, [
+                        _c("p", {
+                          domProps: {
+                            innerHTML: _vm._s(
+                              _vm.lastEventNews.description.substring(0, 75) +
+                                "...."
+                            )
+                          }
+                        })
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._l(_vm.newsData.slice(0, 7), function(n) {
+                  return n.cat.slug == "evenements"
+                    ? _c("div", { staticClass: "card-action" }, [
+                        _c("a", { attrs: { href: "/news/" + n.slug } }, [
+                          _vm._v(_vm._s(n.name))
                         ])
                       ])
-                    }),
-                    0
-                  )
-                : _vm._e()
-            ])
+                    : _vm._e()
+                })
+              ],
+              2
+            )
           ])
         ]
       ),
       _vm._v(" "),
-      _vm.lastSportsNews
-        ? _c(
-            "div",
-            {
-              staticClass: "container mx-auto",
-              staticStyle: { "border-top": "solid 1px #e2e9f0" }
-            },
-            [
-              _vm._m(4),
-              _vm._v(" "),
-              _c("div", { staticClass: "grid grid-cols-3" }, [
-                _c("div", { staticClass: "col-span-3 lg:col-span-2" }, [
-                  _c(
-                    "a",
-                    { attrs: { href: "/news/" + _vm.lastSportsNews.slug } },
-                    [
-                      _c("img", {
-                        staticClass: "w-full p-2",
-                        staticStyle: { height: "25rem !important" },
-                        attrs: {
-                          src: "/news-image/" + _vm.lastSportsNews.image,
-                          alt: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "h6",
-                        {
-                          staticClass:
-                            "font-serif font-bold text-2xl text-center p-2"
-                        },
-                        [_vm._v(_vm._s(_vm.lastSportsNews.name))]
-                      )
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-span-3 mt-2 lg:col-span-1" }, [
-                  _c(
-                    "div",
-                    { staticClass: "grid grid-rows-2 grid-flow-col gap-1" },
-                    _vm._l(_vm.sports.slice(0, 4), function(n) {
-                      return _c("div", { key: n.slug }, [
-                        _c("a", { attrs: { href: "/news/" + n.slug } }, [
-                          _c("img", {
-                            staticClass: "w-full h-20 rounded",
-                            attrs: { src: "/news-image/" + n.image, alt: "" }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "h6",
-                            { staticClass: "font-serif hover:text-blue-600" },
-                            [_vm._v(_vm._s(n.name))]
-                          ),
-                          _vm._v(" "),
-                          _c("i", [
-                            _c("p", {
-                              staticClass: "font-serif text-sm",
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  n.description.substring(0, 150)
-                                )
-                              }
-                            })
-                          ])
-                        ])
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              ])
-            ]
-          )
-        : _vm._e(),
-      _vm._v(" "),
-      _vm._m(5)
+      _vm._m(2)
     ],
     1
   )
@@ -30031,47 +30102,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "h-20 mb-2",
-        staticStyle: { "border-bottom": "solid 1px #e2e8f0" }
-      },
-      [_c("i", [_vm._v("PUBLICITE")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "h-48 mt-3 mb-3",
-        staticStyle: { border: "solid 1px #e2e8f0" }
-      },
-      [_c("i", [_vm._v("PUBLICITE")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "bg-blue-600 w-20 text-white font-serif p-1" },
-      [_c("span", [_vm._v("Cultures")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "bg-blue-600 w-20 text-white font-serif p-1" },
-      [_c("span", [_vm._v("Sports")])]
-    )
+    return _c("div", { staticClass: "container row" }, [
+      _c("div", { staticStyle: { height: "100px" } }, [
+        _c("div", { staticClass: "col s12 m6" }, [
+          _c("p", [_vm._v("publicite")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col s12 m6" }, [
+          _vm._v(
+            "\r\n            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\r\n            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\r\n            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\r\n          "
+          )
+        ])
+      ])
+    ])
   },
   function() {
     var _vm = this

@@ -34,7 +34,7 @@ class CarousselController extends Controller
     public function getBanner()
     {
         $caroussel = Caroussel::all()
-                    ->where('state', false);
+                    ->where('state', true);
         return response()->json($caroussel);   
     }
 

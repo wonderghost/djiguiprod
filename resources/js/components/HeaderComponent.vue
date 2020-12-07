@@ -31,56 +31,67 @@
             </ul>
         </template>
         <template v-if="type == 'djigui-news'">
-            <nav class="flex items-center justify-between flex-wrap bg-black p-0">
-                <div class="flex items-center flex-shrink-0 text-white mr-0">
-                    <img src="/img/logo-djigui.png" width="200" alt="">
+            <div style="background-color: grey;">
+                <a href="/" class="brand-logo"><img src="/img/logo-djigui.png" width="200px" height="50px"></a>
+                <div class="hide-on-med-and-down" style="float: right; margin-top: 10px;">
+                  <a href="/" class="waves-effect waves-light btn light-blue darken-2" style="font-size: 11px;">A propos</a>
+                  <a href="/" class="waves-effect waves-light btn light-blue darken-2" style="font-size: 11px;">Contact</a>
+                  <a href="/" class="waves-effect waves-light btn light-blue darken-2" style="font-size: 11px;">Publicite</a>
                 </div>
-                <div class="visible lg:invisible absolute right-0 mr-20 top-0">
-                    <!-- <a class="text-white"><i class="material-icons">menu</i></a> -->
-                    <Slide right reveal>
-                        <a id="home" href="/news/"> 
-                            <span>Home</span>  
-                        </a>
-                        <a :href="'/news/category/'+k.slug" v-for="k in menu.category" :key="k.slug">
-                            <span>{{k.name}}</span>
-                        </a>
-                        <a v-if="user != 'null'" href="#">
-                            <!-- <span>Admin</span> -->
-                            <ul class="drop-list rounded w-full">
-                                <li><a class="" href="/news/articles/add">Articles</a></li>
-                                <li><a class="" href="/admin/manage-pages">Pages</a></li>
-                                <li><a class="" href="/admin/manage-users">Utilisateur</a></li>
-                                <li><a class="" href="/admin/bannieres">Bannieres</a></li>
-                                <li><a class="" style="cursor : pointer !important;" @click="logout()">Logout</a></li>
-                            </ul>
-                        </a>
-                    </Slide>
-                </div>
-                <ul class="flex mx-auto invisible md:invisible lg:visible">
-                    <li class="mr-6"><a class="text-white" href="/news/"><i class="material-icons">home</i></a></li>
-                    <li v-for="l in menu.category" :key="l.slug" class="mr-6">
+            </div>
+<!-- ici se touve le menu principale fixe et dure -->
+      <!-- Dropdown Structure -->
+              <ul id="dropdown10" class="dropdown-content">
+                <li><a class="" href="/news/articles/add">Articles</a></li>
+                <li><a class="" href="/admin/manage-pages">Pages</a></li>
+                <li><a class="" href="/admin/manage-users">Utilisateur</a></li>
+                <li><a class="" href="/admin/bannieres">Bannieres</a></li>
+                <li><a class="" style="cursor : pointer !important;" @click="logout()">Logout</a></li>
+              </ul>
+              <ul id="dropdown02" class="dropdown-content">
+               <li><a class="" href="/news/articles/add">Articles</a></li>
+                <li><a class="" href="/admin/manage-pages">Pages</a></li>
+                <li><a class="" href="/admin/manage-users">Utilisateur</a></li>
+                <li><a class="" href="/admin/bannieres">Bannieres</a></li>
+                <li><a class="" style="cursor : pointer !important;" @click="logout()">Logout</a></li>
+              </ul>
+              <nav class="nav grey darken-3">
+                  <div class="nav-wrapper">
+                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <ul class="center hide-on-med-and-down" >
+                      <li><a href="/news">Dernieres</a></li>
+                      <li v-for="l in menu.category" :key="l.slug" class="mr-6">
                         <a class="text-white" :href="'/news/category/'+l.slug">{{l.name}}</a>
                     </li>
-                    <li v-if="user != 'null'" class="my-dropdown">
-                        <a class="text-white btn-drop text-left" @click="dropMenu()" href="#">{{user}} <i class="material-icons">arrow_drop_down</i></a>
-                        <!-- admin menu -->
-                        <ul v-show="dropState" class="drop-list absolute z-50 shadow-md bg-white p-5 rounded">
-                            <li><a class="hover:text-blue-600" href="/news/articles/add">Articles</a></li>
-                            <li><a class="hover:text-blue-600" href="/admin/manage-pages">Pages</a></li>
-                            <li><a class="hover:text-blue-600" href="/admin/manage-users">Utilisateur</a></li>
-                            <li><a class="hover:text-blue-600" href="/admin/bannieres">Bannieres</a></li>
-                            <li><a class="hover:text-blue-600" style="cursor : pointer !important;" @click="logout()">Logout</a></li>
-                        </ul>
+                      <li v-if="user != 'null'"><a class="dropdown-trigger" href="#!" data-target="dropdown10">{{  user  }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                    </ul>
+                    <ul class="side-nav" id="mobile-demo">
+                      <li><a href="/news">Dernieres</a></li>
+                        <li v-for="l in menu.category" :key="l.slug" class="mr-6">
+                        <a class="text-white" :href="'/news/category/'+l.slug">{{l.name}}</a>
                     </li>
-                </ul>
-            </nav>
+                      <li v-if="user != 'null'"><a class="dropdown-trigger" href="#!" data-target="dropdown02">{{  user  }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                    </ul>
+                  </div>
+              </nav>
+<!-- ici se termine le menu  -->
         </template>
     </div>
 </template>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript">
 
+          $('.carousel.carousel-slider').carousel({
+            fullWidth: true
+          });
+
+          $(".button-collapse").sideNav();
+          $(".dropdown-button").dropdown();
+        
+      </script>
 <script>
-import { Slide } from 'vue-burger-menu'
 
+import { Slide } from 'vue-burger-menu'
     export default {
         components : {
             Slide

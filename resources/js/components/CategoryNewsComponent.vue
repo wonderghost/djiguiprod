@@ -5,13 +5,13 @@
         :is-full-page="fullPage"
         loader="bars"></loading>
         <!-- BREADCRUMB -->
-        <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
+       <!--  <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
             <ol class="list-reset flex text-grey-dark">
                 <li><a href="/news" class="text-blue font-bold"><i class="material-icons">home</i></a></li>
                 <li><span class="mx-2">/</span></li>
                 <li>{{categoryName}}</li>
             </ol>
-        </nav>
+        </nav> -->
 
         <div v-if="nothingState" class="h-20 bg-blue-800 text-white">
             <p class="text-center text-xl">Aucune donnee pour le moment !</p>

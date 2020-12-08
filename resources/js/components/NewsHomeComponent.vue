@@ -43,18 +43,20 @@
         </div>
 
         <div class="col s12 m4">
-            <div v-if="newsData" class="card">
-                <div v-for="n in newsData.slice(1,4)" :key="n.slug" class="card-image">
-                <a :href="'/news/'+n.slug">
-                  <img :src="'/news-image/'+n.image" style="height: 150px;">
-                  <span class="card-title" style="padding-bottom: -20px; 
-                  background: linear-gradient(transparent,black);
-                  width: 500px;">
+            <div class="card">
+                <div v-for="n in newsData.slice(1,4)" :key="n.slug" >
+                    <div class="card-image">
+                    <a :href="'/news/'+n.slug">
+                      <img :src="'/news-image/'+n.image" style="height: 150px;">
+                      <span class="card-title" style="padding-bottom: -20px; 
+                      background: linear-gradient(transparent,black);
+                      width: 500px;">
                     <h6 style="float:right; margin-top: -60px;" class="hide-on-med-and-down">{{n.author.name}} - Real Time</h6>
                     <h6 style="margin-bottom: -10px;" >{{n.sub_cat.name}}</h6>
                     <h5 style="margin-bottom: -10px;">{{n.name.substring(0,25)}}</h5>
                   </span>
                 </a>
+                </div>
                 </div>
             </div>
         </div>
@@ -67,9 +69,7 @@
             <p>publicite</p>
           </div>
           <div class="col s12 m6">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            
           </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
                     <a :href="'/news/'+n.slug">
                       <div class="card-image">
                         <img :src="'/news-image/'+n.image">
-                        <span class="card-title">{{ n.name }}</span>
+                        <span class="card-title" v-html="n.name.substring(0,40)+'....'"></span>
                       </div>
                     </a>
                   <div class="card-content">
@@ -114,7 +114,7 @@
               </div>
             </div>    
           <div v-for="n in newsData.slice(0,7)" v-if="n.cat.slug == 'cultures' " class="card-action">
-            <a :href="'/news/'+n.slug">{{ n.name }}</a>
+            <a :href="'/news/'+n.slug" class="blue-text text-darken-2">{{ n.name }}</a>
           </div>
         </div>
       </div>
@@ -135,7 +135,7 @@
               </div>
             </div>    
           <div v-for="n in newsData.slice(0,7)" v-if="n.cat.slug == 'sports' " class="card-action">
-            <a :href="'/news/'+n.slug">{{ n.name }}</a>
+            <a :href="'/news/'+n.slug" class="blue-text text-darken-2">{{ n.name }}</a>
           </div>
         </div>
     </div>
@@ -156,7 +156,7 @@
               </div>
             </div>    
           <div v-for="n in newsData.slice(0,7)" v-if="n.cat.slug == 'evenements' " class="card-action">
-            <a :href="'/news/'+n.slug">{{ n.name }}</a>
+            <a :href="'/news/'+n.slug" class="blue-text text-darken-2">{{ n.name }}</a>
           </div>
         </div>
     </div>
@@ -177,7 +177,7 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VueHorizontalList from 'vue-horizontal-list'
 import InfiniteSlideBar from 'vue-infinite-slide-bar'
-import { VueFlux, Transitions ,FluxCaption} from 'vue-flux';
+import {VueFlux, Transitions ,FluxCaption} from 'vue-flux';
 // import 'vue-flux/dist/vue-flux.css';
 
 

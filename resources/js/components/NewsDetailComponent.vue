@@ -20,63 +20,64 @@
         </div>
 
         <!-- ici se termine le menu  -->
-    <div class="container">
-        <h4 class="center-align">{{news.name}}</h4>
-    </div>
-    <div class="container row" style="width: 95%;">
-        <div class="col s12 m9">
-          <div class="card">
-            <div class="card-image">
-              <img :src="'/news-image/'+news.image" style="height: 518px;">
-              <span class="card-title">
-                <h6>by {{news.author}} | Mercredi 25 Novembre 2020 </h6>
-              </span>
-            </div>
-          </div>
+        <div class="container">
+            <h4 class="center-align">{{news.name}}</h4>
         </div>
-        <div class="col m3">
-          <h5>Plus populaires</h5>
+        
+        <div class="container row" style="width: 95%;">
+            <div class="col s12 m9">
+              <div class="card">
+                <div class="card-image">
+                  <img :src="'/news-image/'+news.image" style="height: 518px;">
+                  <span class="card-title">
+                    <h6>by {{news.author}} | Mercredi 25 Novembre 2020 </h6>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col m3">
+              <h5>Plus populaires</h5>
+              <div>
+                <div v-for="n in othersArticle.slice(0,2)" :key="n.slug" class="card horizontal">
+                  <div class="card-image">
+                    <img :src="'/news-image/'+n.image" style="height: 200px;">
+                  </div>
+                  <div class="card-stacked">
+                    <div class="card-content">
+                    <p v-html="n.name.substring(0,50)+'....'"></p>
+                    </div>
+                    <div class="card-action">
+                      <a :href="'/news/'+n.slug">Voir plus</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div> 
+        <div class="container">
           <div>
-            <div v-for="n in othersArticle.slice(0,2)" :key="n.slug" class="card horizontal">
-              <div class="card-image">
-                <img :src="'/news-image/'+n.image" style="height: 200px;">
-              </div>
-              <div class="card-stacked">
-                <div class="card-content">
-                <p v-html="n.name.substring(0,50)+'....'"></p>
-                </div>
-                <div class="card-action">
-                  <a :href="'/news/'+n.slug">Voir plus</a>
-                </div>
-              </div>
-            </div>
+                <span class="font-serif text-xl">
+                    <h6> Auteur : {{news.author}}</h6> Partagez : 
+                </span>
+                    
+            <!-- SOCIAL SHARING -->
+                    <twitter-share 
+                        :page_url="url"
+                        has_icon>
+                    </twitter-share>
+                    <facebook-share
+                        :page_url="url"
+                        has_icon>    
+                    </facebook-share>
+            <hr>
+            <p v-html="news.name"></p>      
           </div>
-        </div>
-    </div> 
-    <div class="container">
-      <div>
-            <span class="font-serif text-xl">
-                <h6> Auteur : {{news.author}}</h6> Partagez : 
-            </span>
-                
-        <!-- SOCIAL SHARING -->
-                <twitter-share 
-                    :page_url="url"
-                    has_icon>
-                </twitter-share>
-                <facebook-share
-                    :page_url="url"
-                    has_icon>    
-                </facebook-share>
-        <hr>
-        <p v-html="news.name"></p>      
-      </div>
-      <hr>
-      <div>
-        <h6>Contenu</h6>
-        <p v-html="news.description"></p>      
-      </div>
-    </div> 
+          <hr>
+          <div>
+            <h6>Contenu</h6>
+            <p v-html="news.description"></p>      
+          </div>
+        </div> 
         <!-- fin de fin -->
     </div>    
 </template>

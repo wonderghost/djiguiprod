@@ -83,7 +83,8 @@
                     <a :href="'/news/'+n.slug">
                       <div class="card-image">
                         <img :src="'/news-image/'+n.image">
-                        <span class="card-title" v-html="n.name.substring(0,40)+'....'"></span>
+                        <span style="background: linear-gradient(transparent,black);
+                      width: 500px;" class="card-title" v-html="n.name.substring(0,30)+'....'"></span>
                       </div>
                     </a>
                   <div class="card-content">

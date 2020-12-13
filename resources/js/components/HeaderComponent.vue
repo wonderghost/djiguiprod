@@ -57,7 +57,7 @@
               </ul>
               <nav class="nav grey darken-3">
                   <div class="nav-wrapper">
-                    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                    <!-- <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
                     <ul class="center hide-on-med-and-down" >
                       <li><a href="/news">Dernieres</a></li>
                       <li v-for="l in menu.category" :key="l.slug" class="mr-6">
@@ -65,13 +65,21 @@
                     </li>
                       <li v-if="user != 'null'"><a class="dropdown-trigger" href="#!" data-target="dropdown10">{{  user  }}<i class="material-icons right">arrow_drop_down</i></a></li>
                     </ul>
-                    <ul class="side-nav" id="mobile-demo">
-                      <li><a href="/news">Dernieres</a></li>
-                        <li v-for="l in menu.category" :key="l.slug" class="mr-6">
-                        <a class="text-white" :href="'/news/category/'+l.slug">{{l.name}}</a>
-                    </li>
-                      <li v-if="user != 'null'"><a class="dropdown-trigger" href="#!" data-target="dropdown02">{{  user  }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <ul class="side-nav hide-on-large-only" id="mobile-demo">
+                        <li>
+                             <ul id="slide-out" class="sidenav">
+                                <li><a href="/news">Dernieres</a></li>
+                                <li v-for="l in menu.category" :key="l.slug" class="mr-6">
+                                <a class="text-white" :href="'/news/category/'+l.slug">{{l.name}}</a>
+                                </li>
+                                <li v-if="user != 'null'"><a class="dropdown-trigger" href="#!" data-target="dropdown02">{{  user  }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                              </ul>
+                            <a href="#"  data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                        </li>
+                     
                     </ul>
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Recherche
+                        <i class="material-icons">loop</i></a>
                   </div>
               </nav>
 <!-- ici se termine le menu  -->
@@ -79,18 +87,22 @@
     </div>
 </template>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <script type="text/javascript">
+          
 
-          $('.carousel.carousel-slider').carousel({
+          $(document).ready(function(){
+            $('.sidenav').sidenav();
+
+            $('.carousel.carousel-slider').carousel({
             fullWidth: true
-          });
+              });
 
-          $(".button-collapse").sideNav();
-          $(".dropdown-button").dropdown();
+              $(".dropdown-trigger").dropdown();
+          });
         
       </script>
 <script>
-
 import { Slide } from 'vue-burger-menu'
     export default {
         components : {

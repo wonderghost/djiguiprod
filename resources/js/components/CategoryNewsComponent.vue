@@ -21,28 +21,105 @@
             <i>PUBLICITE</i>
         </div>
 
-        <div v-if="!nothingState" class="container mx-auto">
-            <div v-if="subCatgoryList" class="mt-5">
-                <span class="font-serif text-4xl mr-10">{{categoryName}} : </span>
-                <span class="text-2xl mr-2 pr-2" style="border-right : solid 1px #e2e8f0" v-for="sc in subCatgoryList" :key="sc.slug">{{ sc.name }}</span>
+        <div v-if="!nothingState" class="container">
+            <div v-if="subCatgoryList" >
+                <div class="col s12">
+                  <ul class="tabs" >
+                    <li class="tab col s3" v-for="sc in subCatgoryList" :key="sc.slug">
+                        <a href="#"><h6>{{ sc.name }}</h6></a></li>
+                  </ul>
+                </div>
+                <!-- <span class="font-serif text-4xl mr-10">{{categoryName}} : </span>
+                <span class="text-2xl mr-2 pr-2" style="border-right : solid 1px #e2e8f0" v-for="sc in subCatgoryList" :key="sc.slug">{{ sc.name }}</span> -->
             </div>
-            <div class="grid grid-cols-1 gap-3 divide-x divider-gray-400 lg:grid-cols-2">
+            <div class="row">
                 <div>
-                    <div class="h-20 mb-2" style="border-bottom : solid 1px #e2e8f0">
+                    <div style="border-bottom : solid 1px #e2e8f0">
                         <i>PUBLICITE</i>
                     </div>
+                    <h4 class="center-align" >{{categoryName}}</h4>
                     <div v-if="lastNews">
-                        <a :href="'/news/'+lastNews.slug">
-                            <img :src="'/news-image/'+lastNews.image" class="w-full p-2" style="height : 25rem !important;" alt="">
-                            <h6 class="font-serif font-bold text-2xl text-center p-2">{{lastNews.name}}</h6>
-                        </a>
-                    </div>
-                    <div class="h-48 mt-3 mb-3" style="border : solid 1px #e2e8f0">
-                        <i>PUBLICITE</i>
+                        <div class="col s12 m10">
+                          <div class="card">
+                            <div class="card-image">
+                            <a :href="'/news/'+lastNews.slug">
+                              <img :src="'/news-image/'+lastNews.image" height="450px;">
+                              <span class="card-title" style="font-size: 40px;
+                                background: linear-gradient(transparent,black);">
+                                <span >
+                                <h5 v-html="lastNews.name.substring(0,150)" ></h5>
+                                </span>
+                                <h6>by {{lastNews.author}} | Mercredi 25 Novembre 2020 </h6>
+                              </span>
+                            </a>
+                            </div>
+                          </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div class="col s12 m10" >   
+            <div class="row">
+            <div v-if="secondLastNews">
+                <div class="col s12 m5">
+                  <div class="card">
+                    <div class="card-image">
+                    <a :href="'/news/'+secondLastNews.slug">
+                      <img :src="'/news-image/'+secondLastNews.image" height="250px;">
+                      <span class="card-title" style="font-size: 40px;
+                        background: linear-gradient(transparent,black);">
+                        <h5  v-html="secondLastNews.name.substring(0,40)"></h5>
+                      </span>
+                    </a>
+                    </div>
+                  </div>
+                </div>
+             </div>
+             <div v-if="thirdLastNews">   
+                <div class="col s12 m5">
+                  <div class="card">
+                    <div class="card-image">
+                    <a :href="'/news/'+thirdLastNews.slug">
+                      <img :src="'/news-image/'+thirdLastNews.image" height="250px;">
+                      <span class="card-title" style="font-size: 40px;
+                        background: linear-gradient(transparent,black);">
+                        <h5 v-html="thirdLastNews.name.substring(0,40)"></h5>
+                      </span>
+                    </a>
+                    </div>
+                  </div>
+                </div>
+             </div>
+            </div>
+            </div>
+
+            <div class="row">
+                <hr>
+                <table>
+                    <tbody v-if="data">
+                      <tr  v-for="n in data.slice(3,10)" :key="n.slug">
+                        <td>
+                            <div>
+                                <a :href="'/news/'+n.slug">
+                                    <h5 v-html="n.name.substring(0,50)" ></h5>
+                                </a>
+                                <h6 v-html="n.description.substring(0,70)" ></h6>
+                                {{n.author}}
+                            </div>
+                        </td>
+                        <td>
+                            <a :href="'/news/'+n.slug">
+                                <img :src="'/news-image/'+n.image" height="100px;">
+                            </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                
+            </div>
+
                 <!--  -->
-                <div class="p-2">
+                <!-- <div class="p-2">
                     <div class="grid grid-cols-1 divide-x divide-gray-400 p-2 lg:grid-cols-2">
                         <div v-if="secondLastNews" class="mb-5 lg:mb-0">
                             <h2 class="font-bold font-serif text-3xl" v-html="secondLastNews.name"></h2>
@@ -67,12 +144,10 @@
                         </div>
                         <div class="grid grid-cols-1"></div>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <!-- // -->
-
         </div>
-        <div v-if="!nothingState" class="container mx-auto">
+      <!--   <div v-if="!nothingState" class="container mx-auto">
             <div v-for="s in subCatgoryList" :key="s.slug" style="border-top : solid 1px #e2e8f0" class="mt-1 mb-4">
                 <div class="bg-blue-600 w-32 text-white font-serif p-1 rounded" style="border-top : solid 1px #e2e8f0"><span>{{s.name}}</span></div>
                 <div class="grid grid-cols-2 gap-3 mt-2 lg:grid-cols-5">
@@ -86,8 +161,7 @@
             </div>
 
         </div>
-        
-    </div>
+         -->
 </template>
 <script>
 // Import component
@@ -163,6 +237,9 @@ import 'vue-loading-overlay/dist/vue-loading.css';
             },
             secondLastNews() {
                 return this.data[1]
+            },
+            thirdLastNews() {
+                return this.data[2]
             }
         }
     }

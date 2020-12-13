@@ -63,7 +63,7 @@ class NewsController extends Controller
 
     public function getList(Category $c , SubCategory $sc ,Article $a) {
         try {
-            $art = $a->select()->where('deleted', false)->orderBy('created_at', 'desc')->get();
+            $art = $a->select()->where('deleted', false)->orderBy('created_at', 'desc')->limit(100)->get();
             $data = [];
 
             foreach($art as $key => $value) {

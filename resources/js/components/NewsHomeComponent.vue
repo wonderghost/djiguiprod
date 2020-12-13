@@ -4,7 +4,6 @@
         :can-cancel="false" 
         :is-full-page="fullPage"
         loader="bars"></loading>
-    
     <div class="h-20" style="border : solid 1px #e2e8f0">
         <i>PUBLICITE</i>
     </div>
@@ -19,8 +18,37 @@
                 </a>
             </div>
             </template>
-      </vue-horizontal-list>
+        </vue-horizontal-list>
     </div>
+    <!-- Modal Structure -->
+              <div id="modal1" class="modal">
+                <div class="modal-content">
+                  <h5>Recherchez par titre</h5>
+                <input type="text" v-model="q" class="input">
+                <table>
+                    <tbody>
+                      <tr  v-for="n in recuperation.slice(0,5)" :key="n.slug">
+                        <td>
+                            <div>
+                                <a :href="'/news/'+n.slug">
+                                    <h5 v-html="n.name.substring(0,50)" ></h5>
+                                </a>
+                                <h6 v-html="n.description.substring(0,70)" ></h6>
+                                {{n.author.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <a :href="'/news/'+n.slug">
+                                <img :src="'/news-image/'+n.image" height="100px;">
+                            </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   </div>
+                <div class="modal-footer">
+                </div>
+              </div>
 
     <!-- ici commence les cadres principal -->
     <div class="container row" style="width: 100%;">
@@ -197,6 +225,7 @@ import {VueFlux, Transitions ,FluxCaption} from 'vue-flux';
         },
         data() {
             return {
+                q : '',
                 breaking: [],
                 Evenementiels: [],
                 categirie: [],
@@ -254,6 +283,13 @@ import {VueFlux, Transitions ,FluxCaption} from 'vue-flux';
             }
         },
         computed : {
+
+            recuperation(){
+                return this.newsData.filter( (n) => {
+                    return n.name.toLowerCase().includes(this.q.toLowerCase());
+                } )
+            },
+
             cultures() {
                 return this.newsData.filter( (n) => {
                     return n.cat.slug.match("cultures")

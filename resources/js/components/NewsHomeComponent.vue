@@ -21,7 +21,7 @@
         </vue-horizontal-list>
     </div>
     <!-- Modal Structure -->
-              <div id="modal1" class="modal">
+            <div id="modal1" class="modal">
                 <div class="modal-content">
                   <h5>Recherchez par titre</h5>
                 <input type="text" v-model="q" class="input">
@@ -57,34 +57,34 @@
           <div class="card">
             <div v-if="lastNews" class="card-image">
              <a :href="'/news/'+lastNews.slug">
-              <img :src="'/news-image/'+lastNews.image" style="height: 450px;">
+              <img :src="'/news-image/'+lastNews.image" style="height: 480px;">
               <span class="card-title" style="font-size: 40px;
-              background: linear-gradient(transparent,black);">
-                <h6 style="float:right; margin-top: -240px;" class="hide-on-med-and-down" >Real Time</h6>
+              background: linear-gradient(transparent,black); 
+              width: 100%;">
+                <h6 style="float:right; margin-top: -240px;" class="hide-on-med-and-down" >{{ new Date(lastNews.date) | dateFormat('DD - MMM') }}</h6>
                 <h6 style="margin-bottom: -5px;" v-html="lastNews.sub_cat.name"></h6>
                 <h4 v-html="lastNews.name" ></h4>
-                <h6 class="hide-on-med-and-down">{{ lastNews.author.name }} | Mercredi 25 Novembre 2020 </h6>
+                <h6 class="hide-on-med-and-down">Par {{ lastNews.author.name }} | {{ new Date(lastNews.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn </h6>
               </span>
               </a>
             </div>
           </div>
         </div>
-
         <div class="col s12 m4">
-            <div class="card">
-                <div v-for="n in newsData.slice(1,4)" :key="n.slug" >
+            <div v-for="n in newsData.slice(1,4)" :key="n.slug" >
+                <div class="card">
                     <div class="card-image">
-                    <a :href="'/news/'+n.slug">
-                      <img :src="'/news-image/'+n.image" style="height: 150px;">
-                      <span class="card-title" style="padding-bottom: -20px; 
-                      background: linear-gradient(transparent,black);
-                      width: 500px;">
-                    <h6 style="float:right; margin-top: -60px;" class="hide-on-med-and-down">{{n.author.name}} - Real Time</h6>
-                    <h6 style="margin-bottom: -10px;" >{{n.sub_cat.name}}</h6>
-                    <h5 style="margin-bottom: -10px;">{{n.name.substring(0,25)}}</h5>
-                  </span>
-                </a>
-                </div>
+                        <a :href="'/news/'+n.slug">
+                          <img :src="'/news-image/'+n.image" style="height: 150px;">
+                          <span class="card-title" style="padding-bottom: -20px; 
+                          background: linear-gradient(transparent,black);
+                          width: 100%;">
+                        <h6 style="float:right; margin-top: -60px;" class="hide-on-med-and-down">par {{n.author.name}} le {{ new Date(n.date) | dateFormat('DD - MMM') }}</h6>
+                        <h6 style="margin-bottom: -10px;" >{{n.sub_cat.name}}</h6>
+                        <h5 style="margin-bottom: -10px;">{{n.name.substring(0,25)}}</h5>
+                          </span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,22 +105,28 @@
 <!-- conteneur de news -->
     <div class="container row" style="width: 95%;">
         <h5>Derniere News</h5>
-            <div v-if="newsData">
-              <div v-for="n in newsData.slice(2,10)" :key="n.slug"  class="col s12 m3">
-                <div class="card small">
-                    <a :href="'/news/'+n.slug">
-                      <div class="card-image">
-                        <img :src="'/news-image/'+n.image">
-                        <span style="background: linear-gradient(transparent,black);
-                      width: 500px;" class="card-title" v-html="n.name.substring(0,30)+'....'"></span>
-                      </div>
-                    </a>
-                  <div class="card-content">
-                    <p v-html="n.description.substring(0,75)+'....'"></p>
+        <div v-if="newsData">
+          <div v-for="n in newsData.slice(2,lead)" :key="n.slug"  class="col s12 m3">
+            <div class="card small">
+                <a :href="'/news/'+n.slug">
+                  <div class="card-image">
+                    <img :src="'/news-image/'+n.image" height="250px;">
+                    <span style="background: linear-gradient(transparent,black);
+                  width: 500px;" class="card-title" v-html="n.name.substring(0,30)+'....'"></span>
                   </div>
-                </div>
+                </a>
+              <div class="card-content">
+                <h6 class="blue-text text-darken-2" >Publié le {{ new Date(n.date) | dateFormat('DD - MMM - YYYY') }}</h6>
+                <p v-html="n.description.substring(0,60)+'....'"></p>
               </div>
             </div>
+          </div>
+        </div>
+         <div class="row">
+            <div class="align-center" >
+                <a class="btn" @click="leadMore()" >charger plus<i class="material-icons">plus</i></a>
+            </div>
+          </div>
     </div>
 <!-- fin de news -->
 <!-- ici commence la liste par category -->
@@ -202,13 +208,15 @@
 <script>
 // Import component
 import Loading from 'vue-loading-overlay';
+// import dateformat
+import VueFilterDateFormat from '@vuejs-community/vue-filter-date-format';
 // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VueHorizontalList from 'vue-horizontal-list'
 import InfiniteSlideBar from 'vue-infinite-slide-bar'
 import {VueFlux, Transitions ,FluxCaption} from 'vue-flux';
 // import 'vue-flux/dist/vue-flux.css';
-
+Vue.use(VueFilterDateFormat);
 
 
     export default {
@@ -225,6 +233,7 @@ import {VueFlux, Transitions ,FluxCaption} from 'vue-flux';
         },
         data() {
             return {
+                lead : 10,
                 q : '',
                 breaking: [],
                 Evenementiels: [],
@@ -249,6 +258,9 @@ import {VueFlux, Transitions ,FluxCaption} from 'vue-flux';
             }
         },
         methods : {
+            leadMore(){
+                return this.lead += 8
+            },
             getNewsList : async function () {
                 try {
                     this.isLoading = true

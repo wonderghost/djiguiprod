@@ -13,6 +13,36 @@
             </ol>
         </nav> -->
 
+        <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                  <h5>Recherchez par titre</h5>
+                <input type="text" v-model="q" class="input">
+                <table>
+                    <tbody>
+                      <tr  v-for="n in recuperation.slice(0,5)" :key="n.slug">
+                        <td>
+                            <div>
+                                <a :href="'/news/'+n.slug">
+                                    <h5 v-html="n.name.substring(0,50)" ></h5>
+                                </a>
+                                <h6 v-html="n.description.substring(0,70)" ></h6>
+                                {{n.author.name}}
+                            </div>
+                        </td>
+                        <td>
+                            <a :href="'/news/'+n.slug">
+                                <img :src="'/news-image/'+n.image" height="100px;">
+                            </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                   </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+
         <div v-if="nothingState" class="h-20 bg-blue-800 text-white">
             <p class="text-center text-xl">Aucune donnee pour le moment !</p>
         </div>
@@ -26,7 +56,8 @@
                 <div class="col s12">
                   <ul class="tabs" >
                     <li class="tab col s3" v-for="sc in subCatgoryList" :key="sc.slug">
-                        <a href="#"><h6>{{ sc.name }}</h6></a></li>
+                        <a :href="'/news/'+sc.slug"><h6>{{ sc.name }}</h6></a>
+                    </li>
                   </ul>
                 </div>
                 <!-- <span class="font-serif text-4xl mr-10">{{categoryName}} : </span>
@@ -49,7 +80,7 @@
                                 <span >
                                 <h5 v-html="lastNews.name.substring(0,150)" ></h5>
                                 </span>
-                                <h6>by {{lastNews.author}} | Mercredi 25 Novembre 2020 </h6>
+                                <h6>by {{lastNews.author}} | {{ new Date(lastNews.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn </h6>
                               </span>
                             </a>
                             </div>
@@ -69,6 +100,7 @@
                       <span class="card-title" style="font-size: 40px;
                         background: linear-gradient(transparent,black);">
                         <h5  v-html="secondLastNews.name.substring(0,40)"></h5>
+                        <h6>{{ new Date(secondLastNews.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn</h6>
                       </span>
                     </a>
                     </div>
@@ -84,6 +116,7 @@
                       <span class="card-title" style="font-size: 40px;
                         background: linear-gradient(transparent,black);">
                         <h5 v-html="thirdLastNews.name.substring(0,40)"></h5>
+                        <h6>{{ new Date(thirdLastNews.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn</h6>
                       </span>
                     </a>
                     </div>
@@ -97,14 +130,14 @@
                 <hr>
                 <table>
                     <tbody v-if="data">
-                      <tr  v-for="n in data.slice(3,10)" :key="n.slug">
+                      <tr  v-for="n in data.slice(3,lead)" :key="n.slug">
                         <td>
                             <div>
                                 <a :href="'/news/'+n.slug">
                                     <h5 v-html="n.name.substring(0,50)" ></h5>
                                 </a>
                                 <h6 v-html="n.description.substring(0,70)" ></h6>
-                                {{n.author}}
+                                {{n.author}} | {{ new Date(n.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn
                             </div>
                         </td>
                         <td>
@@ -115,7 +148,11 @@
                       </tr>
                     </tbody>
                   </table>
-                
+                  <div class="row">
+                    <div class="align-center" >
+                        <a class="btn" @click="leadMore()" >charger plus<i class="material-icons">plus</i></a>
+                    </div>
+                  </div>
             </div>
 
                 <!--  -->
@@ -166,9 +203,12 @@
 <script>
 // Import component
 import Loading from 'vue-loading-overlay';
+// import dateformat
+import VueFilterDateFormat from '@vuejs-community/vue-filter-date-format';
 // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
 
+Vue.use(VueFilterDateFormat);
 
     export default {
         components : {
@@ -183,6 +223,8 @@ import 'vue-loading-overlay/dist/vue-loading.css';
         },
         data() {
             return {
+                lead : 10,
+                q : '',
                 isLoading : false,
                 fullPage : true,
                 subCatgoryList : [],
@@ -191,6 +233,9 @@ import 'vue-loading-overlay/dist/vue-loading.css';
             }
         },
         methods : {
+            leadMore(){
+                return this.lead += 5
+            },
             getSubCategory : async function () {
                 try {
                     this.isLoading = true
@@ -227,6 +272,11 @@ import 'vue-loading-overlay/dist/vue-loading.css';
             }
         },
         computed : {
+            recuperation(){
+                return this.data.filter( (n) => {
+                    return n.name.toLowerCase().includes(this.q.toLowerCase());
+                } )
+            },
             musics() {
                 return this.data.filter((d) => {
                     return d.id_sub_category == 'music'

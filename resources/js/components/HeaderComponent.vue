@@ -78,8 +78,7 @@
                         </li>
                      
                     </ul>
-                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Recherche
-                        <i class="material-icons">loop</i></a>
+                    <a style="float: right; margin-top:15px; margin-right: 15px;" class="light-blue darken-2 waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons" style="margin-top: -10px;">search</i></a>
                   </div>
               </nav>
 <!-- ici se termine le menu  -->
@@ -90,15 +89,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
       <script type="text/javascript">
           
-
           $(document).ready(function(){
-            $('.sidenav').sidenav();
-
             $('.carousel.carousel-slider').carousel({
             fullWidth: true
               });
-
-              $(".dropdown-trigger").dropdown();
+            $(".dropdown-trigger").dropdown();
           });
         
       </script>

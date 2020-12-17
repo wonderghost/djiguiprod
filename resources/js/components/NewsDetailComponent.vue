@@ -1,6 +1,6 @@
 <template>
     <div class="news-block-center">
-        <loading :active.sync="isLoading" 
+       <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
         loader="bars"></loading>
@@ -30,7 +30,7 @@
                 <div class="card-image">
                   <img :src="'/news-image/'+news.image" style="height: 518px;">
                   <span class="card-title">
-                    <h6>by {{news.author}} | Mercredi 25 Novembre 2020 </h6>
+                    <h6>Par {{news.author}} | {{news.created_at}}</h6>
                   </span>
                 </div>
               </div>
@@ -45,6 +45,7 @@
                   <div class="card-stacked">
                     <div class="card-content">
                     <p v-html="n.name.substring(0,50)+'....'"></p>
+                    <h6>{{ new Date(n.date) | dateFormat('DD - MMM') }}</h6> 
                     </div>
                     <div class="card-action">
                       <a :href="'/news/'+n.slug">Voir plus</a>
@@ -57,7 +58,7 @@
         <div class="container">
           <div>
                 <span class="font-serif text-xl">
-                    <h6> Auteur : {{news.author}}</h6> Partagez : 
+                    <h6> Auteur : {{news.author}} le {{news.created_at}}</h6> Partagez : 
                 </span>
                     
             <!-- SOCIAL SHARING -->
@@ -85,21 +86,25 @@
 <script>
 // Import component
 import Loading from 'vue-loading-overlay';
+// import dateformat
+import VueFilterDateFormat from '@vuejs-community/vue-filter-date-format';
 // Import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css';
 
 import VueGoodshareFacebook from "vue-goodshare/src/providers/Facebook.vue";
 import VueGoodshareTwitter from "vue-goodshare/src/providers/Twitter.vue";
 
+Vue.use(VueFilterDateFormat);
+
     export default {
+        components : {
+            'facebook-share' : VueGoodshareFacebook,
+            'twitter-share' : VueGoodshareTwitter,
+            Loading
+        },
         props : {
             details : String,
             url : String
-        },
-        components : {
-            Loading,
-            'facebook-share' : VueGoodshareFacebook,
-            'twitter-share' : VueGoodshareTwitter
         },
         mounted() {
             this.getDetails()

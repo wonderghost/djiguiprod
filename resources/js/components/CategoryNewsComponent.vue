@@ -80,7 +80,7 @@
                                 <span >
                                 <h5 v-html="lastNews.name.substring(0,150)" ></h5>
                                 </span>
-                                <h6>by {{lastNews.author}} | {{ new Date(lastNews.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn </h6>
+                                <h6>by {{lastNews.author}} | {{ lastNews.created_at }} </h6>
                               </span>
                             </a>
                             </div>
@@ -100,7 +100,7 @@
                       <span class="card-title" style="font-size: 40px;
                         background: linear-gradient(transparent,black);">
                         <h5  v-html="secondLastNews.name.substring(0,40)"></h5>
-                        <h6>{{ new Date(secondLastNews.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn</h6>
+                        <h6>{{ secondLastNews.created_at}}</h6>
                       </span>
                     </a>
                     </div>
@@ -116,7 +116,7 @@
                       <span class="card-title" style="font-size: 40px;
                         background: linear-gradient(transparent,black);">
                         <h5 v-html="thirdLastNews.name.substring(0,40)"></h5>
-                        <h6>{{ new Date(thirdLastNews.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn</h6>
+                        <h6>{{ thirdLastNews.created_at }}</h6>
                       </span>
                     </a>
                     </div>
@@ -137,22 +137,21 @@
                                     <h5 v-html="n.name.substring(0,50)" ></h5>
                                 </a>
                                 <h6 v-html="n.description.substring(0,70)" ></h6>
-                                {{n.author}} | {{ new Date(n.date) | dateFormat('DD - MMM - YYYY  HH:mm') }}mn
+                                {{n.author}} | {{ n.created_at }}
                             </div>
                         </td>
                         <td>
                             <a :href="'/news/'+n.slug">
-                                <img :src="'/news-image/'+n.image" height="100px;">
+                                <img :src="'/news-image/'+n.image" height="100px;" width="100px;">
                             </a>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                  <div class="row">
-                    <div class="align-center" >
-                        <a class="btn" @click="leadMore()" >charger plus<i class="material-icons">plus</i></a>
+                    <br>
+                    <div class="center-align">   
+                        <a  class="btn light-blue darken-2" @click="leadMore()" >voir plus</a>
                     </div>
-                  </div>
             </div>
 
                 <!--  -->

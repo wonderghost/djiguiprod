@@ -122,12 +122,10 @@
             </div>
           </div>
         </div>
-         <div class="row">
-            <div class="align-center" >
-                <a class="btn" @click="leadMore()" >charger plus<i class="material-icons">plus</i></a>
-            </div>
-          </div>
     </div>
+        <div class="center-align">
+            <a class="btn light-blue darken-2 " @click="leadMore()" >voir plus</a>
+        </div>
 <!-- fin de news -->
 <!-- ici commence la liste par category -->
 <div  class="container row" style="width: 90%;">

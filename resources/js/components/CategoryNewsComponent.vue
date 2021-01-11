@@ -3,7 +3,9 @@
         <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
-        loader="bars"></loading>
+        background-color="#FFF"
+        opacity="1"
+        color="blue"></loading>
         <!-- BREADCRUMB -->
        <!--  <nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
             <ol class="list-reset flex text-grey-dark">
@@ -17,7 +19,7 @@
             <div id="modal1" class="modal">
                 <div class="modal-content">
                   <h5>Recherchez par titre</h5>
-                <input type="text" v-model="q" class="input">
+                <input placeholder="Veuiller entrer le mot dans cette zone" type="text" v-model="q" class="input">
                 <table>
                     <tbody>
                       <tr  v-for="n in recuperation.slice(0,5)" :key="n.slug">
@@ -76,7 +78,8 @@
                             <a :href="'/news/'+lastNews.slug">
                               <img :src="'/news-image/'+lastNews.image" height="450px;">
                               <span class="card-title" style="font-size: 40px;
-                                background: linear-gradient(transparent,black);">
+                               background: linear-gradient(transparent,black); 
+                                width: 100%;">
                                 <span >
                                 <h5 v-html="lastNews.name.substring(0,150)" ></h5>
                                 </span>
@@ -98,7 +101,7 @@
                     <a :href="'/news/'+secondLastNews.slug">
                       <img :src="'/news-image/'+secondLastNews.image" height="250px;">
                       <span class="card-title" style="font-size: 40px;
-                        background: linear-gradient(transparent,black);">
+                        background: linear-gradient(transparent,black); width: 100%;">
                         <h5  v-html="secondLastNews.name.substring(0,40)"></h5>
                         <h6>{{ secondLastNews.created_at}}</h6>
                       </span>
@@ -114,7 +117,7 @@
                     <a :href="'/news/'+thirdLastNews.slug">
                       <img :src="'/news-image/'+thirdLastNews.image" height="250px;">
                       <span class="card-title" style="font-size: 40px;
-                        background: linear-gradient(transparent,black);">
+                        background: linear-gradient(transparent,black); width: 100%;">
                         <h5 v-html="thirdLastNews.name.substring(0,40)"></h5>
                         <h6>{{ thirdLastNews.created_at }}</h6>
                       </span>

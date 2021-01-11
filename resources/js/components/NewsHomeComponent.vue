@@ -3,7 +3,10 @@
          <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
-        loader="bars"></loading>
+        background-color="#FFF"
+        opacity="1"
+        color="blue"></loading>
+        
     <div class="h-20" style="border : solid 1px #e2e8f0">
         <i>PUBLICITE</i>
     </div>
@@ -24,7 +27,7 @@
             <div id="modal1" class="modal">
                 <div class="modal-content">
                   <h5>Recherchez par titre</h5>
-                <input type="text" v-model="q" class="input">
+                <input placeholder="Veuiller entrer le mot dans cette zone" type="text" v-model="q" class="input">
                 <table>
                     <tbody>
                       <tr  v-for="n in recuperation.slice(0,5)" :key="n.slug">
@@ -50,6 +53,7 @@
                 </div>
               </div>
 
+    
     <!-- ici commence les cadres principal -->
     <div class="container row" style="width: 100%;">
 
@@ -124,7 +128,7 @@
         </div>
     </div>
         <div class="center-align">
-            <a class="btn light-blue darken-2 " @click="leadMore()" >voir plus</a>
+            <a class="#" @click="leadMore()" >voir plus</a>
         </div>
 <!-- fin de news -->
 <!-- ici commence la liste par category -->

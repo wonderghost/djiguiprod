@@ -3,7 +3,9 @@
         <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
-        loader="bars"></loading>
+        background-color="#FFF"
+        opacity="1"
+        color="blue"></loading>
 <!-- 
          <VueCarousel v-for="slide in slides" :key="slide.slug" :title="slide.name" 
          :image="'/news-image/'+slide.image">

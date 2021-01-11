@@ -3,7 +3,9 @@
        <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
-        loader="bars"></loading>
+        background-color="#FFF"
+        opacity="1"
+        color="blue"></loading>
 
         <!-- nav class="bg-grey-light p-3 rounded font-sans w-full m-4">
             <ol class="list-reset flex text-grey-dark">
@@ -38,20 +40,23 @@
             <div class="col m3">
               <h5>Plus populaires</h5>
               <div>
-                <div v-for="n in othersArticle.slice(0,2)" :key="n.slug" class="card horizontal">
-                  <div class="card-image">
-                    <img :src="'/news-image/'+n.image" style="height: 200px;">
-                  </div>
-                  <div class="card-stacked">
-                    <div class="card-content">
-                    <p v-html="n.name.substring(0,50)+'....'"></p>
-                    <h6>{{ new Date(n.date) | dateFormat('DD - MMM') }}</h6> 
-                    </div>
-                    <div class="card-action">
-                      <a :href="'/news/'+n.slug">Voir plus</a>
-                    </div>
-                  </div>
-                </div>
+                  <template v-if='othersArticle'>
+                      <div v-for="n in othersArticle.slice(0,2)" :key="n.slug" class="card horizontal">
+                        <div class="card-image">
+                            <img :src="'/news-image/'+n.image" style="height: 200px;">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                            <p v-html="n.name.substring(0,50)+'....'"></p>
+                            <h6>{{ new Date(n.date) | dateFormat('DD - MMM') }}</h6> 
+                            </div>
+                            <div class="card-action">
+                            <a :href="'/news/'+n.slug">Voir plus</a>
+                            </div>
+                        </div>
+                        </div>
+                  </template>
+                
               </div>
             </div>
         </div> 
@@ -121,7 +126,6 @@ Vue.use(VueFilterDateFormat);
             getDetails : async function () {
                 try {
                     this.isLoading = true
-
                     let response  = await axios.post('/news/'+this.details+'/get-infos' , {
                         _token : document.querySelector("meta[name='csrf-token']").content,
                         slug : this.details
@@ -130,9 +134,12 @@ Vue.use(VueFilterDateFormat);
                     this.news = response.data
 
                     response = await axios.get('/news/articles/get-list')
-                    this.others = response.data
+                    if (response.data) {
+                        this.others = response.data
+                        this.isLoading = false
+                        
+                    }
 
-                    this.isLoading = false
 
                 } catch(error) {
                     alert(error)

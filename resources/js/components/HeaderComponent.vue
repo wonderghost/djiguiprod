@@ -78,7 +78,7 @@
                         </li>
                      
                     </ul>
-                    <a style="float: right; margin-top:15px; margin-right: 15px;" class="light-blue darken-2 waves-effect waves-light btn modal-trigger" href="#modal1"><i class="material-icons" style="margin-top: -10px;">search</i></a>
+                    <a style="float: right; margin-top:15px; margin-right: 15px;" class="modal-trigger" href="#modal1"><i class="material-icons" style="margin-top: -10px;">search</i></a>
                   </div>
               </nav>
 <!-- ici se termine le menu  -->

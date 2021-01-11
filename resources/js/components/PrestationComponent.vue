@@ -1,9 +1,11 @@
 <template>
     <div>
-        <loading :active.sync="isLoading" 
+       <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
-        loader="bars"></loading>
+        background-color="#FFF"
+        opacity="1"
+        color="blue"></loading>
 
         <template v-if="type == 'main'">
             <div class="container">

@@ -3,7 +3,9 @@
         <loading :active.sync="isLoading" 
         :can-cancel="false" 
         :is-full-page="fullPage"
-        loader="bars"></loading>
+        background-color="#FFF"
+        opacity="1"
+        color="blue"></loading>
 
         <div class="container">
             <template v-if="errorState">

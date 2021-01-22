@@ -63,7 +63,7 @@ class NewsController extends Controller
 
     public function getList(Category $c , SubCategory $sc ,Article $a) {
         try {
-            $art = $a->select()->where('deleted', false)->orderBy('created_at', 'desc')->limit(100)->get();
+            $art = $a->select()->where('deleted', false)->orderBy('created_at', 'desc')->limit(40)->get();
             $data = [];
 
             foreach($art as $key => $value) {
@@ -316,7 +316,7 @@ class NewsController extends Controller
             $data = [];
             $i = 0;
             foreach($subCategory as $key => $value) {
-                $articles = $value->articles()->orderBy('created_at','desc')->limit(100)->get();
+                $articles = $value->articles()->orderBy('created_at','desc')->limit(40)->get();
                 foreach($articles as $_key => $_value) {
                     $date = new Carbon($_value->created_at);
                     $date->setLocale('fr_FR');

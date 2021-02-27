@@ -26,4 +26,10 @@ class HomeController extends Controller
         return view('home')
             ->withCat('home');
     }
+
+    public function live()
+    {
+        return view('news/live')
+            ->withCat('news/live');
+    }
 }

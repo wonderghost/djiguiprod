@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/live','HomeController@live');
 Route::get('/','HomeController@index');
 Route::get('/get-prestation','PageController@getListPage');
 Route::get('/get-banner','CarousselController@getBanner');
@@ -34,7 +35,7 @@ Route::post('/admin/update-page','PageController@pageUpdate');
 Route::get('/admin/edit-page{slug}','PageController@EditPage');
 // fin
 
- // Les pur le traitement des banieres
+ // Les routes pour le traitement des banieres
 
     Route::get('/admin/bannieres','CarousselController@index');
     Route::post('/admin/save-caroussel','CarousselController@store');
@@ -42,6 +43,12 @@ Route::get('/admin/edit-page{slug}','PageController@EditPage');
     
     Route::post('/admin/active-banner','CarousselController@activeBanner');
     Route::post('/admin/block-banner','CarousselController@blockBanner');
+
+// fin
+
+// le traitement des publicites
+
+   // Route::get('/admin/pub','')
 
 // fin
 
